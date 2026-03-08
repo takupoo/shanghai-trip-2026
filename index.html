@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>上海イマーシブ体験旅行 2026 GW</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --secondary: #16213e;
+    --accent: #e94560;
+    --gold: #f5c518;
+    --bg: #0f0f23;
+    --card: #1a1a2e;
+    --text: #e0e0e0;
+    --text-muted: #8888aa;
+    --border: #2a2a4a;
+    --matsu: #c9a96e;
+    --take: #5bb5a2;
+    --ume: #7b8cde;
+    --danger: #e94560;
+    --warn: #f5c518;
+    --safe: #5bb5a2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI','Hiragino Sans','Meiryo',sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .hero { background: linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%); padding: 60px 20px; text-align: center; border-bottom: 3px solid var(--accent); position: relative; overflow: hidden; }
+  .hero::before { content:''; position:absolute; top:0;left:0;right:0;bottom:0; background:radial-gradient(circle at 30% 50%,rgba(233,69,96,.1) 0%,transparent 50%),radial-gradient(circle at 70% 50%,rgba(245,197,24,.1) 0%,transparent 50%); }
+  .hero h1 { font-size:2.4em; font-weight:700; letter-spacing:.05em; position:relative; color:#fff; }
+  .hero .subtitle { font-size:1.1em; color:var(--text-muted); margin-top:10px; position:relative; }
+  .hero .dates { display:inline-block; background:rgba(233,69,96,.2); border:1px solid var(--accent); border-radius:8px; padding:8px 24px; margin-top:20px; font-size:1.2em; font-weight:600; color:var(--accent); position:relative; }
+  .container { max-width:1200px; margin:0 auto; padding:0 20px; }
+  nav.toc { background:var(--secondary); padding:20px; margin:30px auto; max-width:1200px; border-radius:12px; border:1px solid var(--border); }
+  nav.toc h2 { font-size:1.1em; color:var(--gold); margin-bottom:12px; }
+  nav.toc ul { list-style:none; display:flex; flex-wrap:wrap; gap:8px; }
+  nav.toc a { display:block; padding:6px 16px; background:var(--card); border:1px solid var(--border); border-radius:6px; color:var(--text); text-decoration:none; font-size:.9em; transition:all .2s; }
+  nav.toc a:hover { border-color:var(--accent); color:var(--accent); }
+  section { margin:40px auto; max-width:1200px; }
+  section > h2 { font-size:1.6em; color:#fff; padding:12px 20px; background:linear-gradient(90deg,var(--accent),transparent); border-radius:8px 8px 0 0; margin-bottom:0; }
+  .section-body { background:var(--card); border:1px solid var(--border); border-top:none; border-radius:0 0 8px 8px; padding:24px; }
+  h3 { font-size:1.2em; color:var(--gold); margin:24px 0 12px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+  h3:first-child { margin-top:0; }
+  h4 { color:#fff; margin-bottom:8px; font-size:1em; }
+  table { width:100%; border-collapse:collapse; margin:12px 0 20px; font-size:.88em; }
+  th { background:var(--secondary); color:var(--gold); padding:10px 12px; text-align:left; border:1px solid var(--border); white-space:nowrap; }
+  td { padding:10px 12px; border:1px solid var(--border); vertical-align:top; }
+  tr:nth-child(even) td { background:rgba(255,255,255,.02); }
+  .badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:.8em; font-weight:600; }
+  .badge-matsu { background:rgba(201,169,110,.2); color:var(--matsu); border:1px solid var(--matsu); }
+  .badge-take { background:rgba(91,181,162,.2); color:var(--take); border:1px solid var(--take); }
+  .badge-ume { background:rgba(123,140,222,.2); color:var(--ume); border:1px solid var(--ume); }
+  .badge-danger { background:rgba(233,69,96,.2); color:var(--danger); border:1px solid var(--danger); }
+  .badge-warn { background:rgba(245,197,24,.2); color:var(--warn); border:1px solid var(--warn); }
+  .badge-safe { background:rgba(91,181,162,.2); color:var(--safe); border:1px solid var(--safe); }
+  .stars { color:var(--gold); letter-spacing:2px; }
+  .alert { padding:14px 18px; border-radius:8px; margin:16px 0; font-size:.92em; }
+  .alert-danger { background:rgba(233,69,96,.1); border:1px solid var(--danger); color:#ff8a9e; }
+  .alert-warn { background:rgba(245,197,24,.1); border:1px solid var(--warn); color:#ffe066; }
+  .alert-info { background:rgba(91,181,162,.1); border:1px solid var(--safe); color:#8eecd6; }
+  .plan-card { border:2px solid var(--border); border-radius:12px; padding:20px; margin:16px 0; position:relative; }
+  .plan-card.matsu { border-color:var(--matsu); }
+  .plan-card.take { border-color:var(--take); }
+  .plan-card.ume { border-color:var(--ume); }
+  .plan-card .plan-label { position:absolute; top:-12px; left:20px; padding:2px 16px; border-radius:12px; font-weight:700; font-size:.9em; }
+  .plan-card.matsu .plan-label { background:var(--matsu); color:#1a1a2e; }
+  .plan-card.take .plan-label { background:var(--take); color:#1a1a2e; }
+  .plan-card.ume .plan-label { background:var(--ume); color:#1a1a2e; }
+  .timeline { position:relative; padding-left:30px; }
+  .timeline::before { content:''; position:absolute; left:10px; top:0; bottom:0; width:2px; background:var(--border); }
+  .timeline-item { position:relative; margin-bottom:16px; padding:12px 16px; background:rgba(255,255,255,.03); border-radius:8px; border:1px solid var(--border); }
+  .timeline-item::before { content:''; position:absolute; left:-24px; top:16px; width:10px; height:10px; border-radius:50%; background:var(--accent); border:2px solid var(--bg); }
+  .timeline-item .time { font-weight:700; color:var(--accent); font-size:.9em; }
+  .timeline-item .activity { font-weight:600; color:#fff; }
+  .timeline-item .detail { color:var(--text-muted); font-size:.88em; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+  @media (max-width:768px) { .grid-2,.grid-3 { grid-template-columns:1fr; } .hero h1 { font-size:1.6em; } nav.toc ul { flex-direction:column; } }
+  .info-card { background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:8px; padding:16px; }
+  .info-card p { font-size:.88em; color:var(--text-muted); }
+  .price-highlight { font-size:1.3em; font-weight:700; color:var(--accent); }
+  .checklist { list-style:none; padding:0; }
+  .checklist li { padding:6px 0 6px 28px; position:relative; font-size:.92em; }
+  .checklist li::before { content:'\2610'; position:absolute; left:0; font-size:1.1em; }
+  .red-team { background:rgba(233,69,96,.05); border:1px solid rgba(233,69,96,.3); border-radius:8px; padding:12px 16px; margin:8px 0; font-size:.88em; }
+  .red-team::before { content:'Red Team'; display:inline-block; background:var(--danger); color:#fff; font-size:.75em; font-weight:700; padding:1px 8px; border-radius:4px; margin-right:8px; }
+  .review-box { background:rgba(245,197,24,.05); border:1px solid rgba(245,197,24,.2); border-radius:8px; padding:14px 16px; margin:10px 0; font-size:.88em; }
+  .review-box a { color:var(--gold); text-decoration:underline; }
+  .review-box .review-title { font-weight:700; color:#fff; }
+  .review-box .review-source { color:var(--text-muted); font-size:.85em; }
+  .review-box .review-summary { margin-top:6px; }
+  .flow-diagram { overflow-x:auto; margin:20px 0; }
+  .map-container { overflow-x:auto; margin:20px 0; background:rgba(255,255,255,.02); border-radius:12px; border:1px solid var(--border); padding:16px; }
+  footer { text-align:center; padding:40px 20px; color:var(--text-muted); font-size:.85em; border-top:1px solid var(--border); margin-top:60px; }
+  .booking-links { margin:8px 0; display:flex; flex-wrap:wrap; gap:6px; }
+  .booking-links a { display:inline-block; padding:4px 12px; border-radius:6px; font-size:.8em; font-weight:600; text-decoration:none; transition:all .2s; }
+  .booking-links a.bl-primary { background:rgba(233,69,96,.15); border:1px solid var(--accent); color:var(--accent); }
+  .booking-links a.bl-secondary { background:rgba(245,197,24,.1); border:1px solid rgba(245,197,24,.4); color:var(--gold); }
+  .booking-links a.bl-tertiary { background:rgba(91,181,162,.1); border:1px solid rgba(91,181,162,.4); color:var(--safe); }
+  .booking-links a:hover { opacity:.8; transform:translateY(-1px); }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <h1>Shanghai Immersive Trip 2026</h1>
+  <p class="subtitle">上海イマーシブ体験旅行 完全ガイド v2</p>
+  <div class="dates">2026.04.29 (Wed) - 05.04 (Mon) / 5泊6日</div>
+  <p class="subtitle" style="margin-top:12px;">4名 / 東京発 / 為替: 1 CNY = 21.0 JPY, 1 USD = 150 JPY</p>
+</div>
+
+<!-- ===== TOC ===== -->
+<nav class="toc">
+  <div class="container">
+    <h2>CONTENTS</h2>
+    <ul>
+      <li><a href="#overview">旅行概要</a></li>
+      <li><a href="#map">エリアマップ</a></li>
+      <li><a href="#flow">旅程フロー図</a></li>
+      <li><a href="#immersive">イマーシブ公演</a></li>
+      <li><a href="#disney">ディズニー</a></li>
+      <li><a href="#hotel">ホテル比較</a></li>
+      <li><a href="#hotel-why-cheap">なぜ安い？</a></li>
+      <li><a href="#gourmet">グルメガイド</a></li>
+      <li><a href="#plans">日程プラン</a></li>
+      <li><a href="#budget">予算総括</a></li>
+      <li><a href="#action">アクション</a></li>
+      <li><a href="#logistics">移動・準備</a></li>
+      <li><a href="#redteam">Red Team</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== 1. 旅行概要 ===== -->
+<section id="overview">
+  <h2>1. 旅行概要</h2>
+  <div class="section-body">
+    <div class="grid-3">
+      <div class="info-card"><h4>期間</h4><p>2026/04/29(水) - 05/04(月)<br>5泊6日（早帰り想定）</p></div>
+      <div class="info-card"><h4>メンバー</h4><p>4名（友人グループ）<br>通訳を必要日のみ手配</p></div>
+      <div class="info-card"><h4>メイン目的</h4><p>イマーシブコンテンツ複数<br>上海ディズニーランド<br>上海グルメ・観光</p></div>
+    </div>
+    <div class="alert alert-danger" style="margin-top:20px;">
+      <strong>重要:</strong> 中国の労働節（5/1-5/5）と完全に重複。航空券・ホテル・チケットの早期予約が必須。3月中の予約開始を強く推奨。
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2. エリアマップ ===== -->
+<section id="map">
+  <h2>2. 上海エリアマップ - スポット位置関係</h2>
+  <div class="section-body">
+    <p style="margin-bottom:12px;">主要スポットの相対位置と移動時間（人民広場を基点）。黄浦江を挟んで西が浦西（市中心）、東が浦東。</p>
+    <div class="map-container">
+      <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;height:auto;">
+        <!-- Background -->
+        <rect width="900" height="620" fill="#0f0f23"/>
+        <!-- Huangpu River -->
+        <path d="M580,0 C570,80 590,160 575,240 C560,320 580,400 570,480 C560,560 575,600 570,620" stroke="#1a3a5c" stroke-width="40" fill="none" opacity="0.6"/>
+        <text x="585" y="300" fill="#2a5a8c" font-size="12" transform="rotate(85,585,300)">黄 浦 江</text>
+        <!-- Areas labels -->
+        <text x="250" y="30" fill="#555" font-size="14" font-weight="bold">- - - 浦 西 (市中心) - - -</text>
+        <text x="680" y="30" fill="#555" font-size="14" font-weight="bold">浦 東</text>
+        <!-- Grid lines (subtle) -->
+        <line x1="0" y1="100" x2="560" y2="100" stroke="#1a1a3e" stroke-width="1" stroke-dasharray="4"/>
+        <line x1="0" y1="200" x2="560" y2="200" stroke="#1a1a3e" stroke-width="1" stroke-dasharray="4"/>
+        <line x1="0" y1="300" x2="560" y2="300" stroke="#1a1a3e" stroke-width="1" stroke-dasharray="4"/>
+        <line x1="0" y1="400" x2="560" y2="400" stroke="#1a1a3e" stroke-width="1" stroke-dasharray="4"/>
+
+        <!-- === SPOTS === -->
+        <!-- Hongqiao Airport -->
+        <circle cx="60" cy="280" r="18" fill="#16213e" stroke="#5bb5a2" stroke-width="2"/>
+        <text x="60" y="284" fill="#5bb5a2" font-size="11" text-anchor="middle">SHA</text>
+        <text x="60" y="310" fill="#8888aa" font-size="10" text-anchor="middle">虹橋空港</text>
+
+        <!-- Sleep No More (Jing'an) -->
+        <circle cx="280" cy="130" r="14" fill="var(--accent)" opacity="0.8"/>
+        <text x="280" y="134" fill="#fff" font-size="9" text-anchor="middle">SNM</text>
+        <text x="280" y="110" fill="#e94560" font-size="11" text-anchor="middle" font-weight="bold">Sleep No More</text>
+        <text x="280" y="155" fill="#8888aa" font-size="9" text-anchor="middle">静安区・南京西路</text>
+
+        <!-- Portman Ritz-Carlton (nearby SNM) -->
+        <rect x="330" y="118" width="8" height="8" fill="#7b8cde" rx="2"/>
+        <text x="342" y="127" fill="#7b8cde" font-size="9">リッツカールトン</text>
+
+        <!-- People's Square / JW Marriott -->
+        <circle cx="340" cy="220" r="20" fill="#f5c518" opacity="0.3"/>
+        <circle cx="340" cy="220" r="8" fill="#f5c518"/>
+        <text x="340" y="200" fill="#f5c518" font-size="12" text-anchor="middle" font-weight="bold">人民広場</text>
+        <text x="340" y="248" fill="#8888aa" font-size="9" text-anchor="middle">JWマリオット直結</text>
+        <text x="340" y="260" fill="#8888aa" font-size="9" text-anchor="middle">各地への基点</text>
+
+        <!-- The Bund -->
+        <rect x="475" y="160" width="60" height="120" fill="none" stroke="#c9a96e" stroke-width="2" rx="4" opacity="0.5"/>
+        <text x="505" y="185" fill="#c9a96e" font-size="12" text-anchor="middle" font-weight="bold">外灘</text>
+        <text x="505" y="200" fill="#c9a96e" font-size="9" text-anchor="middle">The Bund</text>
+        <text x="505" y="220" fill="#8888aa" font-size="8" text-anchor="middle">BOMBANA</text>
+        <text x="505" y="232" fill="#8888aa" font-size="8" text-anchor="middle">Mr&Mrs Bund</text>
+        <text x="505" y="244" fill="#8888aa" font-size="8" text-anchor="middle">和平飯店(改装中)</text>
+        <text x="505" y="256" fill="#8888aa" font-size="8" text-anchor="middle">ウォルドーフ</text>
+
+        <!-- Yu Garden -->
+        <circle cx="440" cy="320" r="12" fill="#5bb5a2" opacity="0.7"/>
+        <text x="440" y="324" fill="#fff" font-size="8" text-anchor="middle">豫園</text>
+        <text x="440" y="345" fill="#8888aa" font-size="9" text-anchor="middle">南翔饅頭店・MRX</text>
+
+        <!-- Xintiandi -->
+        <circle cx="350" cy="340" r="12" fill="#7b8cde" opacity="0.7"/>
+        <text x="350" y="344" fill="#fff" font-size="8" text-anchor="middle">新天地</text>
+        <text x="350" y="365" fill="#8888aa" font-size="9" text-anchor="middle">アンダーズ</text>
+
+        <!-- Tianzifang -->
+        <circle cx="280" cy="380" r="10" fill="#555" opacity="0.7"/>
+        <text x="280" y="384" fill="#ccc" font-size="8" text-anchor="middle">田子坊</text>
+
+        <!-- SAGA (Caobao Rd) -->
+        <circle cx="200" cy="470" r="14" fill="var(--accent)" opacity="0.8"/>
+        <text x="200" y="474" fill="#fff" font-size="8" text-anchor="middle">SAGA</text>
+        <text x="200" y="495" fill="#e94560" font-size="10" text-anchor="middle">SAGA光明之城</text>
+        <text x="200" y="508" fill="#8888aa" font-size="9" text-anchor="middle">徐汇区・漕宝路</text>
+
+        <!-- Fu 1015 -->
+        <text x="180" y="150" fill="#c9a96e" font-size="9">福1015</text>
+        <circle cx="170" cy="146" r="4" fill="#c9a96e"/>
+
+        <!-- Old Jesse -->
+        <text x="200" y="395" fill="#8888aa" font-size="9">老吉士</text>
+        <circle cx="192" cy="391" r="3" fill="#8888aa"/>
+
+        <!-- UMEPLAY (Yangpu) -->
+        <circle cx="460" cy="70" r="14" fill="var(--accent)" opacity="0.8"/>
+        <text x="460" y="74" fill="#fff" font-size="8" text-anchor="middle">UME</text>
+        <text x="460" y="55" fill="#e94560" font-size="10" text-anchor="middle">UMEPLAY</text>
+        <text x="460" y="95" fill="#8888aa" font-size="9" text-anchor="middle">楊浦区</text>
+
+        <!-- Pudong side -->
+        <!-- Park Hyatt -->
+        <rect x="660" y="200" width="8" height="8" fill="#c9a96e" rx="2"/>
+        <text x="672" y="209" fill="#c9a96e" font-size="9">パークハイアット(79-93F)</text>
+        <!-- FLAIR -->
+        <rect x="660" y="220" width="8" height="8" fill="#c9a96e" rx="2"/>
+        <text x="672" y="229" fill="#c9a96e" font-size="9">FLAIR(リッツ58F)</text>
+
+        <!-- Disney (far south-east) -->
+        <circle cx="780" cy="530" r="22" fill="#f5c518" opacity="0.3"/>
+        <circle cx="780" cy="530" r="10" fill="#f5c518"/>
+        <text x="780" y="510" fill="#f5c518" font-size="12" text-anchor="middle" font-weight="bold">Disney</text>
+        <text x="780" y="560" fill="#8888aa" font-size="9" text-anchor="middle">上海ディズニー</text>
+        <text x="780" y="573" fill="#8888aa" font-size="9" text-anchor="middle">浦東新区(市中心から遠い)</text>
+
+        <!-- Pudong Airport -->
+        <circle cx="830" cy="420" r="18" fill="#16213e" stroke="#5bb5a2" stroke-width="2"/>
+        <text x="830" y="424" fill="#5bb5a2" font-size="11" text-anchor="middle">PVG</text>
+        <text x="830" y="448" fill="#8888aa" font-size="10" text-anchor="middle">浦東空港</text>
+
+        <!-- === TRAVEL TIMES === -->
+        <!-- People's Square -> SNM -->
+        <line x1="330" y1="205" x2="290" y2="148" stroke="#444" stroke-width="1" stroke-dasharray="4"/>
+        <text x="295" y="180" fill="#666" font-size="9">10分</text>
+        <!-- People's Square -> Bund -->
+        <line x1="358" y1="215" x2="475" y2="200" stroke="#444" stroke-width="1" stroke-dasharray="4"/>
+        <text x="410" y="200" fill="#666" font-size="9">10分</text>
+        <!-- People's Square -> Yu Garden -->
+        <line x1="355" y1="238" x2="430" y2="312" stroke="#444" stroke-width="1" stroke-dasharray="4"/>
+        <text x="400" y="275" fill="#666" font-size="9">15分</text>
+        <!-- People's Square -> SAGA -->
+        <line x1="325" y1="238" x2="210" y2="458" stroke="#444" stroke-width="1" stroke-dasharray="4"/>
+        <text x="250" y="350" fill="#666" font-size="9">20分</text>
+        <!-- People's Square -> UMEPLAY -->
+        <line x1="355" y1="205" x2="450" y2="82" stroke="#444" stroke-width="1" stroke-dasharray="4"/>
+        <text x="415" y="140" fill="#666" font-size="9">30分</text>
+        <!-- People's Square -> Disney -->
+        <line x1="358" y1="230" x2="760" y2="525" stroke="#e94560" stroke-width="1" stroke-dasharray="6,3" opacity="0.5"/>
+        <text x="560" y="410" fill="#e94560" font-size="10" font-weight="bold">60分(地下鉄) / 50分(車)</text>
+
+        <!-- Legend -->
+        <rect x="20" y="530" width="200" height="80" fill="#16213e" rx="6" stroke="#2a2a4a"/>
+        <text x="30" y="550" fill="#f5c518" font-size="10" font-weight="bold">凡例</text>
+        <circle cx="35" cy="565" r="5" fill="#e94560"/>
+        <text x="45" y="569" fill="#ccc" font-size="9">イマーシブ会場</text>
+        <circle cx="130" cy="565" r="5" fill="#f5c518"/>
+        <text x="140" y="569" fill="#ccc" font-size="9">主要スポット</text>
+        <rect x="30" y="578" width="6" height="6" fill="#c9a96e" rx="1"/>
+        <text x="40" y="585" fill="#ccc" font-size="9">ホテル/レストラン</text>
+        <rect x="130" y="578" width="6" height="6" fill="#7b8cde" rx="1"/>
+        <text x="140" y="585" fill="#ccc" font-size="9">観光エリア</text>
+        <line x1="30" y1="598" x2="60" y2="598" stroke="#444" stroke-width="1" stroke-dasharray="4"/>
+        <text x="65" y="602" fill="#ccc" font-size="9">移動時間(人民広場から)</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3. 旅程フロー図 ===== -->
+<section id="flow">
+  <h2>3. 旅程フロー図（竹プラン）</h2>
+  <div class="section-body">
+    <p style="margin-bottom:12px;">推奨の竹プラン（4泊5日）を一気通貫で図示。色分け: <span style="color:var(--accent);">イマーシブ</span> / <span style="color:var(--gold);">ディズニー</span> / <span style="color:var(--take);">観光</span> / <span style="color:var(--matsu);">グルメ</span></p>
+    <div class="flow-diagram">
+      <svg viewBox="0 0 1100 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1100px;height:auto;">
+        <rect width="1100" height="420" fill="#0f0f23"/>
+        <!-- Day headers -->
+        <rect x="20" y="10" width="200" height="36" rx="6" fill="#16213e" stroke="#e94560" stroke-width="1.5"/>
+        <text x="120" y="33" fill="#e94560" font-size="13" text-anchor="middle" font-weight="bold">Day1 4/29(水) 到着日</text>
+        <rect x="240" y="10" width="200" height="36" rx="6" fill="#16213e" stroke="#f5c518" stroke-width="1.5"/>
+        <text x="340" y="33" fill="#f5c518" font-size="13" text-anchor="middle" font-weight="bold">Day2 4/30(木) Disney</text>
+        <rect x="460" y="10" width="200" height="36" rx="6" fill="#16213e" stroke="#e94560" stroke-width="1.5"/>
+        <text x="560" y="33" fill="#e94560" font-size="13" text-anchor="middle" font-weight="bold">Day3 5/1(金) UMEPLAY</text>
+        <rect x="680" y="10" width="200" height="36" rx="6" fill="#16213e" stroke="#e94560" stroke-width="1.5"/>
+        <text x="780" y="33" fill="#e94560" font-size="13" text-anchor="middle" font-weight="bold">Day4 5/2(土) SAGA</text>
+        <rect x="900" y="10" width="180" height="36" rx="6" fill="#16213e" stroke="#5bb5a2" stroke-width="1.5"/>
+        <text x="990" y="33" fill="#5bb5a2" font-size="13" text-anchor="middle" font-weight="bold">Day5 5/3(日) 帰国</text>
+
+        <!-- Time axis -->
+        <text x="5" y="85" fill="#555" font-size="9">AM</text>
+        <line x1="18" y1="80" x2="1090" y2="80" stroke="#2a2a4a" stroke-width="1"/>
+        <text x="5" y="195" fill="#555" font-size="9">PM</text>
+        <line x1="18" y1="190" x2="1090" y2="190" stroke="#2a2a4a" stroke-width="1"/>
+        <text x="5" y="305" fill="#555" font-size="9">夜</text>
+        <line x1="18" y1="300" x2="1090" y2="300" stroke="#2a2a4a" stroke-width="1"/>
+
+        <!-- Day 1 -->
+        <rect x="30" y="65" width="180" height="45" rx="6" fill="rgba(91,181,162,.15)" stroke="#5bb5a2"/>
+        <text x="120" y="83" fill="#5bb5a2" font-size="10" text-anchor="middle">8:00 羽田発</text>
+        <text x="120" y="98" fill="#8888aa" font-size="9" text-anchor="middle">→ 12:00 虹橋着</text>
+        <rect x="30" y="125" width="180" height="35" rx="6" fill="rgba(91,181,162,.15)" stroke="#5bb5a2"/>
+        <text x="120" y="148" fill="#5bb5a2" font-size="10" text-anchor="middle">ホテルチェックイン</text>
+        <rect x="30" y="175" width="180" height="45" rx="6" fill="rgba(91,181,162,.15)" stroke="#5bb5a2"/>
+        <text x="120" y="193" fill="#5bb5a2" font-size="10" text-anchor="middle">外灘散策</text>
+        <text x="120" y="208" fill="#8888aa" font-size="9" text-anchor="middle">夜景スポット</text>
+        <rect x="30" y="285" width="180" height="50" rx="6" fill="rgba(201,169,110,.15)" stroke="#c9a96e"/>
+        <text x="120" y="305" fill="#c9a96e" font-size="11" text-anchor="middle" font-weight="bold">Mr & Mrs Bund</text>
+        <text x="120" y="322" fill="#8888aa" font-size="9" text-anchor="middle">外灘夜景フレンチ</text>
+
+        <!-- Day 2 -->
+        <rect x="250" y="60" width="180" height="45" rx="6" fill="rgba(245,197,24,.15)" stroke="#f5c518"/>
+        <text x="340" y="78" fill="#f5c518" font-size="10" text-anchor="middle">7:00 Early Entry</text>
+        <text x="340" y="93" fill="#8888aa" font-size="9" text-anchor="middle">開園前入場</text>
+        <rect x="250" y="115" width="180" height="80" rx="6" fill="rgba(245,197,24,.2)" stroke="#f5c518" stroke-width="2"/>
+        <text x="340" y="140" fill="#f5c518" font-size="12" text-anchor="middle" font-weight="bold">Shanghai Disney</text>
+        <text x="340" y="157" fill="#8888aa" font-size="9" text-anchor="middle">Zootopia / Pirates / TRON</text>
+        <text x="340" y="172" fill="#8888aa" font-size="9" text-anchor="middle">DPA活用で効率的に</text>
+        <rect x="250" y="205" width="180" height="35" rx="6" fill="rgba(245,197,24,.15)" stroke="#f5c518"/>
+        <text x="340" y="228" fill="#f5c518" font-size="10" text-anchor="middle">パーク内ディナー</text>
+        <rect x="250" y="290" width="180" height="40" rx="6" fill="rgba(245,197,24,.15)" stroke="#f5c518"/>
+        <text x="340" y="315" fill="#f5c518" font-size="10" text-anchor="middle">花火 → ホテルへ</text>
+
+        <!-- Day 3 -->
+        <rect x="470" y="65" width="180" height="50" rx="6" fill="rgba(91,181,162,.15)" stroke="#5bb5a2"/>
+        <text x="560" y="85" fill="#5bb5a2" font-size="10" text-anchor="middle">豫園・南翔饅頭店</text>
+        <text x="560" y="100" fill="#8888aa" font-size="9" text-anchor="middle">小籠包ランチ</text>
+        <rect x="470" y="145" width="180" height="70" rx="6" fill="rgba(233,69,96,.2)" stroke="#e94560" stroke-width="2"/>
+        <text x="560" y="170" fill="#e94560" font-size="13" text-anchor="middle" font-weight="bold">UMEPLAY HAVEN</text>
+        <text x="560" y="188" fill="#8888aa" font-size="9" text-anchor="middle">75-90min 没入体験</text>
+        <text x="560" y="203" fill="#8888aa" font-size="9" text-anchor="middle">"人生最高のエンタメ"</text>
+        <rect x="470" y="285" width="180" height="50" rx="6" fill="rgba(201,169,110,.15)" stroke="#c9a96e"/>
+        <text x="560" y="305" fill="#c9a96e" font-size="11" text-anchor="middle" font-weight="bold">老吉士酒家</text>
+        <text x="560" y="322" fill="#8888aa" font-size="9" text-anchor="middle">伝統上海料理ディナー</text>
+
+        <!-- Day 4 -->
+        <rect x="690" y="65" width="180" height="45" rx="6" fill="rgba(91,181,162,.15)" stroke="#5bb5a2"/>
+        <text x="780" y="85" fill="#5bb5a2" font-size="10" text-anchor="middle">新天地・田子坊</text>
+        <text x="780" y="100" fill="#8888aa" font-size="9" text-anchor="middle">散策・ショッピング</text>
+        <rect x="690" y="145" width="180" height="70" rx="6" fill="rgba(233,69,96,.2)" stroke="#e94560" stroke-width="2"/>
+        <text x="780" y="170" fill="#e94560" font-size="13" text-anchor="middle" font-weight="bold">SAGA 光明之城</text>
+        <text x="780" y="188" fill="#8888aa" font-size="9" text-anchor="middle">90min ギネス認定</text>
+        <text x="780" y="203" fill="#8888aa" font-size="9" text-anchor="middle">1930s上海にタイムスリップ</text>
+        <rect x="690" y="285" width="180" height="50" rx="6" fill="rgba(201,169,110,.15)" stroke="#c9a96e"/>
+        <text x="780" y="305" fill="#c9a96e" font-size="11" text-anchor="middle" font-weight="bold">珮姐老火锅</text>
+        <text x="780" y="322" fill="#8888aa" font-size="9" text-anchor="middle">重慶式火鍋で打ち上げ</text>
+
+        <!-- Day 5 -->
+        <rect x="910" y="65" width="160" height="45" rx="6" fill="rgba(91,181,162,.15)" stroke="#5bb5a2"/>
+        <text x="990" y="85" fill="#5bb5a2" font-size="10" text-anchor="middle">朝食・チェックアウト</text>
+        <text x="990" y="100" fill="#8888aa" font-size="9" text-anchor="middle">お土産購入</text>
+        <rect x="910" y="125" width="160" height="45" rx="6" fill="rgba(91,181,162,.15)" stroke="#5bb5a2"/>
+        <text x="990" y="148" fill="#5bb5a2" font-size="10" text-anchor="middle">午前便で東京へ</text>
+
+        <!-- Connecting arrows -->
+        <line x1="210" y1="370" x2="240" y2="370" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="430" y1="370" x2="460" y2="370" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="650" y1="370" x2="680" y2="370" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="870" y1="370" x2="900" y2="370" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+        <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#666"/></marker></defs>
+
+        <!-- Legend -->
+        <rect x="30" y="365" width="12" height="12" rx="2" fill="rgba(233,69,96,.2)" stroke="#e94560"/>
+        <text x="48" y="376" fill="#ccc" font-size="9">イマーシブ</text>
+        <rect x="120" y="365" width="12" height="12" rx="2" fill="rgba(245,197,24,.15)" stroke="#f5c518"/>
+        <text x="138" y="376" fill="#ccc" font-size="9">ディズニー</text>
+        <rect x="210" y="365" width="12" height="12" rx="2" fill="rgba(91,181,162,.15)" stroke="#5bb5a2"/>
+        <text x="228" y="376" fill="#ccc" font-size="9">観光・移動</text>
+        <rect x="300" y="365" width="12" height="12" rx="2" fill="rgba(201,169,110,.15)" stroke="#c9a96e"/>
+        <text x="318" y="376" fill="#ccc" font-size="9">グルメ</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. イマーシブ ===== -->
+<section id="immersive">
+  <h2>4. イマーシブコンテンツ一覧 + 日本語レビュー</h2>
+  <div class="section-body">
+
+    <table>
+      <thead>
+        <tr><th>公演名</th><th>ジャンル</th><th>言語</th><th>時間</th><th>価格 (CNY/JPY)</th><th>エリア</th><th>評価</th><th>備考</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sleep No More</strong></td>
+          <td>イマーシブシアター</td>
+          <td><span class="badge badge-safe">非言語</span></td>
+          <td>2h</td>
+          <td>590-690元<br>(12,390-14,490円)</td>
+          <td>静安区</td>
+          <td><span class="stars">★★★★★</span></td>
+          <td><span class="badge badge-danger">5月公演要確認</span>
+            <div class="booking-links"><a class="bl-primary" href="http://www.sleepnomore.cn/" target="_blank">公式サイト</a><a class="bl-secondary" href="https://www.247tickets.com/t/sleep-no-more-shanghai" target="_blank">247tickets</a><a class="bl-tertiary" href="https://www.klook.com/activity/51507-sleep-no-more-shang-hai/" target="_blank">Klook</a></div></td>
+        </tr>
+        <tr>
+          <td><strong>UMEPLAY</strong></td>
+          <td>映画没入型体験</td>
+          <td><span class="badge badge-warn">中国語中心</span></td>
+          <td>75-90min</td>
+          <td>300-500元<br>(6,300-10,500円)</td>
+          <td>楊浦区/徐汇区</td>
+          <td><span class="stars">★★★★★</span></td>
+          <td>4人に最適。HAVEN推奨
+            <div class="booking-links"><a class="bl-primary" href="http://www.umeplay.com/" target="_blank">公式サイト</a><a class="bl-secondary" href="https://www.247tickets.com/" target="_blank">247tickets</a></div></td>
+        </tr>
+        <tr>
+          <td><strong>SAGA 光明之城</strong></td>
+          <td>行浸式シアター</td>
+          <td><span class="badge badge-safe">視覚中心</span></td>
+          <td>90min</td>
+          <td>298元〜<br>(6,258円〜)</td>
+          <td>徐汇区</td>
+          <td><span class="stars">★★★★</span></td>
+          <td>ギネス認定最大
+            <div class="booking-links"><a class="bl-primary" href="https://www.damai.cn/" target="_blank">大麦网</a><a class="bl-secondary" href="https://you.ctrip.com/sight/shanghai2/145088631.html" target="_blank">Trip.com</a></div></td>
+        </tr>
+        <tr>
+          <td><strong>MRX 弥生</strong></td>
+          <td>密室脱出</td>
+          <td><span class="badge badge-danger">中国語のみ</span></td>
+          <td>60-90min</td>
+          <td>292-564元<br>(6,132-11,844円)</td>
+          <td>黄浦区</td>
+          <td><span class="stars">★★★★</span></td>
+          <td>通訳必須。日系ホラー
+            <div class="booking-links"><a class="bl-secondary" href="https://m.dianping.com/shop/1635381524" target="_blank">大众点评(外滩店)</a></div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-danger">
+      <strong>候補除外: 新世界：破笼之宴</strong> - 抗日戦争をテーマにした作品であり、日本人グループにとって文化的に配慮が必要。また松江区で遠い+6時間+金土日限定のため、今回の候補から除外を推奨。
+    </div>
+
+    <!-- Sleep No More Reviews -->
+    <h3>Sleep No More 上海 - 日本語レビュー</h3>
+    <p>2025年4月以降リニューアル: 公演時間3h→2hに短縮、チケット約1/3に値下げ、日本語パンフレット新設。</p>
+    <div class="review-box">
+      <div class="review-title"><a href="https://note.com/marchingants/n/n9f1c4ac2c25d" target="_blank">はじめての不眠之夜ガイド〜Sleep No More上海〜</a></div>
+      <div class="review-source">marchingants / note</div>
+      <div class="review-summary">初心者向け完全ガイド。入場の流れ（荷物預け→バー待機→トランプカードで入場順決定）、館内行動指針を丁寧に解説。言葉がわからなくても楽しめるノンバーバル演劇。</div>
+    </div>
+    <div class="review-box">
+      <div class="review-title"><a href="https://note.com/marchingants/n/na13e0d458da2" target="_blank">Sleep No More上海 2025/4からの変更点＆体験談</a></div>
+      <div class="review-source">marchingants / note</div>
+      <div class="review-summary">2025年4月変更点: 2h短縮、価格値下げ、写真ブース新設、日本語含む4か国語パンフ対応。時間短縮は残念だがコスパ向上。</div>
+    </div>
+    <div class="review-box">
+      <div class="review-title"><a href="https://note.com/whiterabbit1130/n/n7a7f0076725e" target="_blank">没入型演劇《不眠之夜》sleep no more を体験した</a></div>
+      <div class="review-source">いなばゆみ / note</div>
+      <div class="review-summary">入口から世界観が作り込まれ、物語の一部として没入。1on1（役者との一対一の場面）も体験。リピートしたいとの感想。</div>
+    </div>
+
+    <!-- UMEPLAY Reviews -->
+    <h3>UMEPLAY - 日本語レビュー <span class="badge badge-danger">必読</span></h3>
+    <p>日本のエンタメ業界関係者から「人生最高」「死ぬまでに一度は行け」と絶賛。レビュー記事10件以上と最も充実。</p>
+    <div class="review-box">
+      <div class="review-title"><a href="https://note.com/kajiken0630/n/n23f1c2cca829" target="_blank">いま世界で最も濃密なエンタメ体験と評される中国の没入型体験『UMEPLAY』が完全に想像以上だった話</a></div>
+      <div class="review-source">梶谷健人 / note (2026年1月)</div>
+      <div class="review-summary">映画級セット+ライブ演技+アトラクション機構の融合。4-6名参加に2-3名の役者が付く120分。「想像以上」。中国だからこそ実現できる構造的背景（人件費・施設規模）も分析。</div>
+    </div>
+    <div class="review-box">
+      <div class="review-title"><a href="https://note.com/horishou/n/n62df9500e7a2" target="_blank">"死ぬまでに一度は行け"――上海の没入型体験『UMEPLAY』が人生最高のエンタメだった話</a></div>
+      <div class="review-source">Shota Horii / note</div>
+      <div class="review-summary">タイトル通り「死ぬまでに一度は行くべき」と断言。中国語の壁があっても体験する価値があるとの結論。</div>
+    </div>
+    <div class="review-box">
+      <div class="review-title"><a href="https://omocoro.jp/bros/kiji/556781/" target="_blank">劇薬のホラー体験『UMEPLAY』の話をしよう</a></div>
+      <div class="review-source">梨 / オモコロブロス！</div>
+      <div class="review-summary">二泊三日で7作品体験。ホラーイベント個人ベスト5の過半数がここで更新。真っ暗闇での一瞬の明滅で異形が浮かぶ「唯物論的ホラー」。演劇とお化け屋敷の融合。</div>
+    </div>
+    <div class="review-box">
+      <div class="review-title"><a href="https://note.com/togaiaoi/n/n700b607a5b6d" target="_blank">ARGオタクが上海の体験型エンタメを山ほど浴びた結果、中国語を勉強する決意をするまで</a></div>
+      <div class="review-source">兎谷あおい / note</div>
+      <div class="review-summary">HAVENとABEILLEをともに<strong>「Tier S（人生が変わるレベル）」</strong>と評価。体験後に中国語を勉強する決意。HAVENは美しく余韻が残る。ABEILLEはSF系でホラー控えめ。</div>
+    </div>
+    <div class="review-box">
+      <div class="review-title"><a href="https://note.com/moyan0315/n/n4a65103a7b9d" target="_blank">自分の人生が"他人事"だった僕が、上海の体験型エンタメで初めて"自分を生きた"話</a></div>
+      <div class="review-source">たかはしともや / note</div>
+      <div class="review-summary">UMEPLAY・MRX・Sleep No Moreの横断的体験記。体験型エンタメを通じた自己変容を描く。</div>
+    </div>
+
+    <!-- SAGA Reviews -->
+    <h3>SAGA光明之城 - レビュー</h3>
+    <div class="review-box">
+      <div class="review-title">日本語の詳細体験記はほぼ未確認</div>
+      <div class="review-summary">フランスPuy du Fouがアジア初展開。46,000m2の会場で1930年代上海にタイムスリップ。26通りのルート選択、150名以上の俳優、26,000点以上の小道具。視覚演出中心で言語バリアは低め。Trip.comに<a href="https://jp.trip.com/moments/theme/poi-saga-city-of-light-145088631-guides-993135/" target="_blank">日本語ガイド</a>あり。</div>
+    </div>
+
+    <!-- MRX Reviews -->
+    <h3>MRX 弥生 - 日本語レビュー</h3>
+    <p>日本にも「MRX魔王の日曜日」として進出済み。上海版は日本版の2-3倍の広さ。</p>
+    <div class="review-box">
+      <div class="review-title"><a href="https://realife-blog.com/yayoi1/" target="_blank">【イマーシブ体験!?】弥生 第一章の感想レビュー！没入型＆ホラー演出とは？</a></div>
+      <div class="review-source">リアル脱出ライフ</div>
+      <div class="review-summary">2-6名で90分。没入度が極めて高く「あの時間をただ生きていた」と感じるほど。謎の難易度バランスが絶妙。声優・早見沙織がキャラボイスを担当。</div>
+    </div>
+    <div class="review-box">
+      <div class="review-title"><a href="https://netanker.hatenablog.jp/entry/2025/01/16/190000" target="_blank">謎解き施設『MRX魔王の日曜日』体験記</a></div>
+      <div class="review-source">ねおあみ日記 / はてなブログ (2025年1月)</div>
+      <div class="review-summary">日本展開施設の紹介と上海本家との比較。上海版はショッピングビル1フロア全部が体験施設。</div>
+    </div>
+
+    <h3>予約方法</h3>
+    <table>
+      <tr><th>プラットフォーム</th><th>特徴</th><th>支払い</th></tr>
+      <tr><td>247tickets</td><td>英語対応。外国人向け</td><td>クレジットカード対応</td></tr>
+      <tr><td>Klook / KKday</td><td>日本語対応。安心感</td><td>クレジットカード対応</td></tr>
+      <tr><td>大众点评 / 美团</td><td>中国最大。最安値</td><td>Alipay/WeChat Pay</td></tr>
+      <tr><td>大麦网 (damai.cn)</td><td>中国チケットサイト</td><td>Alipay</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===== 5. ディズニー ===== -->
+<section id="disney">
+  <h2>5. 上海ディズニーランド攻略</h2>
+  <div class="section-body">
+    <div class="grid-2">
+      <div class="info-card"><h4>基本情報</h4><p><strong>チケット（ピーク++）:</strong> 799元 (16,779円)/人<br><strong>Early Entry:</strong> 149元 (3,129円)/人<br><strong>DPA 3セット:</strong> 600-800元目安<br><strong>1人予算合計:</strong> 約2,200-2,500元 (46,200-52,500円)</p><div class="booking-links"><a class="bl-primary" href="https://www.shanghaidisneyresort.com/" target="_blank">公式サイト(チケット)</a><a class="bl-secondary" href="https://www.klook.com/activity/1558-shanghai-disneyland-ticket/" target="_blank">Klook</a><a class="bl-tertiary" href="https://www.kkday.com/en/product/2578" target="_blank">KKday</a></div></div>
+      <div class="info-card"><h4>おすすめ日程</h4><p><span class="badge badge-safe">Best</span> <strong>4/30(木)</strong> - 中国側まだ平日<br><span class="badge badge-safe">Good</span> <strong>5/4(月)</strong> - 労働節明け<br><span class="badge badge-danger">Avoid</span> <strong>5/1-5/3</strong> - 8万人超</p></div>
+    </div>
+    <h3>必乗り TOP 3</h3>
+    <div class="grid-3">
+      <div class="info-card"><h4>1. Zootopia: Hot Pursuit</h4><p>世界唯一。最新没入型ライド。DPA最優先。</p></div>
+      <div class="info-card"><h4>2. Pirates of the Caribbean</h4><p>世界最高傑作と評される上海版。</p></div>
+      <div class="info-card"><h4>3. TRON Lightcycle Power Run</h4><p>夜のネオン演出が圧巻。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6. ホテル ===== -->
+<section id="hotel">
+  <h2>6. ホテル比較（松竹梅）+ 3名1室オプション</h2>
+  <div class="section-body">
+
+    <div class="alert alert-danger">
+      <strong>フェアモント和平飯店は2025年から大規模改装中</strong>（2027年まで、Raffles Peace Hotelにリブランド予定）。松プランの候補からウォルドーフアストリアまたはパークハイアットを推奨。
+    </div>
+
+    <h3>部屋構成オプション</h3>
+    <p style="margin-bottom:12px;">4名グループの場合、「ツイン×2室」と「ツイン+エクストラベッド×1室 + シングル×1室」の2パターンがあります。</p>
+    <table>
+      <thead><tr><th>ホテル</th><th>エクストラベッド</th><th>EB料金/泊</th><th>3名1室+1名1室 vs 2室の節約額/泊</th></tr></thead>
+      <tbody>
+        <tr><td><strong>パークハイアット上海</strong></td><td>対応あり（要リクエスト）</td><td>要問合せ</td><td>要確認</td></tr>
+        <tr><td><strong>ウォルドーフアストリア</strong></td><td>対応あり</td><td>約300元+税(6,930円)</td><td>約400-1,000元節約</td></tr>
+        <tr><td><strong>JWマリオット上海</strong></td><td>対応あり（最大1台）</td><td>291.5元(6,122円)</td><td>約500-900元節約</td></tr>
+        <tr><td><strong>アンダーズ新天地</strong></td><td>対応あり（最大1台）</td><td><strong>233元(4,893円)</strong><br><span class="badge badge-safe">最安</span></td><td>約400-700元節約</td></tr>
+        <tr><td><strong>コンラッド上海</strong></td><td>対応あり</td><td>300元(6,300円)</td><td>約400-800元節約</td></tr>
+        <tr><td><strong>ポートマン・リッツカールトン</strong></td><td>対応あり（要リクエスト）</td><td>要問合せ</td><td>要確認</td></tr>
+        <tr><td><strong>ハイアットセントリック</strong></td><td><span class="badge badge-warn">要確認</span></td><td>不明</td><td>予約前にホテルに直接確認</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-info">
+      <strong>推奨:</strong> コスパ重視なら「3名1室(ツイン+EB)+1名1室」が有効。エクストラベッド代233-300元を足しても、2室取るよりCNY 400-1,000/泊の節約に。ただしEB快適性は通常ベッドに劣る（195cm×100cm程度）。
+    </div>
+
+    <!-- 松 -->
+    <div class="plan-card matsu">
+      <div class="plan-label">松 PREMIUM</div>
+      <table style="margin-top:10px;">
+        <thead><tr><th>ホテル</th><th>エリア</th><th>2室1泊</th><th>5泊合計</th><th>イマーシブへ</th><th>特徴</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ウォルドーフアストリア</strong><br>Waldorf Astoria <span class="badge badge-safe">推奨</span></td><td>外灘</td><td>3,500-6,800元<br>(73,500-142,800円)</td><td>17,500-34,000元<br>(367,500-714,000円)</td><td>15分</td><td>ヒルトン最上級。歴史的建築。外灘夜景。EB対応。</td></tr>
+          <tr><td><strong>パークハイアット上海</strong><br>Park Hyatt</td><td>陸家嘴(浦東)</td><td>3,600-7,000元<br>(75,600-147,000円)</td><td>18,000-35,000元<br>(378,000-735,000円)</td><td>25分</td><td>79-93階。87階絶景朝食。EB対応(要リクエスト)。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 竹 -->
+    <div class="plan-card take">
+      <div class="plan-label">竹 STANDARD</div>
+      <table style="margin-top:10px;">
+        <thead><tr><th>ホテル</th><th>エリア</th><th>2室1泊</th><th>5泊合計</th><th>イマーシブへ</th><th>特徴</th></tr></thead>
+        <tbody>
+          <tr><td><strong>JWマリオット上海</strong><br><span class="badge badge-safe">推奨</span></td><td>人民広場</td><td>2,400-4,200元<br>(50,400-88,200円)</td><td>12,000-21,000元<br>(252,000-441,000円)</td><td><strong>5分</strong></td><td>駅直結。EB 291.5元/泊。Bonvoyポイント。</td></tr>
+          <tr><td><strong>アンダーズ新天地</strong></td><td>新天地</td><td>2,200-3,100元<br>(46,200-65,100円)</td><td>11,000-15,500元<br>(231,000-325,500円)</td><td>15分</td><td>デザインホテル。EB最安233元/泊。無料ミニバー。</td></tr>
+          <tr><td><strong>コンラッド上海</strong></td><td>南京東路</td><td>1,800-3,500元<br>(37,800-73,500円)</td><td>9,000-17,500元<br>(189,000-367,500円)</td><td>10分</td><td>歩行街直結。EB 300元/泊。66階建。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 梅 -->
+    <div class="plan-card ume">
+      <div class="plan-label">梅 ECONOMY</div>
+      <table style="margin-top:10px;">
+        <thead><tr><th>ホテル</th><th>エリア</th><th>2室1泊</th><th>5泊合計</th><th>イマーシブへ</th><th>特徴</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ポートマン・リッツカールトン</strong><br><span class="badge badge-safe">コスパ最強</span></td><td>南京西路</td><td>1,700-2,800元<br>(35,700-58,800円)</td><td>8,500-14,000元<br>(178,500-294,000円)</td><td><strong>10分</strong></td><td>五つ星が値崩れ。SNM至近。EB対応(要リクエスト)。</td></tr>
+          <tr><td><strong>ハイアットセントリック</strong></td><td>中山公園</td><td>1,300-2,100元<br>(27,300-44,100円)</td><td>6,500-10,500元<br>(136,500-220,500円)</td><td>20分</td><td>最安クラス。EB要確認。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="red-team">
+      表示価格は通常期ベース。労働節(5/1-5/3)は1.5-2倍の可能性。ツインルームは予約時に「双床房/Twin」を指定。エクストラベッドは「subject to availability」のため事前にホテルへ直接メール確認を。
+    </div>
+  </div>
+</section>
+
+<!-- ===== 7. なぜ安い？ ===== -->
+<section id="hotel-why-cheap">
+  <h2>7. なぜ上海の五つ星ホテルは安いのか</h2>
+  <div class="section-body">
+    <h3>価格比較: リッツカールトン</h3>
+    <table>
+      <thead><tr><th>都市</th><th>1泊平均(USD)</th><th>日本円</th><th>上海比</th></tr></thead>
+      <tbody>
+        <tr><td><strong>上海</strong> Pudong</td><td>$182-337</td><td>約27,000-50,000円</td><td>-</td></tr>
+        <tr><td><strong>東京</strong></td><td>$600-1,093</td><td>約90,000-164,000円</td><td><strong>3-4倍</strong></td></tr>
+        <tr><td><strong>ニューヨーク</strong> Central Park</td><td>$720-866</td><td>約108,000-130,000円</td><td><strong>3-4倍</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3>値崩れの4大要因</h3>
+    <div class="grid-2">
+      <div class="info-card">
+        <h4>1. 不動産バブル崩壊</h4>
+        <p>恒大集団・碧桂園など大手デベロッパーが相次ぎデフォルト。中国の五つ星ホテルの多くは「不動産の広告塔」として建てられたもの。不動産市場崩壊でこのビジネスモデルが破綻し、経営困難→売却ラッシュ。</p>
+      </div>
+      <div class="info-card">
+        <h4>2. 供給過剰</h4>
+        <p>民宿運営企業が2022年の3.9万件→2024年の10.1万件に2.6倍増。上海では2025年下半期だけで約1,300室の高級客室が追加予定。五つ星ホテルが屋台を始める異例の事態も（日経新聞報道）。</p>
+      </div>
+      <div class="info-card">
+        <h4>3. 企業接待需要の消滅</h4>
+        <p>企業の60%以上が出張予算を削減（過去3年で平均15-20%減）。腐敗防止キャンペーンで政府関連接待も激減。レストラン個室の稼働率は100%→33%に急落。</p>
+      </div>
+      <div class="info-card">
+        <h4>4. OTA価格競争</h4>
+        <p>Trip.com、Booking.com等のオンライン旅行予約サイトの台頭で価格競争が激化。ホテル側は割引せざるを得ない状況。</p>
+      </div>
+    </div>
+
+    <div class="alert alert-warn">
+      <strong>GW/労働節期間の注意:</strong> 通常期の「破格」水準からは上がるが、東京・NYと比べれば依然として大幅に安い。ただし早期予約が割安確保の鍵。
+    </div>
+    <p style="font-size:.85em;color:var(--text-muted);margin-top:8px;">Sources: <a href="https://www.rakumachi.jp/news/column/386050" style="color:var(--gold)">楽待</a> / <a href="https://www.nikkei.com/article/DGXZQOGM1603L0W5A910C2000000/" style="color:var(--gold)">日経新聞</a></p>
+  </div>
+</section>
+
+<!-- ===== 8. グルメ ===== -->
+<section id="gourmet">
+  <h2>8. グルメガイド + 日本語レビュー</h2>
+  <div class="section-body">
+
+    <h3>マスト有名店（小籠包・生煎）</h3>
+    <table>
+      <thead><tr><th>店名</th><th>ジャンル</th><th>4人予算</th><th>予約</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr><td><strong>南翔饅頭店</strong> 豫園本店</td><td>小籠包</td><td>200-400元 (4,200-8,400円)</td><td>不要（行列）</td><td>元祖。ビブグルマン。2F推奨。朝8:30が穴場。<div class="booking-links"><a class="bl-tertiary" href="https://www.shanghainavi.com/food/2/" target="_blank">上海ナビ</a><a class="bl-secondary" href="https://tabelog.com/china/A5102/A510202/51000004/" target="_blank">食べログ</a></div></td></tr>
+        <tr><td><strong>鼎泰豊</strong> 新天地店</td><td>小籠包</td><td>400-600元 (8,400-12,600円)</td><td>推奨</td><td>安定品質。環球金融中心店は穴場。<div class="booking-links"><a class="bl-primary" href="https://www.dintaifung.com.cn/" target="_blank">公式サイト</a><a class="bl-secondary" href="https://4travel.jp/os_shisetsu/10387643" target="_blank">4travel</a></div></td></tr>
+        <tr><td><strong>大壺春</strong></td><td>生煎包</td><td>100-200元 (2,100-4,200円)</td><td>不要</td><td>ビブグルマン。カリッと&ジューシー。<div class="booking-links"><a class="bl-secondary" href="https://www.dianping.com/" target="_blank">大众点评で検索</a></div></td></tr>
+        <tr><td><strong>小楊生煎</strong></td><td>生煎包</td><td>80-150元 (1,680-3,150円)</td><td>不要</td><td>4個8元。やけど注意。60店舗以上。<div class="booking-links"><a class="bl-tertiary" href="https://www.shanghainavi.com/food/398/" target="_blank">上海ナビ</a></div></td></tr>
+      </tbody>
+    </table>
+    <div class="review-box">
+      <div class="review-title"><a href="https://note.com/tunacchi/n/ndab70b8fc8b4" target="_blank">【南翔饅頭店】上海小籠包は鼎泰豊より美味いのか?!</a></div>
+      <div class="review-source">MIYA / note</div>
+      <div class="review-summary">ミシュラン取得店。1F テイクアウト鮮肉小籠饅頭20元/12個。「10軒ほど食べた中で圧倒的1位」との評価。行列回避は朝一が鍵。</div>
+    </div>
+    <div class="review-box">
+      <div class="review-title"><a href="https://whostolemysheep.hatenablog.com/entry/2024/03/12/183000" target="_blank">ビブグルマン常連の上海グルメ焼き小籠包「大壶春」</a></div>
+      <div class="review-source">ひつじ泥棒2 / はてなブログ (2024年)</div>
+      <div class="review-summary">外はカリッと中はジューシー。酢と辣油で食べるスタイル。小楊生煎より「大壺春のほうが好み」との声多数。</div>
+    </div>
+
+    <h3>上海料理の名店</h3>
+    <table>
+      <thead><tr><th>店名</th><th>ランク</th><th>4人予算</th><th>予約</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr><td><strong>福1015</strong></td><td><span class="badge badge-matsu">ミシュラン1つ星</span></td><td>1,500-2,500元 (31,500-52,500円)</td><td>必須</td><td>1930年代洋館。看板なし隠れ家。Asia Best 50 #16。<div class="booking-links"><a class="bl-primary" href="https://guide.michelin.com/us/en/shanghai-municipality/shanghai/restaurant/fu-1015" target="_blank">ミシュラン</a><a class="bl-secondary" href="https://www.dianping.com/" target="_blank">大众点评で予約</a><a class="bl-tertiary" href="https://tabelog.com/china/A5102/A510214/51000003/" target="_blank">食べログ</a></div></td></tr>
+        <tr><td><strong>老吉士酒家</strong></td><td><span class="badge badge-take">中級</span></td><td>600-1,000元 (12,600-21,000円)</td><td>必須</td><td>30年超。紅焼肉が日本人好み。テーブル7卓のみ。<div class="booking-links"><a class="bl-secondary" href="https://www.dianping.com/" target="_blank">大众点评で予約</a><a class="bl-tertiary" href="https://www.shanghainavi.com/food/465/" target="_blank">上海ナビ</a></div></td></tr>
+        <tr><td><strong>蘭心餐厅</strong></td><td><span class="badge badge-ume">庶民派</span></td><td>300-500元 (6,300-10,500円)</td><td>不要</td><td>進賢路。濃油赤醤の紅焼肉。ドラマ「繁花」関連。<div class="booking-links"><a class="bl-tertiary" href="https://tabelog.com/china/A5102/A510203/51000347/" target="_blank">食べログ</a></div></td></tr>
+      </tbody>
+    </table>
+    <div class="review-box">
+      <div class="review-title"><a href="https://foodies-asia.com/shanghai_fu1015/" target="_blank">中国・上海『福1015／Fu 1015』上海料理</a></div>
+      <div class="review-source">Foodies Asia</div>
+      <div class="review-summary">シェフ盧懌明(Tony Lu)氏。フランス人銀行家が建てた洋館。完全予約制。同シェフが福1088(アラカルト)、福1039(カジュアル)、福和慧(ベジタリアン)も経営。予算・好みで使い分け可。</div>
+    </div>
+    <div class="review-box">
+      <div class="review-title"><a href="https://ameblo.jp/from-shanghai/entry-12229405263.html" target="_blank">老吉士 上海人おすすめの上海料理店</a></div>
+      <div class="review-source">まだまだ冷や汗日記 in上海 / Ameba</div>
+      <div class="review-summary">上海人の友人推薦で訪問。紅焼肉は日本人好みの味付け。予約なしでは入れないほどの人気。接客は愛想がないことで有名。</div>
+    </div>
+    <div class="review-box">
+      <div class="review-title"><a href="https://note.com/h_l380/n/nd0be25fc612b" target="_blank">蘭心餐廳 上海市ご飯情報</a></div>
+      <div class="review-source">note</div>
+      <div class="review-summary">進賢路の弄堂小館。濃油赤醤の紅焼肉は口に入れるとすぐ溶ける。白米との相性が抜群。夕食時は並ぶことが多い。</div>
+    </div>
+
+    <h3>夜景ディナー</h3>
+    <table>
+      <thead><tr><th>店名</th><th>ランク</th><th>4人予算</th><th>ジャンル</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr><td><strong>8&frac12; BOMBANA</strong></td><td><span class="badge badge-matsu">ミシュラン2つ星</span></td><td>3,200-4,800元 (67,200-100,800円)</td><td>イタリアン</td><td>予約極困難。4/29 or 5/4-5を狙う。<div class="booking-links"><a class="bl-primary" href="https://www.ottoemezzobombana.com/branch/shanghai/" target="_blank">公式(予約)</a><a class="bl-secondary" href="https://guide.michelin.com/us/en/shanghai-municipality/shanghai/restaurant/8-1-2-otto-e-mezzo-bombana-393918" target="_blank">ミシュラン</a></div></td></tr>
+        <tr><td><strong>FLAIR</strong> リッツ58F</td><td><span class="badge badge-matsu">高級</span></td><td>1,500-3,000元 (31,500-63,000円)</td><td>バー&ダイニング</td><td>中国最高層ルーフトップバー。外灘全景。<div class="booking-links"><a class="bl-primary" href="https://www.flairrooftopbarshanghai.com" target="_blank">公式サイト</a></div></td></tr>
+        <tr><td><strong>Mr & Mrs Bund</strong></td><td><span class="badge badge-take">上級</span></td><td>1,500-2,500元 (31,500-52,500円)</td><td>シーフード&ステーキ</td><td>Paul Pairet。外灘18号ビル6F。<div class="booking-links"><a class="bl-secondary" href="https://www.dianping.com/" target="_blank">大众点评で予約</a></div></td></tr>
+      </tbody>
+    </table>
+    <div class="review-box">
+      <div class="review-title"><a href="https://zekkei.in/flair-rooftop-bar-the-most-beautiful-night-view-in-shanghai" target="_blank">上海で一番夜景が綺麗なルーフトップバー「FLAIR」へ行ってきたよ</a></div>
+      <div class="review-source">絶景in</div>
+      <div class="review-summary">オープンエアのテラスから東方明珠電視塔が目の前の高さ。日没30分〜1時間前入店がベスト。雰囲気・スタッフ対応・音楽すべて◎。日曜夕方は1時間待ちの場合あり。</div>
+    </div>
+    <div class="review-box">
+      <div class="review-title"><a href="https://magazine.hitosara.com/article/912/" target="_blank">名実ともにアジアNo.1のイタリアン【8½ Otto e Mezzo Bombana】</a></div>
+      <div class="review-source">ヒトサラマガジン</div>
+      <div class="review-summary">香港本店はミシュラン3つ星（イタリア国外唯一）。上海店は2つ星。Chef's Tableでキッチン内食事体験も可能。ディナーコース約1,700RMB/人。</div>
+    </div>
+
+    <h3>火鍋</h3>
+    <table>
+      <thead><tr><th>店名</th><th>4人予算</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr><td><strong>珮姐老火锅</strong></td><td>500-800元 (10,500-16,800円)</td><td>重慶火鍋ランキング1位。九宮格スタイル。8秒ポテトスライスが名物。<div class="booking-links"><a class="bl-secondary" href="https://www.dianping.com/" target="_blank">大众点评で予約</a></div></td></tr>
+        <tr><td><strong>海底捞</strong></td><td>500-800元 (10,500-16,800円)</td><td>24h営業。カンフーヌードルショー。エンタメ火鍋。<div class="booking-links"><a class="bl-primary" href="https://www.haidilao.com/" target="_blank">公式(予約)</a><a class="bl-secondary" href="https://www.dianping.com/" target="_blank">大众点评</a></div></td></tr>
+      </tbody>
+    </table>
+    <div class="review-box">
+      <div class="review-title"><a href="https://www.happysunnyday.net/entry/haidilao" target="_blank">見て楽しい！食べて楽しい！海底捞</a></div>
+      <div class="review-source">晴れたら一人で旅に出る / はてなブログ</div>
+      <div class="review-summary">待ち時間にジュース・お菓子・ネイルサービスが無料。折り鶴3羽で割引。カンフーヌードルと変面ショーが圧巻。テーマパーク級。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 9. 日程プラン ===== -->
+<section id="plans">
+  <h2>9. 推奨日程プラン（松竹梅）</h2>
+  <div class="section-body">
+
+    <div class="plan-card matsu">
+      <div class="plan-label">松 PREMIUM</div>
+      <p style="margin-top:8px;color:var(--text-muted);">イマーシブ3本 + ディズニー + ミシュランディナー2回 / 5泊6日</p>
+      <div class="timeline" style="margin-top:16px;">
+        <div class="timeline-item"><span class="time">Day 1 - 4/29 (水)</span><br><span class="activity">到着 → 外灘 → BOMBANAディナー</span><br><span class="detail">午前便で虹橋着 → チェックイン → 外灘散策 → 8½ BOMBANAでイタリアン</span></div>
+        <div class="timeline-item"><span class="time">Day 2 - 4/30 (木)</span><br><span class="activity">上海ディズニーランド</span><br><span class="detail">Early Entry → Zootopia/Pirates/TRON → パーク内夕食 → 花火鑑賞</span></div>
+        <div class="timeline-item"><span class="time">Day 3 - 5/1 (金)</span><br><span class="activity">UMEPLAY + 福1015</span><br><span class="detail">豫園・南翔饅頭店（昼食）→ UMEPLAY HAVEN → 福1015でミシュラン上海料理</span></div>
+        <div class="timeline-item"><span class="time">Day 4 - 5/2 (土)</span><br><span class="activity">SAGA + Sleep No More</span><br><span class="detail">新天地散策 → SAGA光明之城(ディナー付き) → Sleep No More 19:00公演</span></div>
+        <div class="timeline-item"><span class="time">Day 5 - 5/3 (日)</span><br><span class="activity">MRX + FLAIRバー</span><br><span class="detail">田子坊 → MRX弥生(通訳同行) → FLAIRルーフトップバーで打ち上げ</span></div>
+        <div class="timeline-item"><span class="time">Day 6 - 5/4 (月)</span><br><span class="activity">帰国</span><br><span class="detail">朝食後 → 午前便で東京へ</span></div>
+      </div>
+    </div>
+
+    <div class="plan-card take">
+      <div class="plan-label">竹 STANDARD（推奨）</div>
+      <p style="margin-top:8px;color:var(--text-muted);">イマーシブ2本 + ディズニー + バランス食事 / 4泊5日</p>
+      <div class="timeline" style="margin-top:16px;">
+        <div class="timeline-item"><span class="time">Day 1 - 4/29 (水)</span><br><span class="activity">到着 → 外灘 → Mr & Mrs Bund</span><br><span class="detail">午前便で虹橋着 → チェックイン → 外灘散策 → Mr & Mrs Bundでフレンチ</span></div>
+        <div class="timeline-item"><span class="time">Day 2 - 4/30 (木)</span><br><span class="activity">上海ディズニーランド</span><br><span class="detail">Early Entry → 1日ディズニー → 花火</span></div>
+        <div class="timeline-item"><span class="time">Day 3 - 5/1 (金)</span><br><span class="activity">観光 + UMEPLAY + 上海料理</span><br><span class="detail">豫園・南翔饅頭店 → UMEPLAY HAVEN → 老吉士酒家で上海料理</span></div>
+        <div class="timeline-item"><span class="time">Day 4 - 5/2 (土)</span><br><span class="activity">SAGA + 火鍋</span><br><span class="detail">新天地・田子坊 → SAGA光明之城 → 珮姐老火锅</span></div>
+        <div class="timeline-item"><span class="time">Day 5 - 5/3 (日)</span><br><span class="activity">帰国</span><br><span class="detail">朝食後 → 午前便で東京へ</span></div>
+      </div>
+    </div>
+
+    <div class="plan-card ume">
+      <div class="plan-label">梅 ECONOMY</div>
+      <p style="margin-top:8px;color:var(--text-muted);">イマーシブ1本 + ディズニー + 3泊4日</p>
+      <div class="timeline" style="margin-top:16px;">
+        <div class="timeline-item"><span class="time">Day 1 - 4/29 (水)</span><br><span class="activity">到着 → 観光 → ローカルグルメ</span><br><span class="detail">午前便 → 豫園・南翔饅頭店・外灘 → 蘭心餐厅で夕食</span></div>
+        <div class="timeline-item"><span class="time">Day 2 - 4/30 (木)</span><br><span class="activity">上海ディズニーランド</span><br><span class="detail">Early Entry → 1日ディズニー</span></div>
+        <div class="timeline-item"><span class="time">Day 3 - 5/1 (金)</span><br><span class="activity">UMEPLAY + 新天地</span><br><span class="detail">自由行動 → UMEPLAY → 新天地バー＆ディナー</span></div>
+        <div class="timeline-item"><span class="time">Day 4 - 5/2 (土)</span><br><span class="activity">帰国</span><br><span class="detail">朝食後 → 午前便で東京へ</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 10. 予算総括 ===== -->
+<section id="budget">
+  <h2>10. 予算総括（1人あたり）</h2>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>カテゴリ</th><th><span class="badge badge-matsu">松</span> 5泊6日</th><th><span class="badge badge-take">竹</span> 4泊5日</th><th><span class="badge badge-ume">梅</span> 3泊4日</th></tr></thead>
+      <tbody>
+        <tr><td><strong>航空券</strong></td><td>15-22万円</td><td>10-15万円</td><td>7-12万円</td></tr>
+        <tr><td><strong>ホテル</strong>(2室割勘)</td><td>9.5-14.5万円</td><td>4.5-8万円</td><td>2-3.5万円</td></tr>
+        <tr><td><strong>ホテル</strong>(3名1室+1室)</td><td>8-12万円</td><td>3.5-6.5万円</td><td>1.5-3万円</td></tr>
+        <tr><td><strong>ディズニー</strong></td><td>5.2万円</td><td>5.2万円</td><td>3.5万円</td></tr>
+        <tr><td><strong>イマーシブ</strong></td><td>4.5万円(3本)</td><td>2.5万円(2本)</td><td>1万円(1本)</td></tr>
+        <tr><td><strong>食事</strong></td><td>6-8万円</td><td>3-5万円</td><td>2-3万円</td></tr>
+        <tr><td><strong>移動費</strong></td><td>1.5万円</td><td>1万円</td><td>0.5万円</td></tr>
+        <tr><td><strong>通訳</strong></td><td>1.5万円(3日)</td><td>0.8万円(2日)</td><td>0.4万円(1日)</td></tr>
+        <tr><td><strong>通信・雑費</strong></td><td>0.5万円</td><td>0.5万円</td><td>0.5万円</td></tr>
+      </tbody>
+      <tfoot>
+        <tr style="background:rgba(233,69,96,.1);"><td><strong>合計(1人/2室)</strong></td><td class="price-highlight">43.7-67.7万円</td><td class="price-highlight">27.5-42.0万円</td><td class="price-highlight">17.4-27.4万円</td></tr>
+        <tr style="background:rgba(91,181,162,.1);"><td><strong>合計(1人/3名1室)</strong></td><td class="price-highlight">42-65万円</td><td class="price-highlight">26-40万円</td><td class="price-highlight">16-26万円</td></tr>
+        <tr style="background:rgba(245,197,24,.1);"><td><strong>合計(4人/2室)</strong></td><td><strong>175-271万円</strong></td><td><strong>110-168万円</strong></td><td><strong>70-110万円</strong></td></tr>
+      </tfoot>
+    </table>
+  </div>
+</section>
+
+<!-- ===== 11. アクションリスト ===== -->
+<section id="action">
+  <h2>11. 予約アクションリスト</h2>
+  <div class="section-body">
+    <h3>即座に（3月中）<span class="badge badge-danger">最優先</span></h3>
+    <ul class="checklist">
+      <li>航空券の予約（価格が日々上昇中）</li>
+      <li>ホテル予約（ツイン×2 or ツイン+EB×1+シングル×1を指定）</li>
+      <li>Sleep No More公式サイトで5月公演有無を確認</li>
+      <li>上海ディズニーチケット購入</li>
+      <li>Alipay/WeChat Pay全員分の設定・クレカ連携</li>
+    </ul>
+    <h3>4月上旬まで</h3>
+    <ul class="checklist">
+      <li>UMEPLAY予約（247tickets or 大众点评）</li>
+      <li>SAGA光明之城予約（大麦网）</li>
+      <li>ミシュランレストラン予約（福1015, BOMBANA）</li>
+      <li>通訳手配（ロコタビ or チャイナエイト）</li>
+      <li>eSIM購入（中国聯通香港推奨）</li>
+    </ul>
+    <h3>4月中旬</h3>
+    <ul class="checklist">
+      <li>ディズニーEarly Entry購入（7日前発売開始）</li>
+      <li>VPN・百度地図・DiDiアプリDL</li>
+    </ul>
+    <h3>出発1週間前</h3>
+    <ul class="checklist">
+      <li>Alipay少額決済テスト</li>
+      <li>ビザ免除最新状況確認</li>
+      <li>パスポート残存確認（6ヶ月以上）</li>
+      <li>海外旅行保険加入</li>
+      <li>現金準備（1人2,000-3,000元の人民元）</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 12. 移動・準備 ===== -->
+<section id="logistics">
+  <h2>12. 移動手段＆事前準備</h2>
+  <div class="section-body">
+    <h3>フライト</h3>
+    <table>
+      <thead><tr><th>航空会社</th><th>ルート</th><th>GW往復</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr><td>ANA / JAL</td><td>羽田→虹橋/浦東</td><td>12-22万円</td><td>虹橋着が市内に便利</td></tr>
+        <tr><td>中国東方航空</td><td>成田/羽田→浦東</td><td>8-15万円</td><td>便数最多</td></tr>
+        <tr><td>春秋/Peach</td><td>成田→浦東</td><td>7-12万円</td><td>LCC</td></tr>
+      </tbody>
+    </table>
+    <h3>市内移動（人民広場から）</h3>
+    <table>
+      <thead><tr><th>目的地</th><th>地下鉄</th><th>タクシー</th></tr></thead>
+      <tbody>
+        <tr><td>Sleep No More</td><td>10分/80円</td><td>15分/410-615円</td></tr>
+        <tr><td>ディズニー</td><td>60分/125円</td><td>50分/2,050-2,665円</td></tr>
+        <tr><td>外灘</td><td>10分/60円</td><td>15分/410-615円</td></tr>
+        <tr><td>SAGA光明之城</td><td>20分/100円</td><td>20分/600-800円</td></tr>
+        <tr><td>UMEPLAY(楊浦)</td><td>30分/125円</td><td>25分/800-1,200円</td></tr>
+      </tbody>
+    </table>
+    <h3>必須準備</h3>
+    <div class="grid-3">
+      <div class="info-card"><h4>Alipay</h4><p>決済の生命線。Visa/MC/JCB対応。Tour Card 10,000元/180日。</p></div>
+      <div class="info-card"><h4>eSIM</h4><p>中国聯通香港推奨(VPN不要)。2,000-4,000円/7日。</p></div>
+      <div class="info-card"><h4>DiDi/百度地図</h4><p>配車&ナビ。Google Maps不可。事前DL必須。</p></div>
+    </div>
+    <div class="alert alert-info"><strong>ビザ免除:</strong> 2026年12月末まで30日以内はビザ不要。渡航1ヶ月前に再確認を。</div>
+  </div>
+</section>
+
+<!-- ===== 13. Red Team ===== -->
+<section id="redteam">
+  <h2>13. Red Team レビューサマリー</h2>
+  <div class="section-body">
+    <h3>深刻度: 高 <span class="badge badge-danger">要対応</span></h3>
+    <table>
+      <thead><tr><th>リスク</th><th>内容</th><th>対策</th></tr></thead>
+      <tbody>
+        <tr><td>Sleep No More終演</td><td>5月公演継続は未確定</td><td>公式で即確認。SAGA+UMEPLAYを確保。</td></tr>
+        <tr><td>和平飯店改装中</td><td>2025-2027大改装。Rafflesにリブランド</td><td>松プランはウォルドーフまたはパークハイアットに変更。</td></tr>
+        <tr><td>航空券価格上昇</td><td>GW+労働節ダブルピーク</td><td>即予約。LCC7-12万/フルサービス12-22万で予算化。</td></tr>
+        <tr><td>Alipay設定トラブル</td><td>カード紐付け失敗リスク</td><td>3週間前に全員設定完了+テスト。現金も準備。</td></tr>
+        <tr><td>新世界テーマ問題</td><td>抗日戦争テーマで日本人に不適</td><td>候補から除外済み。</td></tr>
+      </tbody>
+    </table>
+    <h3>深刻度: 中 <span class="badge badge-warn">注意</span></h3>
+    <table>
+      <thead><tr><th>リスク</th><th>対策</th></tr></thead>
+      <tbody>
+        <tr><td>ホテルのピーク料金(1.5-2倍)</td><td>上限値で予算化。4/29泊と5/3-4泊は比較的安い。</td></tr>
+        <tr><td>ミシュラン予約困難</td><td>連休の端(4/29, 5/3)を狙う。代替店もリスト済み。</td></tr>
+        <tr><td>佳家湯包閉店の可能性</td><td>南翔饅頭店・大壺春で代替。</td></tr>
+        <tr><td>eSIM通信不安定</td><td>百度地図を事前DL。通信手段2重化。</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-warn">
+      本資料は <strong>1 CNY = 21.0 JPY / 1 USD = 150 JPY</strong> で統一換算。予算は+10%の余裕を。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Shanghai Immersive Trip 2026 - 調査・作成: Claude Agent Team (v2)</p>
+  <p>作成日: 2026年3月8日 / 情報は調査時点のものです。予約前に必ず最新情報をご確認ください。</p>
+  <p style="margin-top:8px;">Sources: Trip.com, KAYAK, TripAdvisor, Klook, 247tickets, 大众点评, ミシュランガイド, 楽待, 日経新聞, 各公式サイト, note各記事, 外務省, JETRO</p>
+</footer>
+
+</body>
+</html>
