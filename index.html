@@ -24,26 +24,31 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI','Hiragino Sans','Meiryo',sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
-  .hero { background: linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%); padding: 60px 20px; text-align: center; border-bottom: 3px solid var(--accent); position: relative; overflow: hidden; }
+  .hero { background: linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%); padding: 48px 20px; text-align: center; border-bottom: 3px solid var(--accent); position: relative; overflow: hidden; }
   .hero::before { content:''; position:absolute; top:0;left:0;right:0;bottom:0; background:radial-gradient(circle at 30% 50%,rgba(233,69,96,.1) 0%,transparent 50%),radial-gradient(circle at 70% 50%,rgba(245,197,24,.1) 0%,transparent 50%); }
-  .hero h1 { font-size:2.4em; font-weight:700; letter-spacing:.05em; position:relative; color:#fff; }
-  .hero .subtitle { font-size:1.1em; color:var(--text-muted); margin-top:10px; position:relative; }
-  .hero .dates { display:inline-block; background:rgba(233,69,96,.2); border:1px solid var(--accent); border-radius:8px; padding:8px 24px; margin-top:20px; font-size:1.2em; font-weight:600; color:var(--accent); position:relative; }
+  .hero h1 { font-size:2.2em; font-weight:700; letter-spacing:.05em; position:relative; color:#fff; }
+  .hero .subtitle { font-size:1em; color:var(--text-muted); margin-top:8px; position:relative; }
+  .hero .dates { display:inline-block; background:rgba(233,69,96,.2); border:1px solid var(--accent); border-radius:8px; padding:6px 20px; margin-top:14px; font-size:1.1em; font-weight:600; color:var(--accent); position:relative; }
   .container { max-width:1200px; margin:0 auto; padding:0 20px; }
-  nav.toc { background:var(--secondary); padding:20px; margin:30px auto; max-width:1200px; border-radius:12px; border:1px solid var(--border); }
-  nav.toc h2 { font-size:1.1em; color:var(--gold); margin-bottom:12px; }
-  nav.toc ul { list-style:none; display:flex; flex-wrap:wrap; gap:8px; }
-  nav.toc a { display:block; padding:6px 16px; background:var(--card); border:1px solid var(--border); border-radius:6px; color:var(--text); text-decoration:none; font-size:.9em; transition:all .2s; }
-  nav.toc a:hover { border-color:var(--accent); color:var(--accent); }
-  section { margin:40px auto; max-width:1200px; }
-  section > h2 { font-size:1.6em; color:#fff; padding:12px 20px; background:linear-gradient(90deg,var(--accent),transparent); border-radius:8px 8px 0 0; margin-bottom:0; }
+
+  /* Tab Navigation */
+  .tab-nav { display:flex; flex-wrap:wrap; gap:0; max-width:1200px; margin:0 auto; padding:0 20px; border-bottom:2px solid var(--border); }
+  .tab-btn { padding:12px 20px; background:transparent; border:none; color:var(--text-muted); font-size:.95em; font-weight:600; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all .2s; font-family:inherit; }
+  .tab-btn:hover { color:var(--text); }
+  .tab-btn.active { color:var(--accent); border-bottom-color:var(--accent); }
+  .tab-panel { display:none; }
+  .tab-panel.active { display:block; }
+  @media (max-width:768px) { .tab-btn { padding:10px 12px; font-size:.82em; } }
+
+  section { margin:30px auto; max-width:1200px; }
+  section > h2 { font-size:1.5em; color:#fff; padding:10px 20px; background:linear-gradient(90deg,var(--accent),transparent); border-radius:8px 8px 0 0; margin-bottom:0; }
   .section-body { background:var(--card); border:1px solid var(--border); border-top:none; border-radius:0 0 8px 8px; padding:24px; }
-  h3 { font-size:1.2em; color:var(--gold); margin:24px 0 12px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+  h3 { font-size:1.15em; color:var(--gold); margin:20px 0 10px; padding-bottom:5px; border-bottom:1px solid var(--border); }
   h3:first-child { margin-top:0; }
   h4 { color:#fff; margin-bottom:8px; font-size:1em; }
-  table { width:100%; border-collapse:collapse; margin:12px 0 20px; font-size:.88em; }
-  th { background:var(--secondary); color:var(--gold); padding:10px 12px; text-align:left; border:1px solid var(--border); white-space:nowrap; }
-  td { padding:10px 12px; border:1px solid var(--border); vertical-align:top; }
+  table { width:100%; border-collapse:collapse; margin:10px 0 16px; font-size:.86em; }
+  th { background:var(--secondary); color:var(--gold); padding:8px 10px; text-align:left; border:1px solid var(--border); white-space:nowrap; }
+  td { padding:8px 10px; border:1px solid var(--border); vertical-align:top; }
   tr:nth-child(even) td { background:rgba(255,255,255,.02); }
   .badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:.8em; font-weight:600; }
   .badge-matsu { background:rgba(201,169,110,.2); color:var(--matsu); border:1px solid var(--matsu); }
@@ -53,46 +58,43 @@
   .badge-warn { background:rgba(245,197,24,.2); color:var(--warn); border:1px solid var(--warn); }
   .badge-safe { background:rgba(91,181,162,.2); color:var(--safe); border:1px solid var(--safe); }
   .stars { color:var(--gold); letter-spacing:2px; }
-  .alert { padding:14px 18px; border-radius:8px; margin:16px 0; font-size:.92em; }
+  .alert { padding:12px 16px; border-radius:8px; margin:14px 0; font-size:.9em; }
   .alert-danger { background:rgba(233,69,96,.1); border:1px solid var(--danger); color:#ff8a9e; }
   .alert-warn { background:rgba(245,197,24,.1); border:1px solid var(--warn); color:#ffe066; }
   .alert-info { background:rgba(91,181,162,.1); border:1px solid var(--safe); color:#8eecd6; }
   .plan-card { border:2px solid var(--border); border-radius:12px; padding:20px; margin:16px 0; position:relative; }
-  .plan-card.matsu { border-color:var(--matsu); }
   .plan-card.take { border-color:var(--take); }
-  .plan-card.ume { border-color:var(--ume); }
   .plan-card .plan-label { position:absolute; top:-12px; left:20px; padding:2px 16px; border-radius:12px; font-weight:700; font-size:.9em; }
-  .plan-card.matsu .plan-label { background:var(--matsu); color:#1a1a2e; }
   .plan-card.take .plan-label { background:var(--take); color:#1a1a2e; }
-  .plan-card.ume .plan-label { background:var(--ume); color:#1a1a2e; }
   .timeline { position:relative; padding-left:30px; }
   .timeline::before { content:''; position:absolute; left:10px; top:0; bottom:0; width:2px; background:var(--border); }
-  .timeline-item { position:relative; margin-bottom:16px; padding:12px 16px; background:rgba(255,255,255,.03); border-radius:8px; border:1px solid var(--border); }
-  .timeline-item::before { content:''; position:absolute; left:-24px; top:16px; width:10px; height:10px; border-radius:50%; background:var(--accent); border:2px solid var(--bg); }
-  .timeline-item .time { font-weight:700; color:var(--accent); font-size:.9em; }
+  .timeline-item { position:relative; margin-bottom:12px; padding:10px 14px; background:rgba(255,255,255,.03); border-radius:8px; border:1px solid var(--border); }
+  .timeline-item::before { content:''; position:absolute; left:-24px; top:14px; width:10px; height:10px; border-radius:50%; background:var(--accent); border:2px solid var(--bg); }
+  .timeline-item .time { font-weight:700; color:var(--accent); font-size:.88em; }
   .timeline-item .activity { font-weight:600; color:#fff; }
-  .timeline-item .detail { color:var(--text-muted); font-size:.88em; }
-  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
-  @media (max-width:768px) { .grid-2,.grid-3 { grid-template-columns:1fr; } .hero h1 { font-size:1.6em; } nav.toc ul { flex-direction:column; } }
-  .info-card { background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:8px; padding:16px; }
-  .info-card p { font-size:.88em; color:var(--text-muted); }
+  .timeline-item .detail { color:var(--text-muted); font-size:.85em; }
+  .timeline-item .transport { color:var(--take); font-size:.82em; font-weight:500; margin-top:4px; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+  @media (max-width:768px) { .grid-2,.grid-3 { grid-template-columns:1fr; } .hero h1 { font-size:1.5em; } }
+  .info-card { background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:8px; padding:14px; }
+  .info-card p { font-size:.86em; color:var(--text-muted); }
   .price-highlight { font-size:1.3em; font-weight:700; color:var(--accent); }
   .checklist { list-style:none; padding:0; }
-  .checklist li { padding:6px 0 6px 28px; position:relative; font-size:.92em; }
+  .checklist li { padding:5px 0 5px 28px; position:relative; font-size:.9em; }
   .checklist li::before { content:'\2610'; position:absolute; left:0; font-size:1.1em; }
-  .red-team { background:rgba(233,69,96,.05); border:1px solid rgba(233,69,96,.3); border-radius:8px; padding:12px 16px; margin:8px 0; font-size:.88em; }
+  .red-team { background:rgba(233,69,96,.05); border:1px solid rgba(233,69,96,.3); border-radius:8px; padding:10px 14px; margin:8px 0; font-size:.86em; }
   .red-team::before { content:'Red Team'; display:inline-block; background:var(--danger); color:#fff; font-size:.75em; font-weight:700; padding:1px 8px; border-radius:4px; margin-right:8px; }
-  .review-box { background:rgba(245,197,24,.05); border:1px solid rgba(245,197,24,.2); border-radius:8px; padding:14px 16px; margin:10px 0; font-size:.88em; }
+  .review-box { background:rgba(245,197,24,.05); border:1px solid rgba(245,197,24,.2); border-radius:8px; padding:12px 14px; margin:8px 0; font-size:.86em; }
   .review-box a { color:var(--gold); text-decoration:underline; }
   .review-box .review-title { font-weight:700; color:#fff; }
   .review-box .review-source { color:var(--text-muted); font-size:.85em; }
-  .review-box .review-summary { margin-top:6px; }
-  .flow-diagram { overflow-x:auto; margin:20px 0; }
-  .map-container { overflow-x:auto; margin:20px 0; background:rgba(255,255,255,.02); border-radius:12px; border:1px solid var(--border); padding:16px; }
-  footer { text-align:center; padding:40px 20px; color:var(--text-muted); font-size:.85em; border-top:1px solid var(--border); margin-top:60px; }
-  .booking-links { margin:8px 0; display:flex; flex-wrap:wrap; gap:6px; }
-  .booking-links a { display:inline-block; padding:4px 12px; border-radius:6px; font-size:.8em; font-weight:600; text-decoration:none; transition:all .2s; }
+  .review-box .review-summary { margin-top:5px; }
+  .flow-diagram { overflow-x:auto; margin:16px 0; }
+  .map-container { overflow-x:auto; margin:16px 0; background:rgba(255,255,255,.02); border-radius:12px; border:1px solid var(--border); padding:14px; }
+  footer { text-align:center; padding:30px 20px; color:var(--text-muted); font-size:.85em; border-top:1px solid var(--border); margin-top:40px; }
+  .booking-links { margin:6px 0; display:flex; flex-wrap:wrap; gap:5px; }
+  .booking-links a { display:inline-block; padding:3px 10px; border-radius:6px; font-size:.78em; font-weight:600; text-decoration:none; transition:all .2s; }
   .booking-links a.bl-primary { background:rgba(233,69,96,.15); border:1px solid var(--accent); color:var(--accent); }
   .booking-links a.bl-secondary { background:rgba(245,197,24,.1); border:1px solid rgba(245,197,24,.4); color:var(--gold); }
   .booking-links a.bl-tertiary { background:rgba(91,181,162,.1); border:1px solid rgba(91,181,162,.4); color:var(--safe); }
@@ -101,57 +103,30 @@
 </head>
 <body>
 
-<!-- ===== HERO ===== -->
 <div class="hero">
   <h1>Shanghai Immersive Trip 2026</h1>
-  <p class="subtitle">上海イマーシブ体験旅行 完全ガイド v2</p>
-  <div class="dates">2026.04.29 (Wed) - 05.04 (Mon) / 5泊6日</div>
-  <p class="subtitle" style="margin-top:12px;">4名 / 東京発 / 為替: 1 CNY = 21.0 JPY, 1 USD = 150 JPY</p>
+  <p class="subtitle">上海イマーシブ体験旅行 完全ガイド</p>
+  <div class="dates">2026.04.29 (Wed) - 05.03 (Sun) / 4泊5日</div>
+  <p class="subtitle" style="margin-top:10px;">3名 / 東京発 / 通訳は必要日のみ手配 / 1 CNY = 21.0 JPY</p>
 </div>
 
-<!-- ===== TOC ===== -->
-<nav class="toc">
-  <div class="container">
-    <h2>CONTENTS</h2>
-    <ul>
-      <li><a href="#overview">旅行概要</a></li>
-      <li><a href="#map">エリアマップ</a></li>
-      <li><a href="#flow">旅程フロー図</a></li>
-      <li><a href="#immersive">イマーシブ公演</a></li>
-      <li><a href="#disney">ディズニー</a></li>
-      <li><a href="#disney-tips">日本人向けTips</a></li>
-      <li><a href="#hotel">ホテル比較</a></li>
-      <li><a href="#hotel-why-cheap">なぜ安い？</a></li>
-      <li><a href="#gourmet">グルメガイド</a></li>
-      <li><a href="#plans">日程プラン</a></li>
-      <li><a href="#budget">予算総括</a></li>
-      <li><a href="#action">アクション</a></li>
-      <li><a href="#logistics">移動・準備</a></li>
-      <li><a href="#redteam">Red Team</a></li>
-    </ul>
-  </div>
-</nav>
+<div class="tab-nav" id="tabNav">
+  <button class="tab-btn active" data-tab="tab-itinerary">旅程・予算</button>
+  <button class="tab-btn" data-tab="tab-immersive">イマーシブ</button>
+  <button class="tab-btn" data-tab="tab-disney">ディズニー</button>
+  <button class="tab-btn" data-tab="tab-hotel">ホテル・グルメ</button>
+  <button class="tab-btn" data-tab="tab-prep">準備・予約</button>
+</div>
 
-<!-- ===== 1. 旅行概要 ===== -->
-<section id="overview">
-  <h2>1. 旅行概要</h2>
-  <div class="section-body">
-    <div class="grid-3">
-      <div class="info-card"><h4>期間</h4><p>2026/04/29(水) - 05/04(月)<br>5泊6日（早帰り想定）</p></div>
-      <div class="info-card"><h4>メンバー</h4><p>4名（友人グループ）<br>通訳を必要日のみ手配</p></div>
-      <div class="info-card"><h4>メイン目的</h4><p>イマーシブコンテンツ複数<br>上海ディズニーランド<br>上海グルメ・観光</p></div>
-    </div>
-    <div class="alert alert-danger" style="margin-top:20px;">
-      <strong>重要:</strong> 中国の労働節（5/1-5/5）と完全に重複。航空券・ホテル・チケットの早期予約が必須。3月中の予約開始を強く推奨。
-    </div>
-  </div>
-</section>
+<!-- ======================================== -->
+<!-- TAB 1: 旅程・予算 -->
+<!-- ======================================== -->
+<div class="tab-panel active" id="tab-itinerary">
 
-<!-- ===== 2. エリアマップ ===== -->
 <section id="map">
-  <h2>2. 上海エリアマップ - スポット位置関係</h2>
+  <h2>上海エリアマップ - スポット位置関係</h2>
   <div class="section-body">
-    <p style="margin-bottom:12px;">主要スポットの相対位置と移動時間（人民広場を基点）。黄浦江を挟んで西が浦西（市中心）、東が浦東。</p>
+    <p style="margin-bottom:10px;">主要スポットの相対位置と移動時間（人民広場/JWマリオットを基点）。</p>
     <div class="map-container">
       <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;height:auto;">
         <!-- Background -->
@@ -197,13 +172,12 @@
         <text x="505" y="200" fill="#c9a96e" font-size="9" text-anchor="middle">The Bund</text>
         <text x="505" y="220" fill="#8888aa" font-size="8" text-anchor="middle">BOMBANA</text>
         <text x="505" y="232" fill="#8888aa" font-size="8" text-anchor="middle">Mr&Mrs Bund</text>
-        <text x="505" y="244" fill="#8888aa" font-size="8" text-anchor="middle">和平飯店(改装中)</text>
         <text x="505" y="256" fill="#8888aa" font-size="8" text-anchor="middle">ウォルドーフ</text>
 
         <!-- Yu Garden -->
         <circle cx="440" cy="320" r="12" fill="#5bb5a2" opacity="0.7"/>
         <text x="440" y="324" fill="#fff" font-size="8" text-anchor="middle">豫園</text>
-        <text x="440" y="345" fill="#8888aa" font-size="9" text-anchor="middle">南翔饅頭店・MRX</text>
+        <text x="440" y="345" fill="#8888aa" font-size="9" text-anchor="middle">南翔饅頭店</text>
 
         <!-- Xintiandi -->
         <circle cx="350" cy="340" r="12" fill="#7b8cde" opacity="0.7"/>
@@ -289,14 +263,13 @@
         <text x="65" y="602" fill="#ccc" font-size="9">移動時間(人民広場から)</text>
       </svg>
     </div>
-  </div>
+    </div>
 </section>
 
-<!-- ===== 3. 旅程フロー図 ===== -->
 <section id="flow">
-  <h2>3. 旅程フロー図（竹プラン）</h2>
+  <h2>旅程フロー図（竹プラン 4泊5日）</h2>
   <div class="section-body">
-    <p style="margin-bottom:12px;">推奨の竹プラン（4泊5日）を一気通貫で図示。色分け: <span style="color:var(--accent);">イマーシブ</span> / <span style="color:var(--gold);">ディズニー</span> / <span style="color:var(--take);">観光</span> / <span style="color:var(--matsu);">グルメ</span></p>
+    <p style="margin-bottom:10px;">色分け: <span style="color:var(--accent);">イマーシブ</span> / <span style="color:var(--gold);">ディズニー</span> / <span style="color:var(--take);">観光</span> / <span style="color:var(--matsu);">グルメ</span></p>
     <div class="flow-diagram">
       <svg viewBox="0 0 1100 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1100px;height:auto;">
         <rect width="1100" height="420" fill="#0f0f23"/>
@@ -330,8 +303,8 @@
         <text x="120" y="193" fill="#5bb5a2" font-size="10" text-anchor="middle">外灘散策</text>
         <text x="120" y="208" fill="#8888aa" font-size="9" text-anchor="middle">夜景スポット</text>
         <rect x="30" y="285" width="180" height="50" rx="6" fill="rgba(201,169,110,.15)" stroke="#c9a96e"/>
-        <text x="120" y="305" fill="#c9a96e" font-size="11" text-anchor="middle" font-weight="bold">Mr & Mrs Bund</text>
-        <text x="120" y="322" fill="#8888aa" font-size="9" text-anchor="middle">外灘夜景フレンチ</text>
+        <text x="120" y="305" fill="#c9a96e" font-size="11" text-anchor="middle" font-weight="bold">福1088</text>
+        <text x="120" y="322" fill="#8888aa" font-size="9" text-anchor="middle">ミシュラン上海料理</text>
 
         <!-- Day 2 -->
         <rect x="250" y="60" width="180" height="45" rx="6" fill="rgba(245,197,24,.15)" stroke="#f5c518"/>
@@ -398,9 +371,149 @@
   </div>
 </section>
 
-<!-- ===== 4. イマーシブ ===== -->
+<section id="plans">
+  <h2>詳細旅程（竹プラン 4泊5日）</h2>
+  <div class="section-body">
+    <div class="alert alert-info" style="margin-bottom:16px;">
+      <strong>宿泊:</strong> JWマリオット上海（人民広場直結）ツイン+エクストラベッド 1室。各地へのアクセス最良。<br>
+      <strong>通訳:</strong> Day3(UMEPLAY)・Day4(SAGA)の2日間、夢匣子(@Dream_inthe_Box)に手配依頼。
+    </div>
+
+    <div class="plan-card take" style="border-width:3px;">
+      <div class="plan-label">竹 STANDARD（推奨）</div>
+      <div class="timeline" style="margin-top:16px;">
+
+        <div class="timeline-item">
+          <span class="time">Day 1 - 4/29 (水) 到着日</span><br>
+          <span class="activity">到着 → 外灘散策 → 福1088ディナー</span>
+          <table style="margin:8px 0 4px;font-size:.82em;">
+            <tr><td style="width:80px"><strong>09:30</strong></td><td>羽田発（ANA/JAL 約3h15m）</td></tr>
+            <tr><td><strong>11:45</strong></td><td>上海虹橋空港着（時差-1h）。入国審査+荷物 約30min</td></tr>
+            <tr><td><strong>12:15</strong></td><td>虹橋空港 → <span class="transport">タクシー 30min/70-90元(1,470-1,890円)</span><br>※地下鉄2号線でも可(40min/5元=105円)</td></tr>
+            <tr><td><strong>12:45</strong></td><td>JWマリオット着。チェックイン・荷物整理</td></tr>
+            <tr><td><strong>14:00</strong></td><td>ホテル → <span class="transport">徒歩 20min</span> → 外灘（The Bund）散策 1.5h</td></tr>
+            <tr><td><strong>15:30</strong></td><td>外灘 → <span class="transport">徒歩 10min</span> → 佳家湯包(黄河路店) 小籠包おやつ</td></tr>
+            <tr><td><strong>16:30</strong></td><td>徒歩でホテルへ戻り休憩</td></tr>
+            <tr><td><strong>18:00</strong></td><td>ホテル → <span class="transport">タクシー 15min/35元(735円)</span> → 福1088</td></tr>
+            <tr><td><strong>18:30</strong></td><td>福1088 ミシュラン1つ星ディナー（2h）</td></tr>
+            <tr><td><strong>20:30</strong></td><td>福1088 → <span class="transport">タクシー 15min/35元</span> → ホテル泊</td></tr>
+          </table>
+          <div class="transport">Day1 交通費計: 約140-160元(2,940-3,360円)/3人</div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="time">Day 2 - 4/30 (木) ディズニー ※中国側平日=混雑回避のベスト日</span><br>
+          <span class="activity">終日 上海ディズニーランド</span>
+          <table style="margin:8px 0 4px;font-size:.82em;">
+            <tr><td style="width:80px"><strong>06:45</strong></td><td>ホテル出発</td></tr>
+            <tr><td><strong>06:50</strong></td><td>人民広場駅 → <span class="transport">地下鉄1号線→莘荘乗換→11号線→迪士尼駅 約75min/6元(126円)</span><br>※タクシーなら50min/130-180元(2,730-3,780円)</td></tr>
+            <tr><td><strong>08:00</strong></td><td>Early Entry入園（149元/人、開園1h前）</td></tr>
+            <tr><td><strong>08:10</strong></td><td>Zootopia: Hot Pursuit 直行（DPA最優先で購入済み）</td></tr>
+            <tr><td><strong>09:30</strong></td><td>Pirates of the Caribbean（世界最高傑作の上海版）</td></tr>
+            <tr><td><strong>10:45</strong></td><td>TRON Lightcycle Power Run</td></tr>
+            <tr><td><strong>11:30</strong></td><td>パーク内ランチ（QRコード注文。写真付きメニューで選ぶ）</td></tr>
+            <tr><td><strong>13:00</strong></td><td>Soaring Over the Horizon / 自由行動</td></tr>
+            <tr><td><strong>17:00</strong></td><td>パーク内ディナー</td></tr>
+            <tr><td><strong>20:30</strong></td><td>Illuminate! 花火ショー（城正面で30分前に場所取り）</td></tr>
+            <tr><td><strong>21:15</strong></td><td>迪士尼駅 → <span class="transport">地下鉄11号線→1号線 約75min</span><br>※最終22:00頃。混雑時はタクシー推奨</td></tr>
+            <tr><td><strong>22:30</strong></td><td>ホテル着</td></tr>
+          </table>
+          <div class="transport">Day2 交通費計: 約12元(252円)/人（地下鉄往復）</div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="time">Day 3 - 5/1 (金) 豫園 + UMEPLAY + 上海料理</span><br>
+          <span class="activity">豫園観光 → UMEPLAY HAVEN(通訳同行) → 老吉士酒家</span>
+          <table style="margin:8px 0 4px;font-size:.82em;">
+            <tr><td style="width:80px"><strong>08:30</strong></td><td>ホテル出発 → <span class="transport">徒歩 20min</span> → 豫園</td></tr>
+            <tr><td><strong>09:00</strong></td><td>南翔饅頭店 2F（朝食・小籠包）+ 豫園散策 2h</td></tr>
+            <tr><td><strong>11:00</strong></td><td>豫園 → <span class="transport">タクシー 25min/50-70元(1,050-1,470円)</span> → UMEPLAY(楊浦区)</td></tr>
+            <tr><td><strong>11:30</strong></td><td>UMEPLAY集合。通訳(夢匣子)と合流・ブリーフィング</td></tr>
+            <tr><td><strong>12:00</strong></td><td>UMEPLAY HAVEN 体験開始（約120min）</td></tr>
+            <tr><td><strong>14:00</strong></td><td>体験終了。ディスカッションタイム</td></tr>
+            <tr><td><strong>14:30</strong></td><td>UMEPLAY → <span class="transport">タクシー 20min/45元(945円)</span> → 新天地</td></tr>
+            <tr><td><strong>15:00</strong></td><td>新天地散策・カフェ休憩（1.5h）</td></tr>
+            <tr><td><strong>16:30</strong></td><td>新天地 → <span class="transport">タクシー 10min/25元(525円)</span> → 老吉士酒家</td></tr>
+            <tr><td><strong>17:00</strong></td><td>老吉士酒家 ディナー（開店直後がベスト。紅焼肉・吉士鹹鶏必食）</td></tr>
+            <tr><td><strong>19:30</strong></td><td>老吉士 → <span class="transport">タクシー 15min/35元(735円)</span> → ホテル泊</td></tr>
+          </table>
+          <div class="transport">Day3 交通費計: 約155-175元(3,255-3,675円)/3人</div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="time">Day 4 - 5/2 (土) 田子坊 + SAGA + 火鍋打ち上げ</span><br>
+          <span class="activity">田子坊散策 → SAGA光明之城(通訳同行) → 海底捞 → 外灘夜景</span>
+          <table style="margin:8px 0 4px;font-size:.82em;">
+            <tr><td style="width:80px"><strong>09:00</strong></td><td>ホテル → <span class="transport">地下鉄9号線(人民広場→打浦橋) 約15min/4元</span> → 田子坊</td></tr>
+            <tr><td><strong>09:30</strong></td><td>田子坊散策・お土産（1.5h）</td></tr>
+            <tr><td><strong>11:00</strong></td><td>田子坊 → <span class="transport">徒歩 15min</span> → 光明邨大酒家（早めランチ。11:00開店前に並ぶ）</td></tr>
+            <tr><td><strong>12:00</strong></td><td>光明邨 → <span class="transport">タクシー 20min/50元(1,050円)</span> → SAGA光明之城(徐匯区)</td></tr>
+            <tr><td><strong>12:30</strong></td><td>通訳(夢匣子)と合流</td></tr>
+            <tr><td><strong>13:00</strong></td><td>SAGA光明之城 体験開始（約3h）</td></tr>
+            <tr><td><strong>16:00</strong></td><td>体験終了</td></tr>
+            <tr><td><strong>16:30</strong></td><td>SAGA → <span class="transport">タクシー 20min/50元(1,050円)</span> → 海底捞(南京東路店)</td></tr>
+            <tr><td><strong>17:00</strong></td><td>海底捞 火鍋ディナー（カンフーヌードルショー&無料ネイルで打ち上げ）</td></tr>
+            <tr><td><strong>19:30</strong></td><td>海底捞 → <span class="transport">徒歩 10min</span> → 外灘夜景散策</td></tr>
+            <tr><td><strong>20:30</strong></td><td>外灘 → <span class="transport">徒歩 20min</span> → ホテル泊</td></tr>
+          </table>
+          <div class="transport">Day4 交通費計: 約104元(2,184円)/3人</div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="time">Day 5 - 5/3 (日) 帰国</span><br>
+          <span class="activity">朝食 → 空港 → 東京へ</span>
+          <table style="margin:8px 0 4px;font-size:.82em;">
+            <tr><td style="width:80px"><strong>08:00</strong></td><td>ホテル朝食（JWマリオット朝食ビュッフェ）</td></tr>
+            <tr><td><strong>09:00</strong></td><td>チェックアウト</td></tr>
+            <tr><td><strong>09:15</strong></td><td>ホテル → <span class="transport">タクシー 30min/70-90元(1,470-1,890円)</span> → 虹橋空港<br>※地下鉄2号線でも可(35min/4元)</td></tr>
+            <tr><td><strong>09:45</strong></td><td>虹橋空港着。チェックイン・出国手続き</td></tr>
+            <tr><td><strong>12:00</strong></td><td>虹橋発（ANA/JAL 約2h45m）</td></tr>
+            <tr><td><strong>15:45</strong></td><td>羽田着（時差+1h）</td></tr>
+          </table>
+          <div class="transport">Day5 交通費計: 約70-90元(1,470-1,890円)/3人</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="budget">
+  <h2>予算総括（1人あたり / 3名1室）</h2>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>カテゴリ</th><th><span class="badge badge-take">竹プラン</span> 4泊5日</th><th>内訳メモ</th></tr></thead>
+      <tbody>
+        <tr><td><strong>航空券</strong></td><td>10-15万円</td><td>GW価格。虹橋着ANA/JAL。早期予約が鍵</td></tr>
+        <tr><td><strong>ホテル</strong></td><td>3-5.5万円</td><td>JWマリオット ツイン+EB 1室/4泊 (12,000-21,000元÷3人+EB291.5元×4泊)</td></tr>
+        <tr><td><strong>ディズニー</strong></td><td>2.5万円</td><td>チケット799元+Early Entry149元+DPA600元=1,548元</td></tr>
+        <tr><td><strong>イマーシブ</strong></td><td>1.5-2.5万円</td><td>UMEPLAY 600-800元 + SAGA 300-500元</td></tr>
+        <tr><td><strong>食事</strong></td><td>2-4万円</td><td>福1088+老吉士+海底捞+ローカル食計5日分</td></tr>
+        <tr><td><strong>市内交通</strong></td><td>0.5-0.8万円</td><td>タクシー中心。5日間計 約350-500元</td></tr>
+        <tr><td><strong>通訳</strong></td><td>0.5-1万円</td><td>2日間(UMEPLAY+SAGA) 約800-1,500元÷3人</td></tr>
+        <tr><td><strong>通信・雑費</strong></td><td>0.5万円</td><td>eSIM 3,000円+雑費</td></tr>
+      </tbody>
+      <tfoot>
+        <tr style="background:rgba(233,69,96,.1);"><td><strong>1人あたり合計</strong></td><td class="price-highlight">21-32万円</td><td>中央値 約26万円</td></tr>
+        <tr style="background:rgba(245,197,24,.1);"><td><strong>3人合計</strong></td><td><strong>63-96万円</strong></td><td>中央値 約78万円</td></tr>
+      </tfoot>
+    </table>
+    <div class="red-team">
+      労働節(5/1-5/3)はホテル1.5-2倍の可能性あり。上限値で計算推奨。予算は+10%の余裕を。1 CNY = 21.0 JPY で統一換算。
+    </div>
+  </div>
+</section>
+
+</div><!-- /tab-itinerary -->
+
+
+<!-- ======================================== -->
+<!-- TAB 2: イマーシブ -->
+<!-- ======================================== -->
+<div class="tab-panel" id="tab-immersive">
+
 <section id="immersive">
-  <h2>4. イマーシブコンテンツ一覧 + 日本語レビュー</h2>
+  <h2>イマーシブコンテンツ一覧 + 日本語レビュー</h2>
   <div class="section-body">
 
     <table>
@@ -427,7 +540,7 @@
           <td>300-500元<br>(6,300-10,500円)</td>
           <td>楊浦区/徐汇区</td>
           <td><span class="stars">★★★★★</span></td>
-          <td>4人に最適。HAVEN推奨
+          <td>3人に最適。HAVEN推奨
             <div class="booking-links"><a class="bl-primary" href="http://www.umeplay.com/" target="_blank">公式サイト</a><a class="bl-secondary" href="https://www.247tickets.com/" target="_blank">247tickets</a></div></td>
         </tr>
         <tr>
@@ -585,9 +698,16 @@
   </div>
 </section>
 
-<!-- ===== 5. ディズニー ===== -->
+
+</div><!-- /tab-immersive -->
+
+<!-- ======================================== -->
+<!-- TAB 3: ディズニー -->
+<!-- ======================================== -->
+<div class="tab-panel" id="tab-disney">
+
 <section id="disney">
-  <h2>5. 上海ディズニーランド攻略</h2>
+  <h2>上海ディズニーランド攻略</h2>
   <div class="section-body">
     <div class="grid-2">
       <div class="info-card"><h4>基本情報</h4><p><strong>チケット（ピーク++）:</strong> 799元 (16,779円)/人<br><strong>Early Entry:</strong> 149元 (3,129円)/人<br><strong>DPA 3セット:</strong> 600-800元目安<br><strong>1人予算合計:</strong> 約2,200-2,500元 (46,200-52,500円)</p><div class="booking-links"><a class="bl-primary" href="https://www.shanghaidisneyresort.com/" target="_blank">公式サイト(チケット)</a><a class="bl-secondary" href="https://www.klook.com/activity/1558-shanghai-disneyland-ticket/" target="_blank">Klook</a><a class="bl-tertiary" href="https://www.kkday.com/en/product/2578" target="_blank">KKday</a></div></div>
@@ -601,10 +721,9 @@
     </div>
   </div>
 </section>
-
 <!-- ===== 5.5 ディズニー日本人向けTips ===== -->
 <section id="disney-tips">
-  <h2>5.5 上海ディズニー 日本人が初めて行くときの注意点</h2>
+  <h2>上海ディズニー 日本人が初めて行くときの注意点</h2>
   <div class="section-body">
 
     <h3>決済・アプリ準備（出発3週間前まで）</h3>
@@ -677,81 +796,75 @@
 </section>
 
 <!-- ===== 6. ホテル ===== -->
+
+</div><!-- /tab-disney -->
+
+<!-- ======================================== -->
+<!-- TAB 4: ホテル・グルメ -->
+<!-- ======================================== -->
+<div class="tab-panel" id="tab-hotel">
+
 <section id="hotel">
-  <h2>6. ホテル比較（竹プラン推奨）+ 3名1室オプション</h2>
+  <h2>ホテル（3名1室 ツイン+エクストラベッド）</h2>
   <div class="section-body">
 
-    <div class="alert alert-danger">
-      <strong>フェアモント和平飯店は2025年から大規模改装中</strong>（2027年まで、Raffles Peace Hotelにリブランド予定）。松プランの候補からウォルドーフアストリアまたはパークハイアットを推奨。
+    <div class="alert alert-info">
+      <strong>方針:</strong> 3名でツイン+エクストラベッド(EB)の1室利用。超高級でなくても安定した体験の外資チェーンを厳選。JWマリオット（人民広場直結）を第一推奨。
     </div>
 
-    <h3>部屋構成オプション</h3>
-    <p style="margin-bottom:12px;">4名グループの場合、「ツイン×2室」と「ツイン+エクストラベッド×1室 + シングル×1室」の2パターンがあります。</p>
+    <h3>推奨ホテル比較</h3>
     <table>
-      <thead><tr><th>ホテル</th><th>エクストラベッド</th><th>EB料金/泊</th><th>3名1室+1名1室 vs 2室の節約額/泊</th></tr></thead>
+      <thead><tr><th>ホテル</th><th>エリア</th><th>1室1泊(ツイン+EB)</th><th>4泊合計</th><th>EB料金/泊</th><th>イマーシブへ</th><th>特徴</th></tr></thead>
       <tbody>
-        <tr><td><strong>パークハイアット上海</strong></td><td>対応あり（要リクエスト）</td><td>要問合せ</td><td>要確認</td></tr>
-        <tr><td><strong>ウォルドーフアストリア</strong></td><td>対応あり</td><td>約300元+税(6,930円)</td><td>約400-1,000元節約</td></tr>
-        <tr><td><strong>JWマリオット上海</strong></td><td>対応あり（最大1台）</td><td>291.5元(6,122円)</td><td>約500-900元節約</td></tr>
-        <tr><td><strong>アンダーズ新天地</strong></td><td>対応あり（最大1台）</td><td><strong>233元(4,893円)</strong><br><span class="badge badge-safe">最安</span></td><td>約400-700元節約</td></tr>
-        <tr><td><strong>コンラッド上海</strong></td><td>対応あり</td><td>300元(6,300円)</td><td>約400-800元節約</td></tr>
-        <tr><td><strong>ポートマン・リッツカールトン</strong></td><td>対応あり（要リクエスト）</td><td>要問合せ</td><td>要確認</td></tr>
-        <tr><td><strong>ハイアットセントリック</strong></td><td><span class="badge badge-warn">要確認</span></td><td>不明</td><td>予約前にホテルに直接確認</td></tr>
+        <tr>
+          <td><strong>JWマリオット上海</strong><br><span class="badge badge-safe">第一推奨</span></td>
+          <td>人民広場</td>
+          <td>1,492-2,392元<br>(31,300-50,200円)</td>
+          <td>5,966-9,566元<br>(125,300-200,900円)</td>
+          <td>291.5元(6,122円)</td>
+          <td><strong>5分</strong></td>
+          <td>駅直結。地下鉄1/2/8号線。Bonvoyポイント。朝食優秀。</td>
+        </tr>
+        <tr>
+          <td><strong>アンダーズ新天地</strong></td>
+          <td>新天地</td>
+          <td>1,333-1,783元<br>(28,000-37,400円)</td>
+          <td>5,332-7,132元<br>(112,000-149,800円)</td>
+          <td><strong>233元(4,893円)</strong><br><span class="badge badge-safe">EB最安</span></td>
+          <td>15分</td>
+          <td>デザインホテル。無料ミニバー。新天地直結。</td>
+        </tr>
+        <tr>
+          <td><strong>コンラッド上海</strong></td>
+          <td>南京東路</td>
+          <td>1,200-2,050元<br>(25,200-43,100円)</td>
+          <td>4,800-8,200元<br>(100,800-172,200円)</td>
+          <td>300元(6,300円)</td>
+          <td>10分</td>
+          <td>歩行街直結。66階建。外灘至近。</td>
+        </tr>
       </tbody>
     </table>
+
     <div class="alert alert-info">
-      <strong>推奨:</strong> コスパ重視なら「3名1室(ツイン+EB)+1名1室」が有効。エクストラベッド代233-300元を足しても、2室取るよりCNY 400-1,000/泊の節約に。ただしEB快適性は通常ベッドに劣る（195cm×100cm程度）。
+      <strong>JWマリオット推奨理由:</strong> 人民広場駅直結でイマーシブ各会場・ディズニー・豫園・外灘すべてへのアクセスが最良。Marriott Bonvoyポイントも貯まる。
     </div>
 
-    <!-- 松 -->
-    <div class="plan-card matsu" style="opacity:0.7;">
-      <div class="plan-label">松 PREMIUM（参考）</div>
-      <table style="margin-top:10px;">
-        <thead><tr><th>ホテル</th><th>エリア</th><th>2室1泊</th><th>5泊合計</th><th>イマーシブへ</th><th>特徴</th></tr></thead>
-        <tbody>
-          <tr><td><strong>ウォルドーフアストリア</strong><br>Waldorf Astoria <span class="badge badge-safe">推奨</span></td><td>外灘</td><td>3,500-6,800元<br>(73,500-142,800円)</td><td>17,500-34,000元<br>(367,500-714,000円)</td><td>15分</td><td>ヒルトン最上級。歴史的建築。外灘夜景。EB対応。</td></tr>
-          <tr><td><strong>パークハイアット上海</strong><br>Park Hyatt</td><td>陸家嘴(浦東)</td><td>3,600-7,000元<br>(75,600-147,000円)</td><td>18,000-35,000元<br>(378,000-735,000円)</td><td>25分</td><td>79-93階。87階絶景朝食。EB対応(要リクエスト)。</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 竹 -->
-    <div class="plan-card take" style="border-width:3px;">
-      <div class="plan-label">竹 STANDARD ★おすすめ</div>
-      <table style="margin-top:10px;">
-        <thead><tr><th>ホテル</th><th>エリア</th><th>2室1泊</th><th>5泊合計</th><th>イマーシブへ</th><th>特徴</th></tr></thead>
-        <tbody>
-          <tr><td><strong>JWマリオット上海</strong><br><span class="badge badge-safe">推奨</span></td><td>人民広場</td><td>2,400-4,200元<br>(50,400-88,200円)</td><td>12,000-21,000元<br>(252,000-441,000円)</td><td><strong>5分</strong></td><td>駅直結。EB 291.5元/泊。Bonvoyポイント。</td></tr>
-          <tr><td><strong>アンダーズ新天地</strong></td><td>新天地</td><td>2,200-3,100元<br>(46,200-65,100円)</td><td>11,000-15,500元<br>(231,000-325,500円)</td><td>15分</td><td>デザインホテル。EB最安233元/泊。無料ミニバー。</td></tr>
-          <tr><td><strong>コンラッド上海</strong></td><td>南京東路</td><td>1,800-3,500元<br>(37,800-73,500円)</td><td>9,000-17,500元<br>(189,000-367,500円)</td><td>10分</td><td>歩行街直結。EB 300元/泊。66階建。</td></tr>
-        </tbody>
-      </table>
-      <div class="alert alert-info" style="margin-top:12px;">
-        <strong>竹プラン推奨理由:</strong> 超高級でなくても十分快適。JWマリオットはイマーシブ会場に最も近く、Bonvoyポイントも貯まる。アンダーズは新天地直結でデザイン性高く、無料ミニバー付き。コンラッドは歩行街直結で便利。いずれも安定した体験が期待できる外資チェーン。
-      </div>
-    </div>
-
-    <!-- 梅 -->
-    <div class="plan-card ume">
-      <div class="plan-label">梅 ECONOMY</div>
-      <table style="margin-top:10px;">
-        <thead><tr><th>ホテル</th><th>エリア</th><th>2室1泊</th><th>5泊合計</th><th>イマーシブへ</th><th>特徴</th></tr></thead>
-        <tbody>
-          <tr><td><strong>ポートマン・リッツカールトン</strong><br><span class="badge badge-safe">コスパ最強</span></td><td>南京西路</td><td>1,700-2,800元<br>(35,700-58,800円)</td><td>8,500-14,000元<br>(178,500-294,000円)</td><td><strong>10分</strong></td><td>五つ星が値崩れ。SNM至近。EB対応(要リクエスト)。</td></tr>
-          <tr><td><strong>ハイアットセントリック</strong></td><td>中山公園</td><td>1,300-2,100元<br>(27,300-44,100円)</td><td>6,500-10,500元<br>(136,500-220,500円)</td><td>20分</td><td>最安クラス。EB要確認。</td></tr>
-        </tbody>
-      </table>
+    <h3>エクストラベッド(EB)について</h3>
+    <div class="info-card">
+      <p><strong>サイズ:</strong> 約195cm×100cm（通常ベッドより狭い）<br>
+      <strong>予約方法:</strong> 予約時に「加床/Extra Bed」をリクエスト。subject to availabilityのため<strong>事前にホテルへ直接メール確認必須</strong>。<br>
+      <strong>注意:</strong> EB快適性は通常ベッドに劣る。体が大きい人は交代制で使うのも手。</p>
     </div>
 
     <div class="red-team">
-      表示価格は通常期ベース。労働節(5/1-5/3)は1.5-2倍の可能性。ツインルームは予約時に「双床房/Twin」を指定。エクストラベッドは「subject to availability」のため事前にホテルへ直接メール確認を。
+      表示価格は通常期ベース。労働節(5/1-5/3)は1.5-2倍の可能性。ツインルームは予約時に「双床房/Twin」を指定。
     </div>
   </div>
 </section>
 
-<!-- ===== 7. なぜ安い？ ===== -->
 <section id="hotel-why-cheap">
-  <h2>7. なぜ上海の五つ星ホテルは安いのか</h2>
+  <h2>なぜ上海の五つ星ホテルは安いのか</h2>
   <div class="section-body">
     <h3>価格比較: リッツカールトン</h3>
     <table>
@@ -782,21 +895,15 @@
         <p>Trip.com、Booking.com等のオンライン旅行予約サイトの台頭で価格競争が激化。ホテル側は割引せざるを得ない状況。</p>
       </div>
     </div>
-
-    <div class="alert alert-warn">
-      <strong>GW/労働節期間の注意:</strong> 通常期の「破格」水準からは上がるが、東京・NYと比べれば依然として大幅に安い。ただし早期予約が割安確保の鍵。
-    </div>
-    <p style="font-size:.85em;color:var(--text-muted);margin-top:8px;">Sources: <a href="https://www.rakumachi.jp/news/column/386050" style="color:var(--gold)">楽待</a> / <a href="https://www.nikkei.com/article/DGXZQOGM1603L0W5A910C2000000/" style="color:var(--gold)">日経新聞</a></p>
   </div>
 </section>
 
-<!-- ===== 8. グルメ ===== -->
 <section id="gourmet">
-  <h2>8. グルメガイド（味重視）+ 日本語レビュー</h2>
+  <h2>グルメガイド（味重視）+ 日本語レビュー</h2>
   <div class="section-body">
 
     <div class="alert alert-info" style="margin-bottom:20px;">
-      <strong>調査方針:</strong> 雰囲気やおしゃれさよりも「とにかく味がおいしい」店を厳選。ローカルで評判の名店を中心に、友人4人グループでカジュアルに楽しめることも重視。各店の営業時間・価格・予約方法・おすすめメニューを網羅。
+      <strong>調査方針:</strong> 雰囲気やおしゃれさよりも「とにかく味がおいしい」店を厳選。ローカルで評判の名店を中心に、友人3人グループでカジュアルに楽しめることも重視。各店の営業時間・価格・予約方法・おすすめメニューを網羅。
     </div>
 
     <div class="alert alert-warn" style="margin-bottom:20px;">
@@ -1189,99 +1296,38 @@
   </div>
 </section>
 
-<!-- ===== 9. 日程プラン ===== -->
-<section id="plans">
-  <h2>9. 推奨日程プラン（松竹梅）</h2>
-  <div class="section-body">
+</div><!-- /tab-hotel -->
 
-    <div class="plan-card matsu">
-      <div class="plan-label">松 PREMIUM</div>
-      <p style="margin-top:8px;color:var(--text-muted);">イマーシブ3本 + ディズニー + ミシュランディナー2回 / 5泊6日</p>
-      <div class="timeline" style="margin-top:16px;">
-        <div class="timeline-item"><span class="time">Day 1 - 4/29 (水)</span><br><span class="activity">到着 → 外灘 → BOMBANAディナー</span><br><span class="detail">午前便で虹橋着 → チェックイン → 外灘散策 → 8½ BOMBANAでイタリアン</span></div>
-        <div class="timeline-item"><span class="time">Day 2 - 4/30 (木)</span><br><span class="activity">上海ディズニーランド</span><br><span class="detail">Early Entry → Zootopia/Pirates/TRON → パーク内夕食 → 花火鑑賞</span></div>
-        <div class="timeline-item"><span class="time">Day 3 - 5/1 (金)</span><br><span class="activity">UMEPLAY + 福1015</span><br><span class="detail">豫園・南翔饅頭店（昼食）→ UMEPLAY HAVEN → 福1015でミシュラン上海料理</span></div>
-        <div class="timeline-item"><span class="time">Day 4 - 5/2 (土)</span><br><span class="activity">SAGA + Sleep No More</span><br><span class="detail">新天地散策 → SAGA光明之城(ディナー付き) → Sleep No More 19:00公演</span></div>
-        <div class="timeline-item"><span class="time">Day 5 - 5/3 (日)</span><br><span class="activity">9号秘事 + 打ち上げ</span><br><span class="detail">田子坊散策 → 9号秘事(通訳同行) → 老吉士酒家で打ち上げディナー</span></div>
-        <div class="timeline-item"><span class="time">Day 6 - 5/4 (月)</span><br><span class="activity">帰国</span><br><span class="detail">朝食後 → 午前便で東京へ</span></div>
-      </div>
-    </div>
+<!-- ======================================== -->
+<!-- TAB 5: 準備・予約 -->
+<!-- ======================================== -->
+<div class="tab-panel" id="tab-prep">
 
-    <div class="plan-card take">
-      <div class="plan-label">竹 STANDARD（推奨）</div>
-      <p style="margin-top:8px;color:var(--text-muted);">イマーシブ2本 + ディズニー + バランス食事 / 4泊5日</p>
-      <div class="timeline" style="margin-top:16px;">
-        <div class="timeline-item"><span class="time">Day 1 - 4/29 (水)</span><br><span class="activity">到着 → 外灘 → 福1088ディナー</span><br><span class="detail">午前便で虹橋着 → チェックイン → 外灘散策 → 福1088でミシュラン上海料理</span></div>
-        <div class="timeline-item"><span class="time">Day 2 - 4/30 (木)</span><br><span class="activity">上海ディズニーランド</span><br><span class="detail">Early Entry → 1日ディズニー → 花火</span></div>
-        <div class="timeline-item"><span class="time">Day 3 - 5/1 (金)</span><br><span class="activity">観光 + UMEPLAY + 上海料理</span><br><span class="detail">豫園・南翔饅頭店 → UMEPLAY HAVEN → 老吉士酒家で上海料理</span></div>
-        <div class="timeline-item"><span class="time">Day 4 - 5/2 (土)</span><br><span class="activity">SAGA + 火鍋</span><br><span class="detail">新天地・田子坊 → SAGA光明之城 → 珮姐老火锅</span></div>
-        <div class="timeline-item"><span class="time">Day 5 - 5/3 (日)</span><br><span class="activity">帰国</span><br><span class="detail">朝食後 → 午前便で東京へ</span></div>
-      </div>
-    </div>
-
-    <div class="plan-card ume">
-      <div class="plan-label">梅 ECONOMY</div>
-      <p style="margin-top:8px;color:var(--text-muted);">イマーシブ1本 + ディズニー + 3泊4日</p>
-      <div class="timeline" style="margin-top:16px;">
-        <div class="timeline-item"><span class="time">Day 1 - 4/29 (水)</span><br><span class="activity">到着 → 観光 → ローカルグルメ</span><br><span class="detail">午前便 → 豫園・南翔饅頭店・外灘 → 蘭心餐厅で夕食</span></div>
-        <div class="timeline-item"><span class="time">Day 2 - 4/30 (木)</span><br><span class="activity">上海ディズニーランド</span><br><span class="detail">Early Entry → 1日ディズニー</span></div>
-        <div class="timeline-item"><span class="time">Day 3 - 5/1 (金)</span><br><span class="activity">UMEPLAY + 新天地</span><br><span class="detail">自由行動 → UMEPLAY → 新天地バー＆ディナー</span></div>
-        <div class="timeline-item"><span class="time">Day 4 - 5/2 (土)</span><br><span class="activity">帰国</span><br><span class="detail">朝食後 → 午前便で東京へ</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 10. 予算総括 ===== -->
-<section id="budget">
-  <h2>10. 予算総括（1人あたり）</h2>
-  <div class="section-body">
-    <table>
-      <thead><tr><th>カテゴリ</th><th><span class="badge badge-matsu">松</span> 5泊6日</th><th><span class="badge badge-take">竹</span> 4泊5日</th><th><span class="badge badge-ume">梅</span> 3泊4日</th></tr></thead>
-      <tbody>
-        <tr><td><strong>航空券</strong></td><td>15-22万円</td><td>10-15万円</td><td>7-12万円</td></tr>
-        <tr><td><strong>ホテル</strong>(2室割勘)</td><td>9.5-14.5万円</td><td>4.5-8万円</td><td>2-3.5万円</td></tr>
-        <tr><td><strong>ホテル</strong>(3名1室+1室)</td><td>8-12万円</td><td>3.5-6.5万円</td><td>1.5-3万円</td></tr>
-        <tr><td><strong>ディズニー</strong></td><td>5.2万円</td><td>5.2万円</td><td>3.5万円</td></tr>
-        <tr><td><strong>イマーシブ</strong></td><td>4.5万円(3本)</td><td>2.5万円(2本)</td><td>1万円(1本)</td></tr>
-        <tr><td><strong>食事</strong></td><td>6-8万円</td><td>3-5万円</td><td>2-3万円</td></tr>
-        <tr><td><strong>移動費</strong></td><td>1.5万円</td><td>1万円</td><td>0.5万円</td></tr>
-        <tr><td><strong>通訳</strong></td><td>1.5万円(3日)</td><td>0.8万円(2日)</td><td>0.4万円(1日)</td></tr>
-        <tr><td><strong>通信・雑費</strong></td><td>0.5万円</td><td>0.5万円</td><td>0.5万円</td></tr>
-      </tbody>
-      <tfoot>
-        <tr style="background:rgba(233,69,96,.1);"><td><strong>合計(1人/2室)</strong></td><td class="price-highlight">43.7-67.7万円</td><td class="price-highlight">27.5-42.0万円</td><td class="price-highlight">17.4-27.4万円</td></tr>
-        <tr style="background:rgba(91,181,162,.1);"><td><strong>合計(1人/3名1室)</strong></td><td class="price-highlight">42-65万円</td><td class="price-highlight">26-40万円</td><td class="price-highlight">16-26万円</td></tr>
-        <tr style="background:rgba(245,197,24,.1);"><td><strong>合計(4人/2室)</strong></td><td><strong>175-271万円</strong></td><td><strong>110-168万円</strong></td><td><strong>70-110万円</strong></td></tr>
-      </tfoot>
-    </table>
-  </div>
-</section>
-
-<!-- ===== 11. アクションリスト ===== -->
 <section id="action">
-  <h2>11. 予約アクションリスト</h2>
+  <h2>予約アクションリスト</h2>
   <div class="section-body">
     <h3>即座に（3月中）<span class="badge badge-danger">最優先</span></h3>
     <ul class="checklist">
       <li>航空券の予約（価格が日々上昇中）</li>
-      <li>ホテル予約（ツイン×2 or ツイン+EB×1+シングル×1を指定）</li>
+      <li>ホテル予約（JWマリオット ツイン+EB 1室を指定。メールでEB可否を事前確認）</li>
       <li>Sleep No More公式サイトで5月公演有無を確認</li>
-      <li>上海ディズニーチケット購入</li>
-      <li>Alipay/WeChat Pay全員分の設定・クレカ連携</li>
+      <li>上海ディズニーチケット購入（パスポート番号必要。実名制）</li>
+      <li>Alipay 全員分の設定・クレカ連携（3週間前までに完了）</li>
     </ul>
     <h3>4月上旬まで</h3>
     <ul class="checklist">
       <li>UMEPLAY予約（247tickets or 大众点评）</li>
       <li>SAGA光明之城予約（大麦网）</li>
-      <li>ミシュランレストラン予約（福1015, BOMBANA）</li>
-      <li>通訳手配（ロコタビ or チャイナエイト）</li>
+      <li>通訳手配: 夢匣子(@Dream_inthe_Box)にDay3・Day4の2日間依頼</li>
+      <li>老吉士酒家 電話予約 021-6282-9260（週末5日前推奨）</li>
+      <li>福1088 予約（大众点评 or 電話）</li>
       <li>eSIM購入（中国聯通香港推奨）</li>
     </ul>
     <h3>4月中旬</h3>
     <ul class="checklist">
       <li>ディズニーEarly Entry購入（7日前発売開始）</li>
-      <li>VPN・百度地図・DiDiアプリDL</li>
+      <li>百度地図・DiDi・Alipayアプリを全員DL</li>
+      <li>海底捞 予約（公式サイト or 大众点评）</li>
     </ul>
     <h3>出発1週間前</h3>
     <ul class="checklist">
@@ -1294,9 +1340,8 @@
   </div>
 </section>
 
-<!-- ===== 12. 移動・準備 ===== -->
 <section id="logistics">
-  <h2>12. 移動手段＆事前準備</h2>
+  <h2>移動手段＆事前準備</h2>
   <div class="section-body">
     <h3>フライト</h3>
     <table>
@@ -1307,15 +1352,18 @@
         <tr><td>春秋/Peach</td><td>成田→浦東</td><td>7-12万円</td><td>LCC</td></tr>
       </tbody>
     </table>
-    <h3>市内移動（人民広場から）</h3>
+    <h3>市内移動（人民広場/JWマリオットから）</h3>
     <table>
-      <thead><tr><th>目的地</th><th>地下鉄</th><th>タクシー</th></tr></thead>
+      <thead><tr><th>目的地</th><th>地下鉄</th><th>タクシー(DiDi)</th></tr></thead>
       <tbody>
-        <tr><td>Sleep No More</td><td>10分/80円</td><td>15分/410-615円</td></tr>
-        <tr><td>ディズニー</td><td>60分/125円</td><td>50分/2,050-2,665円</td></tr>
-        <tr><td>外灘</td><td>10分/60円</td><td>15分/410-615円</td></tr>
-        <tr><td>SAGA光明之城</td><td>20分/100円</td><td>20分/600-800円</td></tr>
-        <tr><td>UMEPLAY(楊浦)</td><td>30分/125円</td><td>25分/800-1,200円</td></tr>
+        <tr><td>虹橋空港</td><td>2号線 35min/4元(84円)</td><td>25-35min/70-100元</td></tr>
+        <tr><td>ディズニー</td><td>1号線→11号線 75min/6元(126円)</td><td>50min/130-180元</td></tr>
+        <tr><td>外灘</td><td>徒歩20min or 2号線1駅</td><td>10min/20元</td></tr>
+        <tr><td>豫園</td><td>徒歩25min or 10号線2駅</td><td>10min/20元</td></tr>
+        <tr><td>UMEPLAY(楊浦)</td><td>10号線→乗換 35min</td><td>25-30min/50-70元</td></tr>
+        <tr><td>SAGA光明之城</td><td>1号線→乗換 25min</td><td>20min/45-60元</td></tr>
+        <tr><td>新天地</td><td>1号線1駅 5min</td><td>10min/20元</td></tr>
+        <tr><td>田子坊</td><td>9号線(打浦橋) 15min</td><td>15min/30元</td></tr>
       </tbody>
     </table>
     <h3>必須準備</h3>
@@ -1328,18 +1376,17 @@
   </div>
 </section>
 
-<!-- ===== 13. Red Team ===== -->
 <section id="redteam">
-  <h2>13. Red Team レビューサマリー</h2>
+  <h2>Red Team レビューサマリー</h2>
   <div class="section-body">
     <h3>深刻度: 高 <span class="badge badge-danger">要対応</span></h3>
     <table>
       <thead><tr><th>リスク</th><th>内容</th><th>対策</th></tr></thead>
       <tbody>
         <tr><td>Sleep No More終演</td><td>5月公演継続は未確定</td><td>公式で即確認。SAGA+UMEPLAYを確保。</td></tr>
-        <tr><td>和平飯店改装中</td><td>2025-2027大改装。Rafflesにリブランド</td><td>松プランはウォルドーフまたはパークハイアットに変更。</td></tr>
         <tr><td>航空券価格上昇</td><td>GW+労働節ダブルピーク</td><td>即予約。LCC7-12万/フルサービス12-22万で予算化。</td></tr>
         <tr><td>Alipay設定トラブル</td><td>カード紐付け失敗リスク</td><td>3週間前に全員設定完了+テスト。現金も準備。</td></tr>
+        <tr><td>SAGA愛国テーマ</td><td>1930年代上海の愛国的テーマを含む</td><td>通訳から事前説明を受け理解した上で参加。</td></tr>
         <tr><td>新世界テーマ問題</td><td>抗日戦争テーマで日本人に不適</td><td>候補から除外済み。</td></tr>
       </tbody>
     </table>
@@ -1347,10 +1394,10 @@
     <table>
       <thead><tr><th>リスク</th><th>対策</th></tr></thead>
       <tbody>
-        <tr><td>ホテルのピーク料金(1.5-2倍)</td><td>上限値で予算化。4/29泊と5/3-4泊は比較的安い。</td></tr>
-        <tr><td>ミシュラン予約困難</td><td>連休の端(4/29, 5/3)を狙う。代替店もリスト済み。</td></tr>
-        <tr><td>佳家湯包閉店の可能性</td><td>南翔饅頭店・大壺春で代替。</td></tr>
+        <tr><td>ホテルのピーク料金(1.5-2倍)</td><td>上限値で予算化。4/29泊は比較的安い。</td></tr>
+        <tr><td>老吉士予約困難</td><td>5日前に電話予約。代替: 蘭心餐厅(予約不要)</td></tr>
         <tr><td>eSIM通信不安定</td><td>百度地図を事前DL。通信手段2重化。</td></tr>
+        <tr><td>EB確保不可</td><td>予約時メールで確認。不可ならアンダーズ(EB233元)へ。</td></tr>
       </tbody>
     </table>
     <div class="alert alert-warn">
@@ -1359,11 +1406,24 @@
   </div>
 </section>
 
+</div><!-- /tab-prep -->
+
 <footer>
-  <p>Shanghai Immersive Trip 2026 - 調査・作成: Claude Agent Team (v2)</p>
+  <p>Shanghai Immersive Trip 2026 - 調査・作成: Claude Agent Team</p>
   <p>作成日: 2026年3月8日 / 情報は調査時点のものです。予約前に必ず最新情報をご確認ください。</p>
-  <p style="margin-top:8px;">Sources: Trip.com, KAYAK, TripAdvisor, Klook, 247tickets, 大众点评, ミシュランガイド, 楽待, 日経新聞, 各公式サイト, note各記事, 外務省, JETRO</p>
 </footer>
+
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo({top: document.querySelector('.tab-nav').offsetTop - 10, behavior: 'smooth'});
+  });
+});
+</script>
 
 </body>
 </html>
