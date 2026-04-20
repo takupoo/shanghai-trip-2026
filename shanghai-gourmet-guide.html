@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f0f23">
+<title>上海グルメ写真ガイド｜JWマリオット起点</title>
+<style>
+  :root{
+    --bg:#0f0f23; --card:#1a1a2e; --card2:#16213e;
+    --accent:#e94560; --gold:#f5c518; --take:#5bb5a2; --ume:#7b8cde; --matsu:#c9a96e;
+    --text:#e8e8f0; --muted:#9999b8; --border:#2a2a4a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{background:var(--bg);color:var(--text);}
+  body{font-family:'Hiragino Sans','Noto Sans JP','Segoe UI',sans-serif;line-height:1.6;padding-bottom:40px;}
+  a{color:var(--gold);}
+  .hero{padding:32px 18px 20px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border-bottom:2px solid var(--accent);position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(233,69,96,.15),transparent 50%),radial-gradient(circle at 80% 20%,rgba(245,197,24,.12),transparent 50%);}
+  .hero h1{font-size:1.6em;font-weight:800;letter-spacing:.02em;position:relative;}
+  .hero .subtitle{color:var(--muted);margin-top:6px;font-size:.88em;position:relative;}
+  .hero .hotel{margin-top:14px;padding:10px 14px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:10px;position:relative;font-size:.85em;}
+  .hero .hotel strong{color:var(--gold);}
+  .hero .hotel-links{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;}
+  .hero .hotel-links a{display:inline-block;font-size:.78em;padding:4px 10px;border-radius:999px;background:rgba(245,197,24,.15);border:1px solid rgba(245,197,24,.4);color:var(--gold);text-decoration:none;}
+  .nav-back{display:inline-block;margin-top:10px;color:var(--muted);text-decoration:none;font-size:.82em;position:relative;}
+
+  .filters{position:sticky;top:0;z-index:10;background:rgba(15,15,35,.95);backdrop-filter:blur(8px);padding:10px 14px;border-bottom:1px solid var(--border);overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+  .filter-row{display:inline-flex;gap:6px;}
+  .chip{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text);font-size:.78em;font-weight:600;cursor:pointer;transition:all .15s;user-select:none;}
+  .chip.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .chip:hover:not(.active){background:rgba(233,69,96,.15);border-color:var(--accent);}
+
+  .grid{max-width:1200px;margin:0 auto;padding:16px 12px;display:grid;grid-template-columns:1fr;gap:14px;}
+  @media(min-width:720px){.grid{grid-template-columns:1fr 1fr;padding:20px 18px;gap:18px;}}
+  @media(min-width:1080px){.grid{grid-template-columns:1fr 1fr 1fr;}}
+
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,border-color .15s;}
+  .card:hover{transform:translateY(-2px);border-color:var(--accent);}
+  .card.hidden{display:none;}
+
+  .hero-img{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#1a1a2e,#0f3460);overflow:hidden;}
+  .hero-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s;}
+  .card:hover .hero-img img{transform:scale(1.04);}
+  .hero-img .emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.2em;opacity:.9;pointer-events:none;z-index:1;}
+  .hero-img.has-img .emoji{display:none;}
+  .hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(15,15,35,.75),transparent 40%);pointer-events:none;}
+  .hero-tags{position:absolute;top:8px;left:8px;right:8px;display:flex;justify-content:space-between;gap:6px;z-index:2;}
+  .tag{display:inline-block;padding:3px 8px;border-radius:6px;font-size:.7em;font-weight:700;backdrop-filter:blur(4px);}
+  .tag-cat{background:rgba(233,69,96,.85);color:#fff;}
+  .tag-star{background:rgba(0,0,0,.6);color:var(--gold);letter-spacing:1px;}
+  .hero-name{position:absolute;bottom:8px;left:10px;right:10px;z-index:2;}
+  .hero-name .jp{font-size:1.15em;font-weight:800;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6);line-height:1.25;}
+  .hero-name .cn{font-size:.78em;color:#ddd;margin-top:2px;opacity:.9;}
+
+  .body{padding:12px 14px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .meta{display:flex;flex-wrap:wrap;gap:6px;font-size:.76em;}
+  .meta span{display:inline-flex;align-items:center;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid var(--border);}
+  .meta .access{color:var(--take);border-color:rgba(91,181,162,.35);background:rgba(91,181,162,.08);}
+  .meta .price{color:var(--gold);border-color:rgba(245,197,24,.35);background:rgba(245,197,24,.08);}
+  .meta .reserve-yes{color:var(--accent);border-color:rgba(233,69,96,.4);background:rgba(233,69,96,.12);font-weight:700;}
+  .meta .reserve-no{color:var(--muted);}
+  .meta .reserve-walk{color:var(--ume);border-color:rgba(123,140,222,.35);background:rgba(123,140,222,.08);}
+
+  .meal-slots{display:flex;gap:5px;margin-top:-4px;}
+  .meal-slots .ms{flex:1;text-align:center;padding:5px 4px;border-radius:6px;font-size:.72em;font-weight:700;border:1px solid var(--border);}
+  .meal-slots .ms .lb{display:block;font-size:.85em;opacity:.85;margin-bottom:1px;}
+  .meal-slots .ms .vl{font-size:1.2em;line-height:1;}
+  .meal-slots .ms.on{background:rgba(91,181,162,.12);border-color:var(--take);color:var(--take);}
+  .meal-slots .ms.best{background:rgba(233,69,96,.18);border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1px rgba(233,69,96,.3);}
+  .meal-slots .ms.off{background:rgba(255,255,255,.02);color:var(--muted);opacity:.45;}
+  .meal-slots .ms.ok{background:rgba(245,197,24,.08);border-color:rgba(245,197,24,.4);color:var(--gold);}
+
+  .block{font-size:.84em;}
+  .block .label{color:var(--gold);font-weight:700;font-size:.78em;margin-right:4px;}
+  .signature{background:rgba(245,197,24,.06);border-left:3px solid var(--gold);padding:7px 10px;border-radius:4px;font-size:.82em;}
+  .atmosphere{color:var(--muted);font-size:.8em;line-height:1.5;}
+
+  .review{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:.78em;}
+  .review .src{color:var(--muted);font-size:.9em;margin-bottom:3px;}
+  .review .src a{color:var(--take);text-decoration:none;}
+  .review .quote{color:#dadbe8;}
+
+  .reserve-box{background:rgba(233,69,96,.06);border:1px solid rgba(233,69,96,.3);border-radius:8px;padding:8px 10px;font-size:.78em;}
+  .reserve-box.no{background:rgba(91,181,162,.06);border-color:rgba(91,181,162,.3);}
+  .reserve-box.walk{background:rgba(123,140,222,.06);border-color:rgba(123,140,222,.3);}
+  .reserve-box .rt{font-weight:700;margin-bottom:2px;}
+  .reserve-box.yes .rt{color:var(--accent);}
+  .reserve-box.no .rt{color:var(--take);}
+  .reserve-box.walk .rt{color:var(--ume);}
+  .reserve-box .rb{color:var(--muted);line-height:1.5;}
+
+  .actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;padding-top:4px;border-top:1px dashed var(--border);}
+  .btn{flex:1;min-width:90px;text-align:center;padding:8px 6px;font-size:.76em;font-weight:700;text-decoration:none;border-radius:8px;border:1px solid var(--border);color:var(--text);background:rgba(255,255,255,.03);transition:all .15s;}
+  .btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary{background:rgba(233,69,96,.15);border-color:var(--accent);color:var(--accent);}
+  .btn.gold{background:rgba(245,197,24,.12);border-color:rgba(245,197,24,.45);color:var(--gold);}
+  .btn.emerald{background:rgba(91,181,162,.1);border-color:rgba(91,181,162,.4);color:var(--take);}
+
+  .section-title{max-width:1200px;margin:24px auto 2px;padding:0 18px;font-size:1.1em;color:var(--gold);font-weight:800;border-left:4px solid var(--accent);padding-left:10px;}
+  .section-note{max-width:1200px;margin:0 auto 4px;padding:4px 18px;color:var(--muted);font-size:.82em;}
+
+  .empty{max-width:1200px;margin:30px auto;padding:40px 20px;text-align:center;color:var(--muted);}
+
+  footer{max-width:1200px;margin:40px auto 0;padding:24px 18px;border-top:1px solid var(--border);color:var(--muted);font-size:.8em;text-align:center;}
+  footer p{margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>🥟 上海グルメ写真ガイド</h1>
+  <p class="subtitle">人民広場・JWマリオット Tomorrow Square 起点 / 2026春</p>
+  <div class="hotel">
+    <strong>🏨 JW Marriott Shanghai at Tomorrow Square</strong><br>
+    上海市黄浦区南京西路399号（人民広場駅直結・地下鉄1/2/8号線）<br>
+    <div class="hotel-links">
+      <a href="https://www.google.com/maps/place/JW+Marriott+Shanghai+at+Tomorrow+Square" target="_blank" rel="noopener">🗺 Google Maps</a>
+      <a href="https://www.marriott.co.jp/hotels/travel/shajw-jw-marriott-hotel-shanghai-at-tomorrow-square/" target="_blank" rel="noopener">🌐 公式</a>
+    </div>
+  </div>
+  <a href="index.html" class="nav-back">← 旅行計画トップへ戻る</a>
+</header>
+
+<div class="filters">
+  <div class="filter-row">
+    <span class="chip active" data-filter="all">すべて</span>
+    <span class="chip" data-filter="dimsum">🥟 小籠包・生煎</span>
+    <span class="chip" data-filter="shanghai">🦀 上海料理</span>
+    <span class="chip" data-filter="noodle">🍜 麺</span>
+    <span class="chip" data-filter="hotpot">🫕 火鍋・串焼</span>
+    <span class="chip" data-filter="cafe">☕ カフェ・スイーツ</span>
+    <span class="chip" data-filter="drink">🧋 ドリンク</span>
+    <span class="chip" data-filter="sightseeing">🌆 観光スポット</span>
+    <span class="chip" data-filter="reserve-yes">🔴 要予約</span>
+    <span class="chip" data-filter="no-reserve">🟢 予約不要</span>
+    <span class="chip" data-filter="meal-morning">🌅 朝食◎</span>
+    <span class="chip" data-filter="meal-lunch">☀️ 昼食◎</span>
+    <span class="chip" data-filter="meal-dinner">🌙 夕食◎</span>
+    <span class="chip" data-filter="meal-snack">🍦 間食・夜食</span>
+  </div>
+</div>
+
+<div style="max-width:1200px;margin:12px auto 0;padding:10px 18px;">
+  <div style="background:rgba(245,197,24,.08);border:1px solid rgba(245,197,24,.3);border-radius:10px;padding:10px 14px;font-size:.82em;line-height:1.6;color:#eee;">
+    <strong style="color:var(--gold);">🕒 朝・昼・夜マーカーの読み方：</strong><br>
+    <span style="color:var(--accent);font-weight:700;">◎ ベスト</span>（その時間帯が最もおすすめ）　/
+    <span style="color:var(--take);font-weight:700;">○ OK</span>（営業中・行ける）　/
+    <span style="color:var(--gold);font-weight:700;">△ 一応可</span>（営業時間ギリや混雑）　/
+    <span style="color:var(--muted);">－ 非推奨/閉店</span>
+  </div>
+</div>
+
+<h2 class="section-title">⏰ 朝・昼・夜の鉄板セレクション（最初に見て）</h2>
+<p class="section-note">時間帯で迷ったらこの早見表から。各カードのマーカーと連動。</p>
+
+<div style="max-width:1200px;margin:10px auto 24px;padding:0 18px;">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;">
+
+    <div style="background:linear-gradient(135deg,rgba(245,197,24,.12),rgba(245,197,24,.04));border:1px solid rgba(245,197,24,.4);border-radius:12px;padding:14px;">
+      <h3 style="color:#f5c518;font-size:1em;margin-bottom:10px;">🌅 朝食（7:00-10:30）</h3>
+      <ul style="list-style:none;font-size:.88em;line-height:1.9;">
+        <li>🥇 <strong>佳家湯包</strong>（徒歩5分・ホテル至近で湯包朝食）</li>
+        <li>🥈 <strong>大壺春</strong>（6:30開店の生煎で上海モーニング）</li>
+        <li>🥉 <strong>阿娘面馆</strong>（7:00開店・ミシュラン麺）</li>
+        <li>・ <strong>南翔饅頭店</strong>（8:30の豫園本店で行列回避）</li>
+        <li>・ <strong>スタバリザーブ</strong>（朝のカフェタイムに）</li>
+      </ul>
+    </div>
+
+    <div style="background:linear-gradient(135deg,rgba(233,69,96,.12),rgba(233,69,96,.04));border:1px solid rgba(233,69,96,.4);border-radius:12px;padding:14px;">
+      <h3 style="color:#e94560;font-size:1em;margin-bottom:10px;">☀️ 昼食（11:30-14:00）</h3>
+      <ul style="list-style:none;font-size:.88em;line-height:1.9;">
+        <li>🥇 <strong>成隆行蟹王府</strong>（ランチは予約取りやすい・高級中華）</li>
+        <li>🥈 <strong>光明邨大酒家</strong>（地元民の昼食スポット）</li>
+        <li>🥉 <strong>富春小籠館</strong>（混ぜ麺＋小籠包で満足ランチ）</li>
+        <li>・ <strong>老吉士酒家</strong>（ランチも美味・予約必須）</li>
+        <li>・ <strong>鼎泰豊</strong>（安定の点心ランチ）</li>
+      </ul>
+    </div>
+
+    <div style="background:linear-gradient(135deg,rgba(91,181,162,.12),rgba(91,181,162,.04));border:1px solid rgba(91,181,162,.4);border-radius:12px;padding:14px;">
+      <h3 style="color:#5bb5a2;font-size:1em;margin-bottom:10px;">🌙 夕食・夜景（18:00-22:00）</h3>
+      <ul style="list-style:none;font-size:.88em;line-height:1.9;">
+        <li>🥇 <strong>海底捞</strong>（3人で火鍋＆ショーで盛り上がる）</li>
+        <li>🥈 <strong>豊茂烤串</strong>（串焼きで乾杯・モンゴル風BBQ）</li>
+        <li>🥉 <strong>上海タワー 118F</strong>（展望台＋119Fカフェで夜景）</li>
+        <li>・ <strong>左庭右院</strong>（潮汕牛肉火鍋で肉尽くし）</li>
+        <li>・ <strong>豫園ライトアップ</strong>→南翔饅頭店セット</li>
+      </ul>
+    </div>
+
+    <div style="background:linear-gradient(135deg,rgba(123,140,222,.12),rgba(123,140,222,.04));border:1px solid rgba(123,140,222,.4);border-radius:12px;padding:14px;">
+      <h3 style="color:#7b8cde;font-size:1em;margin-bottom:10px;">🍦 間食・〆・夜カフェ</h3>
+      <ul style="list-style:none;font-size:.88em;line-height:1.9;">
+        <li>🥇 <strong>CHAGEE</strong>（1日1杯ルーティン化推奨）</li>
+        <li>🥈 <strong>BONUS Gelato</strong>（安福路散策の休憩）</li>
+        <li>🥉 <strong>香港糖水</strong>（静安寺観光の〆に豆花）</li>
+        <li>・ <strong>スタバリザーブ</strong>（22時まで長居OK）</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div style="margin-top:14px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px dashed var(--border);border-radius:10px;font-size:.8em;color:var(--muted);line-height:1.6;">
+    <strong style="color:var(--gold);">💡 いつ行ってもOKな店：</strong>
+    CHAGEE（中国茶ミルク）/ スタバリザーブ / CoCo都可 は時間問わず立ち寄れる。<br>
+    <strong style="color:var(--accent);">🚨 時間要注意の店：</strong>
+    阿娘面馆（3部制: 7:00-9:30 / 11:00-13:30 / 17:00-19:30）・佳家湯包（19時閉店）・静安寺（17時閉）・光明邨（14-17時は点心のみ）
+  </div>
+</div>
+
+<h2 class="section-title">🥟 小籠包・生煎の名店</h2>
+<p class="section-note">上海の代名詞。名店ほど並ぶ。朝一・雨の日が狙い目。</p>
+
+<main class="grid">
+
+  <!-- 南翔饅頭店 -->
+  <article class="card" data-cat="dimsum no-reserve meal-morning meal-lunch">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&auto=format" alt="小籠包" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🥟</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">小籠包・元祖</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">南翔饅頭店（豫園本店）</div>
+        <div class="cn">Nanxiang Mantou Dian</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚇 ホテルから約15分</span>
+        <span class="price">💴 50-200元</span>
+        <span class="reserve-walk">🟣 並び必須</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms best"><span class="lb">🌅朝</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms ok"><span class="lb">🌙夜</span><span class="vl">△</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>蟹黄灌湯包（カニ味噌スープ饅頭）/ 鮮肉小籠饅頭 / ストロー刺しジャンボ小籠包</div>
+      <div class="atmosphere">1900年創業・ミシュラン掲載。豫園の真ん中の歴史建築で食べる「小籠包の王様」。1Fテイクアウト／2F着席レストラン／3F高級の3階構成。</div>
+      <div class="reserve-box walk">
+        <div class="rt">🟣 予約不可・並び必須</div>
+        <div class="rb">朝8:30着が行列回避の鍵。混雑時は1Fテイクアウトに切替も◎。2F以上は味が濃厚でおすすめ。</div>
+      </div>
+      <div class="review">
+        <div class="src"><a href="https://note.com/tunacchi/n/ndab70b8fc8b4" target="_blank" rel="noopener">📝 MIYA / note</a></div>
+        <div class="quote">「旨味たっぷりスープが零れ落ちるほど入り、肉餡は弾力と強いコク。鼎泰豊が女王なら南翔は王様。2F推奨。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/shop/4132455" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=南翔馒头店+豫园" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn gold" href="https://www.instagram.com/explore/tags/南翔饅頭店/" target="_blank" rel="noopener">📷 Insta</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 大壺春 -->
+  <article class="card" data-cat="dimsum no-reserve meal-morning meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1625398407796-82650a8c135f?w=800&auto=format" alt="生煎包" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🥯</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">焼き小籠包</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">大壺春（四川中路本店）</div>
+        <div class="cn">Da Hu Chun · ミシュラン・ビブグルマン</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚶 ホテルから徒歩15分</span>
+        <span class="price">💴 15-30元</span>
+        <span class="reserve-walk">🟣 並ぶが回転速い</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms best"><span class="lb">🌅朝</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms on"><span class="lb">🌙夜</span><span class="vl">○</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>鮮肉生煎（豚肉のみ）/ 蝦肉生煎（エビ丸ごと）/ 鵝肝生煎（フォアグラ）/ 咖喱牛肉湯</div>
+      <div class="atmosphere">1932年創業。肉まんの底をカリッと焼いた「全発酵」タイプの生煎包の元祖。小楊生煎より「大壺春派」の声も多い。ローカル感たっぷり。</div>
+      <div class="reserve-box walk">
+        <div class="rt">🟣 予約不可（ただし回転は速い）</div>
+        <div class="rb">豫園店は朝6:30開店で朝食利用◎。並んでも10-15分程度。カレー牛肉スープとのセットが通の食べ方。</div>
+      </div>
+      <div class="review">
+        <div class="src"><a href="https://whostolemysheep.hatenablog.com/entry/2024/03/12/183000" target="_blank" rel="noopener">📝 ひつじ泥棒2 / はてなブログ</a></div>
+        <div class="quote">「全発酵生地は厚くて松ソフト、底はカリッと香ばしい。肉餡は甘辛で旨味凝縮。小楊生煎より好み。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/shop/2934528" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=大壶春+四川中路" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 佳家湯包 -->
+  <article class="card" data-cat="dimsum no-reserve meal-morning meal-lunch">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1548940740-204726a19be3?w=800&auto=format" alt="湯包" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🥟</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">湯包・ローカルNo.1</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">佳家湯包（黄河路店）</div>
+        <div class="cn">Jia Jia Tang Bao</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚶 ホテルから徒歩5分</span>
+        <span class="price">💴 25-50元</span>
+        <span class="reserve-walk">🟣 レジ→番号札</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms best"><span class="lb">🌅朝</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms ok"><span class="lb">🌙夜</span><span class="vl">△</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>招牌蟹粉鮮肉湯包（38元/12個）/ 純蟹粉品鮮 / 蛋黄鮮肉湯包</div>
+      <div class="atmosphere">ホテル至近。ドラマ「繁花」で有名な黄河路の細長い店内。ヒラヒラ薄皮とジューシーな肉汁、地元民に「鼎泰豊より旨い」と言わしめる庶民派の頂点。</div>
+      <div class="reserve-box walk">
+        <div class="rt">🟣 予約不可・15-20分待ち覚悟</div>
+        <div class="rb">レジで先に注文・支払い→番号札で待つ方式。混雑時は相席。8:00-19:00営業。</div>
+      </div>
+      <div class="review">
+        <div class="src"><a href="https://ameblo.jp/ejinobouken/entry-12911737500.html" target="_blank" rel="noopener">📝 エヂのブログ / Ameba</a></div>
+        <div class="quote">「アメリカのグルメ番組でも絶賛。蟹粉鮮肉湯包が絶品で、鼎泰豊より旨いとの評多数。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/shop/1882622" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=佳家汤包+黄河路" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 富春小籠館 -->
+  <article class="card" data-cat="dimsum noodle no-reserve meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1526318896980-cf78c088247c?w=800&auto=format" alt="小籠包" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🍜</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">無形文化遺産</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">富春小籠館</div>
+        <div class="cn">Fu Chun Xiao Long Guan</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚕 ホテルから15分</span>
+        <span class="price">💴 30-70元</span>
+        <span class="reserve-no">🟢 予約不要</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms on"><span class="lb">🌅朝</span><span class="vl">○</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>国家非遺の小籠包 / 葱油拌面（焦がしネギ油混ぜ麺）/ 上海焼きそば（太麺）</div>
+      <div class="atmosphere">旧フランス租界の庶民的な老舗。国家無形文化遺産（非遺）認定の職人が作る、有名店の半値の小籠包。焦がしネギ油×上海醤油のシンプルな混ぜ麺は「人生麺」の声も。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 予約不要</div>
+        <div class="rb">ピーク時以外は並ばず入れる。大众点评で「排队」番号取得できる店舗も。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube「【上海グルメ旅】絶対食べたい！香ばし麺と行列グルメ」</div>
+        <div class="quote">「豚肉の臭みがない小籠包と、焦がしネギ油＋甘め醤油だけのシンプル混ぜ麺が絶品。庶民の味の最高峰。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E5%AF%8C%E6%98%A5%E5%B0%8F%E7%AC%BC%E9%A6%86" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=富春小笼馆" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 鼎泰豊 -->
+  <article class="card" data-cat="dimsum reserve-yes meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=800&auto=format" alt="点心" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🥟</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">世界ブランド・安定</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">鼎泰豊（新天地店）</div>
+        <div class="cn">Din Tai Fung</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚕 ホテルから10分</span>
+        <span class="price">💴 100-150元</span>
+        <span class="reserve-yes">🔴 電話/WEB予約可</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>鮮肉小籠包 / 蟹粉小籠包 / 酸辣湯 / 炒飯</div>
+      <div class="atmosphere">台湾発の世界的チェーン。ローカル店が不安な場合の安全牌。日本語メニュー完備。深夜24時まで営業で遅い夜食にも。</div>
+      <div class="reserve-box yes">
+        <div class="rt">🔴 予約推奨（特に週末・夜）</div>
+        <div class="rb">
+          電話：<a href="tel:+862163858378">+86-21-6385-8378</a>（新天地店）<br>
+          WEB：<a href="https://www.dintaifung.com.cn/" target="_blank" rel="noopener">公式予約サイト</a> / 大众点评「订座」<br>
+          環球金融中心店は比較的空いていて穴場。
+        </div>
+      </div>
+      <div class="review">
+        <div class="src"><a href="https://sayahota.com/shanghai-best-restaurant-din-tai-fung/" target="_blank" rel="noopener">📝 さやほたブログ</a></div>
+        <div class="quote">「品質の安定感は抜群。日本語メニューもあり安心。上海ローカル店が不安な場合の安全牌。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dintaifung.com.cn/" target="_blank" rel="noopener">🌐 公式予約</a>
+        <a class="btn" href="https://www.dianping.com/shop/1934321" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=鼎泰丰+新天地" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<h2 class="section-title">🦀 上海料理・高級中華</h2>
+<p class="section-note">シーズン外でも蟹粉（蟹味噌）料理は年中提供。GW期は早め予約を。</p>
+
+<main class="grid">
+
+  <!-- 成隆行蟹王府 -->
+  <article class="card" data-cat="shanghai reserve-yes meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&auto=format" alt="上海蟹" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🦀</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">上海蟹専門・高級</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">成隆行蟹王府（九江路店）</div>
+        <div class="cn">Chenglongxing Xie Wang Fu</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚶 ホテルから徒歩8分</span>
+        <span class="price">💴 400-800元</span>
+        <span class="reserve-yes">🔴 要予約・個室あり</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>上海蟹コース / 蟹味噌フカヒレスープ / 蟹粉炒飯 / 蟹粉小籠包</div>
+      <div class="atmosphere">上海蟹を通年で食べられる専門店。洋館風の内装で接待にも使われる格式。4-5月は冷凍蟹または蟹粉料理中心だが味は本物。</div>
+      <div class="reserve-box yes">
+        <div class="rt">🔴 予約必須（GW期間は特に）</div>
+        <div class="rb">
+          電話：<a href="tel:+862163216066">+86-21-6321-6066</a><br>
+          WEB：<a href="https://www.dianping.com/shop/4152" target="_blank" rel="noopener">大众点评で予約</a> / コンシェルジュ経由も◎
+        </div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube「中国•上海旅行2泊3日🦀衝撃のグルメ」</div>
+        <div class="quote">「濃厚な蟹味噌フカヒレスープ、パラパラ蟹肉入りチャーハン、蟹粉小籠包まで。コース構成が秀逸。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/shop/4152" target="_blank" rel="noopener">📱 大众点评予約</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=成隆行蟹王府+九江路" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 老吉士酒家 -->
+  <article class="card" data-cat="shanghai reserve-yes meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800&auto=format" alt="上海料理" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🍚</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">家庭料理の最高峰</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">老吉士酒家</div>
+        <div class="cn">Jesse Restaurant / 有名人御用達</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚕 ホテルから20分</span>
+        <span class="price">💴 150-250元</span>
+        <span class="reserve-yes">🔴 5日前予約推奨</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>吉士鹹鶏（塩蒸し鶏）/ 紅焼肉（甘辛豚バラ）/ 蟹粉炒粉皮 / 皮蛋豆腐</div>
+      <div class="atmosphere">1990年代からの家庭料理の名店。リャン・チャオウェイやリン・チンシアも通う。テーブル約10卓のみ。接客は素っ気ないが味は保証付き。日本人の口に合う紅焼肉。</div>
+      <div class="reserve-box yes">
+        <div class="rt">🔴 要予約・週末は5日前必須</div>
+        <div class="rb">
+          電話：<a href="tel:+862162829260">+86-21-6282-9260</a>（中国語のみ・ホテルコンシェルジュ経由が安全）<br>
+          <strong>クレジットカード不可</strong>・現金かモバイル決済のみ。日本語対応なし。
+        </div>
+      </div>
+      <div class="review">
+        <div class="src"><a href="https://www.shanghainavi.com/food/465/" target="_blank" rel="noopener">📝 上海ナビ</a></div>
+        <div class="quote">「華麗さはないが古い味わいが常連を引きつける。紅焼肉は日本人にぴったりの甘辛。小さな店で予約必須。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.shanghainavi.com/food/465/" target="_blank" rel="noopener">🌐 上海ナビ詳細</a>
+        <a class="btn" href="https://www.dianping.com/shop/4185" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=老吉士酒家+天平路" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 光明邨大酒家 -->
+  <article class="card" data-cat="shanghai no-reserve meal-morning meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&auto=format" alt="中華料理" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🍲</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">地元民の行列店</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">光明邨大酒家</div>
+        <div class="cn">Guangmingcun Jiujia</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚕 ホテルから15分</span>
+        <span class="price">💴 50-80元</span>
+        <span class="reserve-walk">🟣 並び必須</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms on"><span class="lb">🌅朝</span><span class="vl">○</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>鮮肉月餅（焼きたて肉月餅）/ 蟹粉小籠包 / 蟹粉豆腐 / 葱油拌面</div>
+      <div class="atmosphere">淮海中路の地元民が本当に並ぶ老舗。1Fはテイクアウト惣菜で中高年大人気、2-3Fは着席レストラン。リーズナブルに伝統的な上海料理を楽しめる。</div>
+      <div class="reserve-box walk">
+        <div class="rt">🟣 予約不可・GW期は大行列</div>
+        <div class="rb">電話 <a href="tel:+862153067878">+86-21-5306-7878</a>（空席確認のみ）。鮮肉月餅は焼きたてが絶品なので午前中狙い。</div>
+      </div>
+      <div class="review">
+        <div class="src"><a href="https://4travel.jp/travelogue/10733046" target="_blank" rel="noopener">📝 フォートラベル</a></div>
+        <div class="quote">「淮海中路で最も賑わう行列店。2-3階で伝統的な上海料理をリーズナブルに楽しめる。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/shop/4151" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=光明邨大酒家+淮海中路" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- EDITIONホテル裏の高級中華 -->
+  <article class="card" data-cat="shanghai reserve-yes meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&auto=format" alt="高級中華" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🍽</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">隠れ家高級中華</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">甬府（Yong Fu） / Shanghai EDITION周辺</div>
+        <div class="cn">寧波料理・蟹味噌コース</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚶 ホテルから徒歩8分</span>
+        <span class="price">💴 500-1000元</span>
+        <span class="reserve-yes">🔴 要予約</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>蟹味噌フカヒレスープ / 蟹肉入りパラパラ炒飯 / 寧波風海鮮 / 紅焼肉</div>
+      <div class="atmosphere">南京東路EDITIONホテル裏路地の上品な高級店。YouTuber「中国•上海旅行2泊3日」で紹介され話題。寧波料理系「甬府」や関連店舗が集積エリア。</div>
+      <div class="reserve-box yes">
+        <div class="rt">🔴 予約必須</div>
+        <div class="rb">
+          甬府公式予約：<a href="https://www.dianping.com/search/keyword/1/0_%E7%94%AC%E5%BA%9C" target="_blank" rel="noopener">大众点评で「甬府」検索</a><br>
+          ミシュラン1つ星常連。個室利用はさらに早めに。
+        </div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube「中国•上海旅行2泊3日🦀」</div>
+        <div class="quote">「濃厚な蟹味噌フカヒレスープが格別。パラパラの蟹肉チャーハン、上海蟹と続くコース構成が感動レベル。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E7%94%AC%E5%BA%9C" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=甬府+南京东路" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 風西中国茶（プーアル焼肉） -->
+  <article class="card" data-cat="shanghai reserve-yes meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1552611052-33e04de081de?w=800&auto=format" alt="創作中華" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🍵</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">創作中華・お茶</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">茶香室（陸家嘴エリア）</div>
+        <div class="cn">茶葉を使った創作中華</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚇 ホテルから25分</span>
+        <span class="price">💴 200-400元</span>
+        <span class="reserve-yes">🔴 WEB予約推奨</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms on"><span class="lb">☀️昼</span><span class="vl">○</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>プーアル茶煮込み焼肉（紅色の角煮）/ 茶葉の香りの牛肉炒め / 茶香チャーハン</div>
+      <div class="atmosphere">浦東・陸家嘴の静かな一軒。茶葉を料理に組み込んだ創作中華で、プーアルで柔らかく煮込まれた紅色の焼肉が目にも美しい。上海タワー観光と合わせて◎。</div>
+      <div class="reserve-box yes">
+        <div class="rt">🔴 予約推奨（夜は満席多し）</div>
+        <div class="rb">大众点评の「订座」機能で予約可。店名は「茶香XXX」系が複数あり、陸家嘴店を指定。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube（上海旅アジア#58）</div>
+        <div class="quote">「お茶を組み込んだ目にも美しい創作中華。プーアル角煮は柔らかく、茶葉香る牛肉炒めが印象的。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E8%8C%B6%E9%A6%99%E5%AE%A4" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=陆家嘴+创作中华" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<h2 class="section-title">🍜 麺の名店</h2>
+<p class="section-note">上海の麺はあっさり醤油ベース。日本人にもスッと入る。</p>
+
+<main class="grid">
+
+  <!-- 阿娘面 -->
+  <article class="card" data-cat="noodle no-reserve meal-morning meal-lunch">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&auto=format" alt="麺料理" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🍜</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">ミシュラン・ビブグルマン</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">阿娘面馆</div>
+        <div class="cn">A Niang Mian · おばちゃんの麺</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚕 ホテルから15分</span>
+        <span class="price">💴 40-80元</span>
+        <span class="reserve-walk">🟣 営業3部制・並び必須</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms best"><span class="lb">🌅朝</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms ok"><span class="lb">🌙夜</span><span class="vl">△</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>黄魚麺（イシモチの醤油スープ麺）/ 蟹粉麺（蟹味噌あんかけ）/ 爆鱔面（タウナギ蘇州麺）</div>
+      <div class="atmosphere">思南路の路地の小さな老舗。現在はお孫さん経営。魚介と豚骨合わせの白濁スープにホロホロの白身魚がのり、旨味の強い麺が圧巻。</div>
+      <div class="reserve-box walk">
+        <div class="rt">🟣 予約不可・3部制</div>
+        <div class="rb"><strong>7:00-9:30 / 11:00-13:30 / 17:00-19:30</strong>（短い！時間厳守）。毎日満席になるので開店直後推奨。</div>
+      </div>
+      <div class="review">
+        <div class="src"><a href="https://currycell.exblog.jp/31028247/" target="_blank" rel="noopener">📝 Currycell's Blog</a></div>
+        <div class="quote">「黄魚麺は魚の生臭さがなく、あっさり醤油スープとツルツル麺が絶品。ミシュラン・ビブグルマン。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/shop/5204" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=阿娘面馆+思南路" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 和府撈麺 -->
+  <article class="card" data-cat="noodle no-reserve meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1555126634-323283e090fa?w=800&auto=format" alt="牛肉麺" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🍜</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">チェーン牛肉麺</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">和府撈麺（Hefu Noodle）</div>
+        <div class="cn">書斎風のきれいな店内</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚶 ホテルから徒歩10分</span>
+        <span class="price">💴 40-70元</span>
+        <span class="reserve-no">🟢 予約不要</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms on"><span class="lb">🌅朝</span><span class="vl">○</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>草本牛肉湯麺 / 酸菜牛肉麺 / 鴨血豆腐湯麺</div>
+      <div class="atmosphere">南京東路「第一百貨」や市内フードコートに多数。和風うどんに似た柔らかい細麺、パクチー・八角の香るスープ。清潔感があり女性や家族連れに人気。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 予約不要・気軽に</div>
+        <div class="rb">店舗数多く並ばずに入れる。公式アプリでオンライン注文も可能。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube（上海#57）</div>
+        <div class="quote">「和風うどんに似た柔らかい細麺。パクチーや八角の香るスープが日本人の口にも合う。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E5%92%8C%E5%BA%9C%E6%8D%9E%E9%9D%A2" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn" href="https://www.hefunoodle.com/" target="_blank" rel="noopener">🌐 公式</a>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<h2 class="section-title">🫕 火鍋・串焼</h2>
+<p class="section-note">グループで盛り上がるなら絶対。海底捞はテーマパーク級。</p>
+
+<main class="grid">
+
+  <!-- 海底捞 -->
+  <article class="card" data-cat="hotpot reserve-yes meal-dinner meal-snack">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1552565400-ac8afc37a72a?w=800&auto=format" alt="火鍋" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🫕</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">エンタメ火鍋</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">海底捞（人民広場店）</div>
+        <div class="cn">Hai Di Lao</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚶 ホテルから徒歩7分</span>
+        <span class="price">💴 120-200元</span>
+        <span class="reserve-yes">🔴 アプリ予約必須</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms on"><span class="lb">☀️昼</span><span class="vl">○</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>番茄鍋底 / 捞派毛肚（センマイ）/ 招牌蝦滑 / 鴛鴦鍋</div>
+      <div class="atmosphere">待ち時間に無料ネイル・お菓子・ジュース提供。カンフーヌードルショー・変面ショーあり。3人グループで盛り上がる鉄板。24時間営業の店舗も。</div>
+      <div class="reserve-box yes">
+        <div class="rt">🔴 予約推奨（予約なしだと1時間待ち）</div>
+        <div class="rb">
+          公式アプリ「海底捞会员APP」 / <a href="https://www.haidilao.com/" target="_blank" rel="noopener">公式サイト</a><br>
+          <a href="https://www.dianping.com/search/keyword/1/0_%E6%B5%B7%E5%BA%95%E6%8D%9E" target="_blank" rel="noopener">大众点评「订座」</a>
+        </div>
+      </div>
+      <div class="review">
+        <div class="src"><a href="https://www.happysunnyday.net/entry/haidilao" target="_blank" rel="noopener">📝 晴れたら一人で旅に出る</a></div>
+        <div class="quote">「待ち時間にジュース・お菓子・ネイル無料。カンフーヌードルと変面ショーが圧巻。テーマパーク級。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.haidilao.com/" target="_blank" rel="noopener">🌐 公式予約</a>
+        <a class="btn" href="https://www.dianping.com/search/keyword/1/0_%E6%B5%B7%E5%BA%95%E6%8D%9E" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=海底捞+人民广场" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 左庭右院 -->
+  <article class="card" data-cat="hotpot reserve-yes meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1600626336212-4f98aa6ddf12?w=800&auto=format" alt="牛肉火鍋" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🥩</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">潮汕牛肉火鍋</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">左庭右院（新世界城店）</div>
+        <div class="cn">Zuo Ting You Yuan</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚶 ホテルから徒歩5分</span>
+        <span class="price">💴 120-180元</span>
+        <span class="reserve-yes">🔴 大众点评予約</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>吊笼（リブロース-サーロイン）/ 匙柄（ウデ）/ 鮮牛雑鴛鴦鍋</div>
+      <div class="atmosphere">冷凍肉一切不使用。新鮮な牛肉をしゃぶしゃぶで部位ごとに食べ比べ。味重視派の火鍋マニアから「海底捞より上」の声。ホテル超近距離。</div>
+      <div class="reserve-box yes">
+        <div class="rt">🔴 大众点评予約推奨</div>
+        <div class="rb">ピークタイム（19時-21時）は予約なしだと待つ。新世界城9Fの店舗がホテルから最も近い。</div>
+      </div>
+      <div class="review">
+        <div class="src"><a href="https://dz-blog.com/shanghai-recommendedhotpot/" target="_blank" rel="noopener">📝 dz-blog</a></div>
+        <div class="quote">「潮汕牛肉火鍋の専門店。冷凍肉不使用、新鮮な牛肉をしゃぶしゃぶで。部位ごとに違う食感が楽しめる。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E5%B7%A6%E5%BA%AD%E5%8F%B3%E9%99%A2" target="_blank" rel="noopener">📱 大众点评予約</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=左庭右院+新世界城" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 豊茂烤串 -->
+  <article class="card" data-cat="hotpot no-reserve meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1529694157872-4e0c0f3b238b?w=800&auto=format" alt="串焼き" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🍢</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">自動回転串焼</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">豊茂烤串（第一百貨店店）</div>
+        <div class="cn">Fengmao · モンゴル風BBQ</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚶 ホテルから徒歩10分</span>
+        <span class="price">💴 80-150元</span>
+        <span class="reserve-walk">🟣 現地受付</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms ok"><span class="lb">☀️昼</span><span class="vl">△</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>羊肉串（自動回転機で焼く）/ 腰子（ハラミ）/ 雞軟骨 / 自家製ナン</div>
+      <div class="atmosphere">各テーブルに自動回転串焼き機があり、自分で焼いてスパイス・辛味調味料で食べる体験型。待ち時間にアイスや冷えピタ配布などサービスがユニーク。</div>
+      <div class="reserve-box walk">
+        <div class="rt">🟣 基本的に現地受付（並び番号）</div>
+        <div class="rb">大众点评アプリから「排队」で事前番号取得可能。週末夕食は1時間以上待ち必至。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube（上海#57）</div>
+        <div class="quote">「自動回転串焼き機で羊肉を焼き、スパイスでいただく。待ち時間にアイスや冷えピタ配布でユニーク。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E4%B8%B0%E8%8C%82%E7%83%A4%E4%B8%B2" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=丰茂烤串+第一百货" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<h2 class="section-title">☕ カフェ・スイーツ</h2>
+<p class="section-note">映えも実力も。上海は世界最大規模のコーヒー都市。</p>
+
+<main class="grid">
+
+  <!-- スタバリザーブ -->
+  <article class="card" data-cat="cafe no-reserve meal-morning meal-lunch meal-snack">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&auto=format" alt="スタバリザーブ" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">☕</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">世界最大級</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">スターバックス リザーブ ロースタリー 上海</div>
+        <div class="cn">Starbucks Reserve Roastery</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚇 ホテルから5分</span>
+        <span class="price">💴 50-150元</span>
+        <span class="reserve-no">🟢 予約不要</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms best"><span class="lb">🌅朝</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms on"><span class="lb">🌙夜</span><span class="vl">○</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>リザーブ限定コーヒー / ティーバー（中国茶×コーヒー融合）/ 限定タンブラー</div>
+      <div class="atmosphere">南京西路駅3番出口すぐ。2,700㎡の世界最大級ロースタリー。焙煎機や銅の貯蔵タンクが天井まで連なる圧巻の空間。コーヒー好きの聖地。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 予約不要（公式サイトでチケット予約も可）</div>
+        <div class="rb">ピーク時は入店待ちの場合あり。朝イチが快適。限定タンブラーは売切れ早し。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube「【上海】2025年最新！これ観ればOK」</div>
+        <div class="quote">「世界最大級の規模。限定コーヒーと限定タンブラーが目当てで世界中からファンが集まる。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.starbucksreserve.com/en-us/locations/shanghai" target="_blank" rel="noopener">🌐 公式</a>
+        <a class="btn" href="https://www.dianping.com/shop/91655509" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=Starbucks+Reserve+Roastery+Shanghai" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- BONUS ジェラート -->
+  <article class="card" data-cat="cafe no-reserve meal-snack meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800&auto=format" alt="ジェラート" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🍦</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">クラフトジェラート</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">BONUS Gelato（安福路店）</div>
+        <div class="cn">旧フランス租界の人気店</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚕 ホテルから15分</span>
+        <span class="price">💴 40-70元</span>
+        <span class="reserve-no">🟢 予約不要</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms on"><span class="lb">☀️昼</span><span class="vl">○ 間食</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎ 食後</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>ジャスミン / キャラメルピスタチオ / ブラックタフィーピーチ / アルコール入りフレーバー</div>
+      <div class="atmosphere">プラタナス並木の安福路エリア。本格濃厚イタリアン製法×中国食材のクラフトジェラート。武康大楼散策の休憩に最適な映えスポット。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 予約不要・テイクアウト中心</div>
+        <div class="rb">週末は行列するが10-15分程度。季節限定フレーバーは早めに売切れ。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube「【衝撃】初めて知った中華料理」</div>
+        <div class="quote">「ジャスミンとキャラメルピスタチオが絶品。武康大楼観光の合間に最高の休憩スポット。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_BONUS" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn" href="https://www.instagram.com/bonus.gelato/" target="_blank" rel="noopener">📷 Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=BONUS+gelato+安福路" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- サイゼリヤ -->
+  <article class="card" data-cat="cafe no-reserve meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&auto=format" alt="ピザ" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🍕</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">中国限定メニュー</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">サイゼリヤ（上海店）</div>
+        <div class="cn">日本では食べられない限定品が目当て</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚕 ホテルから20分</span>
+        <span class="price">💴 30-60元</span>
+        <span class="reserve-no">🟢 予約不要</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>パイナップル×ドリアンピザ / 辛みチキン / 中国限定ドリア / ヨーグルト羊羹</div>
+      <div class="atmosphere">日本と同じ安さでも中国限定メニューがネタ的にも味的にも面白い。ネタ枠として必食。IAPMなど安福路近くのモール内。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 予約不要</div>
+        <div class="rb">ランチ時間帯は混むので14時以降がゆっくり。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube「会社の同期4人でいく3泊4日」</div>
+        <div class="quote">「パイナップルドリアンピザが衝撃の美味しさ。日本では食べられないメニューがネタ的にも面白い。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E8%90%A8%E8%8E%89%E4%BA%9A" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn" href="https://www.saizeriya.com.cn/" target="_blank" rel="noopener">🌐 中国サイゼリヤ公式</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 香港糖水 -->
+  <article class="card" data-cat="cafe no-reserve meal-snack meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1587132137056-bfbf0166836e?w=800&auto=format" alt="豆花" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🥣</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">香港式デザート</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">香港糖水（久光百貨店近く）</div>
+        <div class="cn">Hong Kong Tangshui</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚇 ホテルから10分</span>
+        <span class="price">💴 25-50元</span>
+        <span class="reserve-no">🟢 予約不要</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms on"><span class="lb">☀️昼</span><span class="vl">○ 間食</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎ 食後</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>豆花（トファー）/ 小豆豆花ハーフ / マンゴープリン / 亀ゼリー</div>
+      <div class="atmosphere">静安寺の久光百貨店付近。大豆から作る柔らかプリン「豆花」が絶品。買い物帰りの休憩にぴったりで、テイクアウトも可。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 予約不要</div>
+        <div class="rb">ピーク時も回転早く入れる。夜21時頃まで営業。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube（上海観光王道プラン）</div>
+        <div class="quote">「柔らかな豆花と小豆のハーフ＆ハーフが絶品。優しい甘さで暑い日も冷えた日も美味しい。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E9%A6%99%E6%B8%AF%E7%B3%96%E6%B0%B4" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=香港糖水+静安寺" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<h2 class="section-title">🧋 ドリンク（テイクアウト）</h2>
+<p class="section-note">歩きながら片手で。上海のテイクアウト文化を堪能。</p>
+
+<main class="grid">
+
+  <!-- CHAGEE -->
+  <article class="card" data-cat="drink no-reserve meal-morning meal-lunch meal-snack meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?w=800&auto=format" alt="中国茶" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🍵</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">中国No.1ティー</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">CHAGEE（覇王茶姫）</div>
+        <div class="cn">Ba Wang Cha Ji</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚶 市内各所</span>
+        <span class="price">💴 17-30元</span>
+        <span class="reserve-no">🟢 アプリ事前注文</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms best"><span class="lb">🌅朝</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>伯牙絶弦（ジャスミン茶ミルク）<span style="color:var(--accent);">※最初の1杯はこれ</span> / 桂馥蘭香（キンモクセイ）</div>
+      <div class="atmosphere">豫園、南京東路、静安寺など市内各所。タピオカミルクティーではなく、茶葉を本格抽出した中国茶ミルク。上品な香りとまろやかさで日本人にも大ヒット中。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 WeChatミニプログラムで事前注文・スキップ</div>
+        <div class="rb">人気店では店頭で30分待つことも。WeChatから「霸王茶姫」検索→事前注文→番号で受取が時短の鉄則。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube「中国•上海旅行2泊3日🦀」</div>
+        <div class="quote">「上品な香りとミルクのまろやかさが絶妙。1日1杯飲みたくなる中国茶ドリンクの革命。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.chagee.com/" target="_blank" rel="noopener">🌐 公式</a>
+        <a class="btn" href="https://www.dianping.com/search/keyword/1/0_%E9%9C%B8%E7%8E%8B%E8%8C%B6%E5%A7%AC" target="_blank" rel="noopener">📱 大众点评</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- CoCo都可 -->
+  <article class="card" data-cat="drink no-reserve meal-lunch meal-snack meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1558857563-b371033873b5?w=800&auto=format" alt="タピオカ" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🧋</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">定番タピオカ</span>
+        <span class="tag tag-star">★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">CoCo都可</div>
+        <div class="cn">CoCo Fresh Tea</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚶 市内各所</span>
+        <span class="price">💴 15-25元</span>
+        <span class="reserve-no">🟢 予約不要</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎ 間食</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">看板</span>3兄弟（タピオカ+プリン+仙草）/ 芋圓奶茶 / 珍珠紅茶</div>
+      <div class="atmosphere">フードコート等にある定番チェーン。タピオカ・芋圓・コーヒーゼリー入りミルクティーが王道。日本撤退ブランドも中国では健在。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 予約不要</div>
+        <div class="rb">WeChat「COCO都可」ミニプログラムで事前注文が一番速い。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube（上海#57）</div>
+        <div class="quote">「タピオカ・芋・コーヒーゼリーが入った定番3兄弟が安くて美味い。街歩きのお供に。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_COCO%E9%83%BD%E5%8F%AF" target="_blank" rel="noopener">📱 大众点评</a>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<h2 class="section-title">🌆 観光スポット（眺望・歴史）</h2>
+<p class="section-note">写真映えする必食ポイント。早朝・夕暮れが狙い目。</p>
+
+<main class="grid">
+
+  <!-- 上海タワー -->
+  <article class="card" data-cat="sightseeing reserve-yes meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?w=800&auto=format" alt="上海タワー" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🌆</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">世界3位の摩天楼</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">上海中心大厦（上海タワー）</div>
+        <div class="cn">Shanghai Tower · 632m・118F展望台</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚇 ホテルから25分</span>
+        <span class="price">💴 180元（展望台）</span>
+        <span class="reserve-yes">🔴 チケット要事前予約</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms on"><span class="lb">☀️昼</span><span class="vl">○</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎ 夜景</span></span>
+      </div>
+      <div class="signature"><span class="label">見どころ</span>118F展望台 / 119Fカフェ（青島ビール）/ 超高速エレベーター（118秒）</div>
+      <div class="atmosphere">地下鉄2号線陸家嘴駅徒歩10分。118階からの360°パノラマと眼下の黄浦江が圧巻。119階カフェで座って絶景ビール。</div>
+      <div class="reserve-box yes">
+        <div class="rt">🔴 チケット要事前予約（GW期必須）</div>
+        <div class="rb">
+          公式：<a href="https://www.shanghaitower.com.cn/" target="_blank" rel="noopener">shanghaitower.com.cn</a><br>
+          Klook/KKday等でも日本語で予約可：<a href="https://www.klook.com/ja/activity/8287-shanghai-tower-observation-deck-ticket/" target="_blank" rel="noopener">Klook予約</a>
+        </div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube「上海旅🇨🇳規模では敵わないと悟る世界一の摩天楼」</div>
+        <div class="quote">「118階展望台から見下ろす夜景が圧倒的。119階カフェで青島ビール片手に絶景を味わう贅沢。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.klook.com/ja/activity/8287-shanghai-tower-observation-deck-ticket/" target="_blank" rel="noopener">🎫 Klook予約</a>
+        <a class="btn" href="https://www.shanghaitower.com.cn/" target="_blank" rel="noopener">🌐 公式</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=上海中心大厦" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 静安寺 -->
+  <article class="card" data-cat="sightseeing no-reserve meal-morning meal-lunch">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1518399681705-1ac2a8a7ef8f?w=800&auto=format" alt="静安寺" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🏯</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">三国時代の古刹</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">静安寺</div>
+        <div class="cn">Jing'an Temple · 金色の屋根</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚇 ホテルから8分</span>
+        <span class="price">💴 50元（拝観料）</span>
+        <span class="reserve-no">🟢 予約不要</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms best"><span class="lb">🌅朝</span><span class="vl">◎</span></span>
+        <span class="ms on"><span class="lb">☀️昼</span><span class="vl">○</span></span>
+        <span class="ms off"><span class="lb">🌙夜</span><span class="vl">－ 17時閉</span></span>
+      </div>
+      <div class="signature"><span class="label">見どころ</span>金箔の屋根 / 巨大釈迦牟尼仏 / 超高層ビル群との対比ショット</div>
+      <div class="atmosphere">地下鉄2/7号線静安寺駅すぐ。三国時代（西暦247年）創建の由緒ある寺院。現代的な金色の屋根とビル群のコントラストがSNS映え。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 予約不要・チケットは窓口で</div>
+        <div class="rb">7:30-17:00。香港糖水、久光百貨店とセットで観光可。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube（上海グルメ旅）</div>
+        <div class="quote">「摩天楼に囲まれた金色の屋根がインパクト大。参拝客と観光客で常に賑わう上海の顔。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/shop/6793" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=静安寺" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 田子坊 -->
+  <article class="card" data-cat="sightseeing no-reserve meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?w=800&auto=format" alt="田子坊" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🎨</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">アート路地裏</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">田子坊（ティエンズファン）</div>
+        <div class="cn">Tianzifang · 旧工場＋アート路地</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚇 ホテルから15分</span>
+        <span class="price">💴 入場無料</span>
+        <span class="reserve-no">🟢 予約不要</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms off"><span class="lb">🌅朝</span><span class="vl">－</span></span>
+        <span class="ms on"><span class="lb">☀️昼</span><span class="vl">○</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎</span></span>
+      </div>
+      <div class="signature"><span class="label">見どころ</span>迷路のような路地 / アトリエ・カフェ・雑貨 / 夜はバー街に変貌</div>
+      <div class="atmosphere">1930年代の集合住宅を改装したアート街。雑貨・お土産・カフェが密集。夜は路地裏バーも面白い。安福路より観光地感が強い。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 予約不要・入場無料</div>
+        <div class="rb">店舗により営業時間異なる（概ね10:00-22:00）。昼と夜で表情が変わる。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube（上海#57）</div>
+        <div class="quote">「古い集合住宅を改装したアート街。カフェ・雑貨・アトリエが密集していて歩くだけで楽しい。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/shop/4178" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=田子坊" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 武康大楼 -->
+  <article class="card" data-cat="sightseeing no-reserve meal-morning meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1545897033-14fac748f87a?w=800&auto=format" alt="武康大楼" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🏛</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">フラットアイアン型建築</span>
+        <span class="tag tag-star">★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">武康大楼（武康路）</div>
+        <div class="cn">Wukang Mansion · 1924年フランス建築</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚕 ホテルから20分</span>
+        <span class="price">💴 無料（外観のみ）</span>
+        <span class="reserve-no">🟢 予約不要</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms on"><span class="lb">🌅朝</span><span class="vl">○</span></span>
+        <span class="ms on"><span class="lb">☀️昼</span><span class="vl">○</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎ 夕景</span></span>
+      </div>
+      <div class="signature"><span class="label">見どころ</span>船型ファサード / プラタナス並木の武康路 / 周辺のカフェ・古着屋</div>
+      <div class="atmosphere">フランス租界のランドマーク。フラットアイアン型の歴史的建築を背景に、プラタナス並木道で撮る構図がSNS定番。BONUS Gelatoや安福路とセットで。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 予約不要（外観撮影のみ）</div>
+        <div class="rb">週末は写真スポットが混雑。朝9時前 or 夕方以降が撮りやすい。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube（上海グルメ旅）</div>
+        <div class="quote">「フランス租界の象徴。プラタナスの並木道と船型ビルの構図が上海っぽくて最高のフォトスポット。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.dianping.com/shop/4214" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=武康大楼" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 豫園 -->
+  <article class="card" data-cat="sightseeing no-reserve meal-morning meal-lunch meal-dinner">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1528702748617-c64d49f918af?w=800&auto=format" alt="豫園" loading="lazy" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+      <div class="emoji">🏮</div>
+      <div class="hero-tags">
+        <span class="tag tag-cat">明代庭園・門前町</span>
+        <span class="tag tag-star">★★★★★</span>
+      </div>
+      <div class="hero-name">
+        <div class="jp">豫園（ユーユエン）</div>
+        <div class="cn">Yu Garden · 明代の古典庭園</div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <span class="access">🚇 ホテルから15分</span>
+        <span class="price">💴 庭園40元・周辺無料</span>
+        <span class="reserve-no">🟢 予約不要</span>
+      </div>
+      <div class="meal-slots">
+        <span class="ms on"><span class="lb">🌅朝</span><span class="vl">○</span></span>
+        <span class="ms best"><span class="lb">☀️昼</span><span class="vl">◎</span></span>
+        <span class="ms best"><span class="lb">🌙夜</span><span class="vl">◎ ライトアップ</span></span>
+      </div>
+      <div class="signature"><span class="label">見どころ</span>庭園内の九曲橋と湖心亭茶楼 / 豫園商城の食べ歩き / 南翔饅頭店の本店</div>
+      <div class="atmosphere">地下鉄10号線豫園駅直結。400年以上の歴史ある明代庭園と、その周辺の門前町。小籠包の本家・南翔饅頭店もここ。</div>
+      <div class="reserve-box no">
+        <div class="rt">🟢 予約不要（庭園は当日券購入）</div>
+        <div class="rb">庭園は8:30-17:00。商城は22時頃まで賑わう。夜のライトアップが映える。</div>
+      </div>
+      <div class="review">
+        <div class="src">📝 YouTube「会社の同期4人でいく3泊4日」</div>
+        <div class="quote">「夜のライトアップが圧巻。南翔饅頭店で小籠包、食べ歩き、お土産屋巡りと上海らしさの凝縮エリア。」</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.yuyuantm.com.cn/" target="_blank" rel="noopener">🌐 公式</a>
+        <a class="btn" href="https://www.dianping.com/shop/4134" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=豫园" target="_blank" rel="noopener">🗺 地図</a>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<div class="empty" id="empty" style="display:none;">
+  該当するお店がありません。フィルターを変更してみてください。
+</div>
+
+<footer>
+  <p>📱 このページはスマホ最適化されています。フィルターで絞り込み、カード下部のボタンから大众点评/Google Maps/公式サイトへ直接ジャンプできます。</p>
+  <p style="margin-top:8px;">🔴 要予約 / 🟢 予約不要 / 🟣 並び必須（予約不可）</p>
+  <p style="margin-top:8px;color:var(--muted);font-size:.85em;">価格はCNY（1元≈21円換算）/ 所要時間はホテル=JWマリオット上海 Tomorrow Square起点 / レビューは各ブログ・YouTube原文の要約引用です。</p>
+  <p style="margin-top:14px;"><a href="index.html">← 旅行計画トップへ</a></p>
+</footer>
+
+<script>
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('.card');
+  const empty = document.getElementById('empty');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      let visible = 0;
+      cards.forEach(card => {
+        const cats = card.dataset.cat || '';
+        if (f === 'all' || cats.includes(f)) {
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      empty.style.display = visible === 0 ? 'block' : 'none';
+      // Hide section titles with no visible cards
+      document.querySelectorAll('.section-title').forEach(title => {
+        const next = title.nextElementSibling?.nextElementSibling;
+        if (next && next.classList.contains('grid')) {
+          const anyVisible = Array.from(next.querySelectorAll('.card')).some(c => !c.classList.contains('hidden'));
+          title.style.display = anyVisible ? '' : 'none';
+          title.nextElementSibling.style.display = anyVisible ? '' : 'none';
+          next.style.display = anyVisible ? '' : 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
