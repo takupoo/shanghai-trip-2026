@@ -5,121 +5,174 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0f0f23">
 <title>上海グルメ写真ガイド｜JWマリオット起点</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0f0f23; --card:#1a1a2e; --card2:#16213e;
-    --accent:#e94560; --gold:#f5c518; --take:#5bb5a2; --ume:#7b8cde; --matsu:#c9a96e;
-    --text:#e8e8f0; --muted:#9999b8; --border:#2a2a4a;
+    --bg:#f6f1e8;           /* warm cream */
+    --bg-alt:#ece5d6;        /* subtle section */
+    --card:#ffffff;
+    --text:#2d2925;          /* warm near-black */
+    --heading:#1e1a16;
+    --muted:#8a8178;         /* warm gray */
+    --accent:#9c5e46;        /* muted terracotta */
+    --accent-soft:#c48a6e;
+    --sage:#6b7f74;          /* soft sage */
+    --gold:#a8875b;          /* antique gold */
+    --border:#e0d8c9;        /* warm border */
+    --border-strong:#c8bfb0;
+    --shadow:0 1px 2px rgba(45,41,37,.04), 0 2px 8px rgba(45,41,37,.05);
+    --shadow-hover:0 4px 12px rgba(45,41,37,.08), 0 8px 24px rgba(45,41,37,.06);
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{background:var(--bg);color:var(--text);}
-  body{font-family:'Hiragino Sans','Noto Sans JP','Segoe UI',sans-serif;line-height:1.6;padding-bottom:40px;}
-  a{color:var(--gold);}
-  .hero{padding:32px 18px 20px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border-bottom:2px solid var(--accent);position:relative;overflow:hidden;}
-  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(233,69,96,.15),transparent 50%),radial-gradient(circle at 80% 20%,rgba(245,197,24,.12),transparent 50%);}
-  .hero h1{font-size:1.6em;font-weight:800;letter-spacing:.02em;position:relative;}
-  .hero .subtitle{color:var(--muted);margin-top:6px;font-size:.88em;position:relative;}
-  .hero .hotel{margin-top:14px;padding:10px 14px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:10px;position:relative;font-size:.85em;}
-  .hero .hotel strong{color:var(--gold);}
-  .hero .hotel-links{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;}
-  .hero .hotel-links a{display:inline-block;font-size:.78em;padding:4px 10px;border-radius:999px;background:rgba(245,197,24,.15);border:1px solid rgba(245,197,24,.4);color:var(--gold);text-decoration:none;}
-  .nav-back{display:inline-block;margin-top:10px;color:var(--muted);text-decoration:none;font-size:.82em;position:relative;}
+  body{font-family:'Noto Sans JP','Hiragino Sans',sans-serif;font-weight:400;line-height:1.75;padding-bottom:60px;letter-spacing:.01em;}
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  h1,h2,h3,h4{font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-weight:500;color:var(--heading);letter-spacing:.02em;}
 
-  .filters{position:sticky;top:0;z-index:10;background:rgba(15,15,35,.95);backdrop-filter:blur(8px);padding:10px 14px;border-bottom:1px solid var(--border);overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
-  .filter-row{display:inline-flex;gap:6px;}
-  .chip{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text);font-size:.78em;font-weight:600;cursor:pointer;transition:all .15s;user-select:none;}
+  .hero{padding:48px 22px 36px;background:var(--bg);border-bottom:1px solid var(--border);}
+  .hero-inner{max-width:1100px;margin:0 auto;}
+  .hero .brand-mark{font-family:'Cormorant Garamond',serif;font-size:.82em;letter-spacing:.4em;color:var(--accent);text-transform:uppercase;font-weight:500;margin-bottom:12px;}
+  .hero h1{font-size:1.9em;font-weight:500;line-height:1.4;color:var(--heading);}
+  .hero h1 .en{display:block;font-family:'Cormorant Garamond',serif;font-size:.55em;font-style:italic;color:var(--muted);margin-top:4px;letter-spacing:.05em;}
+  .hero .subtitle{color:var(--muted);margin-top:10px;font-size:.85em;letter-spacing:.05em;}
+  .hero .divider{width:40px;height:1px;background:var(--accent);margin:18px 0;}
+  .hero .hotel{margin-top:0;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:4px;font-size:.84em;box-shadow:var(--shadow);}
+  .hero .hotel strong{color:var(--heading);font-weight:500;display:block;margin-bottom:4px;}
+  .hero .hotel .addr{color:var(--muted);font-size:.92em;}
+  .hero .hotel-links{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;}
+  .hero .hotel-links a{display:inline-block;font-size:.78em;padding:5px 12px;border:1px solid var(--border-strong);border-radius:2px;color:var(--text);background:transparent;transition:all .2s;}
+  .hero .hotel-links a:hover{background:var(--accent);border-color:var(--accent);color:#fff;text-decoration:none;}
+  .nav-back{display:inline-block;margin-top:16px;color:var(--muted);font-size:.8em;letter-spacing:.05em;}
+  .nav-back:hover{color:var(--accent);text-decoration:none;}
+
+  .filters{position:sticky;top:0;z-index:10;background:rgba(246,241,232,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 18px;border-bottom:1px solid var(--border);overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+  .filter-row{display:inline-flex;gap:8px;}
+  .chip{display:inline-block;padding:7px 14px;border-radius:2px;background:transparent;border:1px solid var(--border-strong);color:var(--text);font-size:.76em;font-weight:400;letter-spacing:.03em;cursor:pointer;transition:all .2s;user-select:none;}
   .chip.active{background:var(--accent);border-color:var(--accent);color:#fff;}
-  .chip:hover:not(.active){background:rgba(233,69,96,.15);border-color:var(--accent);}
+  .chip:hover:not(.active){border-color:var(--accent);color:var(--accent);}
 
-  .grid{max-width:1200px;margin:0 auto;padding:16px 12px;display:grid;grid-template-columns:1fr;gap:14px;}
-  @media(min-width:720px){.grid{grid-template-columns:1fr 1fr;padding:20px 18px;gap:18px;}}
+  .grid{max-width:1200px;margin:0 auto;padding:20px 14px;display:grid;grid-template-columns:1fr;gap:20px;}
+  @media(min-width:720px){.grid{grid-template-columns:1fr 1fr;padding:28px 22px;gap:24px;}}
   @media(min-width:1080px){.grid{grid-template-columns:1fr 1fr 1fr;}}
 
-  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,border-color .15s;}
-  .card:hover{transform:translateY(-2px);border-color:var(--accent);}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease;box-shadow:var(--shadow);}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);}
   .card.hidden{display:none;}
 
-  .hero-img{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#1a1a2e,#0f3460);overflow:hidden;}
-  .hero-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s;}
-  .card:hover .hero-img img{transform:scale(1.04);}
-  .hero-img .emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.2em;opacity:.9;pointer-events:none;z-index:1;}
+  .hero-img{position:relative;aspect-ratio:4/3;background:var(--bg-alt);overflow:hidden;}
+  .hero-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;filter:saturate(.85) contrast(.98);}
+  .card:hover .hero-img img{transform:scale(1.03);}
+  .hero-img .emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3em;opacity:.4;pointer-events:none;z-index:1;}
   .hero-img.has-img .emoji{display:none;}
-  .hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(15,15,35,.75),transparent 40%);pointer-events:none;}
-  .hero-tags{position:absolute;top:8px;left:8px;right:8px;display:flex;justify-content:space-between;gap:6px;z-index:2;}
-  .tag{display:inline-block;padding:3px 8px;border-radius:6px;font-size:.7em;font-weight:700;backdrop-filter:blur(4px);}
-  .tag-cat{background:rgba(233,69,96,.85);color:#fff;}
-  .tag-star{background:rgba(0,0,0,.6);color:var(--gold);letter-spacing:1px;}
-  .hero-name{position:absolute;bottom:8px;left:10px;right:10px;z-index:2;}
-  .hero-name .jp{font-size:1.15em;font-weight:800;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6);line-height:1.25;}
-  .hero-name .cn{font-size:.78em;color:#ddd;margin-top:2px;opacity:.9;}
+  .hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(30,26,22,.55),rgba(30,26,22,.08) 45%,transparent 70%);pointer-events:none;}
+  .hero-tags{position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;gap:6px;z-index:2;}
+  .tag{display:inline-block;padding:3px 9px;font-size:.68em;font-weight:500;letter-spacing:.04em;backdrop-filter:blur(4px);border-radius:2px;}
+  .tag-cat{background:rgba(255,255,255,.92);color:var(--accent);}
+  .tag-star{background:rgba(30,26,22,.55);color:#e8d9a8;letter-spacing:2px;}
+  .hero-name{position:absolute;bottom:14px;left:16px;right:16px;z-index:2;}
+  .hero-name .jp{font-family:'Noto Serif JP',serif;font-size:1.08em;font-weight:500;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.4);line-height:1.35;}
+  .hero-name .cn{font-family:'Cormorant Garamond',serif;font-size:.78em;font-style:italic;color:rgba(255,255,255,.82);margin-top:4px;letter-spacing:.04em;}
 
-  .body{padding:12px 14px;display:flex;flex-direction:column;gap:10px;flex:1;}
-  .meta{display:flex;flex-wrap:wrap;gap:6px;font-size:.76em;}
-  .meta span{display:inline-flex;align-items:center;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid var(--border);}
-  .meta .access{color:var(--take);border-color:rgba(91,181,162,.35);background:rgba(91,181,162,.08);}
-  .meta .price{color:var(--gold);border-color:rgba(245,197,24,.35);background:rgba(245,197,24,.08);}
-  .meta .reserve-yes{color:var(--accent);border-color:rgba(233,69,96,.4);background:rgba(233,69,96,.12);font-weight:700;}
-  .meta .reserve-no{color:var(--muted);}
-  .meta .reserve-walk{color:var(--ume);border-color:rgba(123,140,222,.35);background:rgba(123,140,222,.08);}
+  .body{padding:16px 18px 16px;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .meta{display:flex;flex-wrap:wrap;gap:6px;font-size:.74em;}
+  .meta span{display:inline-flex;align-items:center;padding:3px 9px;border-radius:2px;background:transparent;border:1px solid var(--border);color:var(--text);font-weight:400;letter-spacing:.02em;}
+  .meta .access{color:var(--sage);border-color:var(--sage);}
+  .meta .price{color:var(--gold);border-color:var(--gold);}
+  .meta .reserve-yes{color:var(--accent);border-color:var(--accent);background:rgba(156,94,70,.06);font-weight:500;}
+  .meta .reserve-no{color:var(--sage);border-color:var(--sage);}
+  .meta .reserve-walk{color:var(--muted);border-color:var(--border-strong);}
 
-  .meal-slots{display:flex;gap:5px;margin-top:-4px;}
-  .meal-slots .ms{flex:1;text-align:center;padding:5px 4px;border-radius:6px;font-size:.72em;font-weight:700;border:1px solid var(--border);}
-  .meal-slots .ms .lb{display:block;font-size:.85em;opacity:.85;margin-bottom:1px;}
-  .meal-slots .ms .vl{font-size:1.2em;line-height:1;}
-  .meal-slots .ms.on{background:rgba(91,181,162,.12);border-color:var(--take);color:var(--take);}
-  .meal-slots .ms.best{background:rgba(233,69,96,.18);border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1px rgba(233,69,96,.3);}
-  .meal-slots .ms.off{background:rgba(255,255,255,.02);color:var(--muted);opacity:.45;}
-  .meal-slots .ms.ok{background:rgba(245,197,24,.08);border-color:rgba(245,197,24,.4);color:var(--gold);}
+  .meal-slots{display:flex;gap:5px;}
+  .meal-slots .ms{flex:1;text-align:center;padding:6px 4px;border-radius:2px;font-size:.7em;font-weight:400;border:1px solid var(--border);background:transparent;}
+  .meal-slots .ms .lb{display:block;font-size:.82em;opacity:.7;margin-bottom:2px;}
+  .meal-slots .ms .vl{font-size:1.05em;line-height:1;font-weight:500;}
+  .meal-slots .ms.on{border-color:var(--sage);color:var(--sage);}
+  .meal-slots .ms.best{border-color:var(--accent);color:var(--accent);background:rgba(156,94,70,.05);}
+  .meal-slots .ms.off{color:var(--muted);opacity:.5;border-style:dashed;}
+  .meal-slots .ms.ok{border-color:var(--gold);color:var(--gold);}
 
-  .block{font-size:.84em;}
-  .block .label{color:var(--gold);font-weight:700;font-size:.78em;margin-right:4px;}
-  .signature{background:rgba(245,197,24,.06);border-left:3px solid var(--gold);padding:7px 10px;border-radius:4px;font-size:.82em;}
-  .atmosphere{color:var(--muted);font-size:.8em;line-height:1.5;}
+  .signature{background:var(--bg);border-left:2px solid var(--accent);padding:9px 12px;font-size:.82em;color:var(--text);line-height:1.6;}
+  .signature .label{display:block;color:var(--accent);font-family:'Cormorant Garamond',serif;font-size:.85em;letter-spacing:.15em;margin-bottom:2px;text-transform:uppercase;font-weight:500;}
+  .atmosphere{color:var(--muted);font-size:.82em;line-height:1.7;}
 
-  .review{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:.78em;}
-  .review .src{color:var(--muted);font-size:.9em;margin-bottom:3px;}
-  .review .src a{color:var(--take);text-decoration:none;}
-  .review .quote{color:#dadbe8;}
+  .review{background:var(--bg);border:1px solid var(--border);border-radius:2px;padding:10px 12px;font-size:.78em;}
+  .review .src{color:var(--muted);font-size:.9em;margin-bottom:4px;font-family:'Cormorant Garamond',serif;font-style:italic;letter-spacing:.03em;}
+  .review .src a{color:var(--sage);}
+  .review .quote{color:var(--text);line-height:1.7;}
+  .review .quote::before{content:'"';color:var(--accent);font-size:1.4em;font-family:'Cormorant Garamond',serif;margin-right:2px;vertical-align:-.1em;}
+  .review .quote::after{content:'"';color:var(--accent);font-size:1.4em;font-family:'Cormorant Garamond',serif;margin-left:2px;vertical-align:-.1em;}
 
-  .reserve-box{background:rgba(233,69,96,.06);border:1px solid rgba(233,69,96,.3);border-radius:8px;padding:8px 10px;font-size:.78em;}
-  .reserve-box.no{background:rgba(91,181,162,.06);border-color:rgba(91,181,162,.3);}
-  .reserve-box.walk{background:rgba(123,140,222,.06);border-color:rgba(123,140,222,.3);}
-  .reserve-box .rt{font-weight:700;margin-bottom:2px;}
+  .reserve-box{background:rgba(156,94,70,.04);border:1px solid var(--border);border-left:2px solid var(--accent);border-radius:2px;padding:10px 12px;font-size:.78em;}
+  .reserve-box.no{border-left-color:var(--sage);background:rgba(107,127,116,.04);}
+  .reserve-box.walk{border-left-color:var(--muted);background:rgba(138,129,120,.04);}
+  .reserve-box .rt{font-weight:500;margin-bottom:4px;letter-spacing:.03em;}
   .reserve-box.yes .rt{color:var(--accent);}
-  .reserve-box.no .rt{color:var(--take);}
-  .reserve-box.walk .rt{color:var(--ume);}
-  .reserve-box .rb{color:var(--muted);line-height:1.5;}
+  .reserve-box.no .rt{color:var(--sage);}
+  .reserve-box.walk .rt{color:var(--text);}
+  .reserve-box .rb{color:var(--muted);line-height:1.7;}
+  .reserve-box .rb a{color:var(--accent);}
 
-  .actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;padding-top:4px;border-top:1px dashed var(--border);}
-  .btn{flex:1;min-width:90px;text-align:center;padding:8px 6px;font-size:.76em;font-weight:700;text-decoration:none;border-radius:8px;border:1px solid var(--border);color:var(--text);background:rgba(255,255,255,.03);transition:all .15s;}
-  .btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
-  .btn.primary{background:rgba(233,69,96,.15);border-color:var(--accent);color:var(--accent);}
-  .btn.gold{background:rgba(245,197,24,.12);border-color:rgba(245,197,24,.45);color:var(--gold);}
-  .btn.emerald{background:rgba(91,181,162,.1);border-color:rgba(91,181,162,.4);color:var(--take);}
+  .actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;padding-top:10px;border-top:1px solid var(--border);}
+  .btn{flex:1;min-width:80px;text-align:center;padding:8px 6px;font-size:.74em;font-weight:400;letter-spacing:.04em;border-radius:2px;border:1px solid var(--border-strong);color:var(--text);background:transparent;transition:all .2s;}
+  .btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;text-decoration:none;}
+  .btn.primary{border-color:var(--accent);color:var(--accent);}
+  .btn.gold{border-color:var(--gold);color:var(--gold);}
+  .btn.emerald{border-color:var(--sage);color:var(--sage);}
+  .btn.insta{border-color:var(--accent-soft);color:var(--accent);background:rgba(196,138,110,.05);}
+  .btn.insta:hover{background:linear-gradient(135deg,#c48a6e,#9c5e46);border-color:var(--accent);color:#fff;}
 
-  .section-title{max-width:1200px;margin:24px auto 2px;padding:0 18px;font-size:1.1em;color:var(--gold);font-weight:800;border-left:4px solid var(--accent);padding-left:10px;}
-  .section-note{max-width:1200px;margin:0 auto 4px;padding:4px 18px;color:var(--muted);font-size:.82em;}
+  .section-title{max-width:1200px;margin:40px auto 4px;padding:0 22px;font-family:'Noto Serif JP',serif;font-size:1.25em;color:var(--heading);font-weight:500;letter-spacing:.04em;display:flex;align-items:center;gap:14px;}
+  .section-title::before{content:'';display:inline-block;width:36px;height:1px;background:var(--accent);}
+  .section-note{max-width:1200px;margin:0 auto 4px;padding:0 22px 0 72px;color:var(--muted);font-size:.82em;letter-spacing:.02em;}
 
   .empty{max-width:1200px;margin:30px auto;padding:40px 20px;text-align:center;color:var(--muted);}
 
-  footer{max-width:1200px;margin:40px auto 0;padding:24px 18px;border-top:1px solid var(--border);color:var(--muted);font-size:.8em;text-align:center;}
-  footer p{margin-bottom:4px;}
+  footer{max-width:1200px;margin:60px auto 0;padding:32px 22px;border-top:1px solid var(--border);color:var(--muted);font-size:.78em;text-align:center;letter-spacing:.03em;line-height:1.9;}
+  footer p{margin-bottom:6px;}
+  footer a{color:var(--accent);}
+
+  /* Quick-pick summary override */
+  .quickpick-wrap{max-width:1200px;margin:16px auto 32px;padding:0 22px;}
+  .quickpick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+  .quickpick-card{background:var(--card);border:1px solid var(--border);border-top:2px solid var(--accent);border-radius:2px;padding:18px 20px;box-shadow:var(--shadow);}
+  .quickpick-card.lunch{border-top-color:var(--accent);}
+  .quickpick-card.morning{border-top-color:var(--gold);}
+  .quickpick-card.dinner{border-top-color:var(--sage);}
+  .quickpick-card.snack{border-top-color:var(--muted);}
+  .quickpick-card h3{font-size:.95em;margin-bottom:12px;color:var(--heading);font-weight:500;letter-spacing:.03em;padding-bottom:8px;border-bottom:1px solid var(--border);}
+  .quickpick-card ul{list-style:none;font-size:.84em;line-height:2;}
+  .quickpick-card ul li strong{color:var(--heading);font-weight:500;}
+  .quickpick-card ul li .rank{display:inline-block;width:18px;color:var(--accent);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95em;}
+  .quickpick-note{margin-top:16px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:2px;font-size:.8em;color:var(--muted);line-height:1.8;}
+  .quickpick-note strong{color:var(--heading);font-weight:500;}
+
+  /* Meal-legend override */
+  .legend-bar{max-width:1200px;margin:14px auto 0;padding:0 22px;}
+  .legend-bar .inner{padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:2px;font-size:.8em;line-height:1.7;color:var(--muted);}
+  .legend-bar strong{color:var(--heading);font-weight:500;}
 </style>
 </head>
 <body>
 
 <header class="hero">
-  <h1>🥟 上海グルメ写真ガイド</h1>
-  <p class="subtitle">人民広場・JWマリオット Tomorrow Square 起点 / 2026春</p>
-  <div class="hotel">
-    <strong>🏨 JW Marriott Shanghai at Tomorrow Square</strong><br>
-    上海市黄浦区南京西路399号（人民広場駅直結・地下鉄1/2/8号線）<br>
-    <div class="hotel-links">
-      <a href="https://www.google.com/maps/place/JW+Marriott+Shanghai+at+Tomorrow+Square" target="_blank" rel="noopener">🗺 Google Maps</a>
-      <a href="https://www.marriott.co.jp/hotels/travel/shajw-jw-marriott-hotel-shanghai-at-tomorrow-square/" target="_blank" rel="noopener">🌐 公式</a>
+  <div class="hero-inner">
+    <div class="brand-mark">Shanghai Gourmet Guide</div>
+    <h1>上海グルメ案内<span class="en">A curated selection for Spring 2026</span></h1>
+    <p class="subtitle">JWマリオット Tomorrow Square 起点 — 写真と日本語レビューで選ぶ25店</p>
+    <div class="divider"></div>
+    <div class="hotel">
+      <strong>JW Marriott Shanghai at Tomorrow Square</strong>
+      <div class="addr">上海市黄浦区南京西路399号 — 人民広場駅直結（地下鉄1/2/8号線）</div>
+      <div class="hotel-links">
+        <a href="https://www.google.com/maps/place/JW+Marriott+Shanghai+at+Tomorrow+Square" target="_blank" rel="noopener">Google Maps</a>
+        <a href="https://www.marriott.co.jp/hotels/travel/shajw-jw-marriott-hotel-shanghai-at-tomorrow-square/" target="_blank" rel="noopener">公式サイト</a>
+      </div>
     </div>
+    <a href="index.html" class="nav-back">← 旅行計画トップへ戻る</a>
   </div>
-  <a href="index.html" class="nav-back">← 旅行計画トップへ戻る</a>
 </header>
 
 <div class="filters">
@@ -141,76 +194,76 @@
   </div>
 </div>
 
-<div style="max-width:1200px;margin:12px auto 0;padding:10px 18px;">
-  <div style="background:rgba(245,197,24,.08);border:1px solid rgba(245,197,24,.3);border-radius:10px;padding:10px 14px;font-size:.82em;line-height:1.6;color:#eee;">
-    <strong style="color:var(--gold);">🕒 朝・昼・夜マーカーの読み方：</strong><br>
-    <span style="color:var(--accent);font-weight:700;">◎ ベスト</span>（その時間帯が最もおすすめ）　/
-    <span style="color:var(--take);font-weight:700;">○ OK</span>（営業中・行ける）　/
-    <span style="color:var(--gold);font-weight:700;">△ 一応可</span>（営業時間ギリや混雑）　/
+<div class="legend-bar">
+  <div class="inner">
+    <strong>朝・昼・夜マーカーの読み方</strong> —
+    <span style="color:var(--accent);">◎ ベスト</span>（その時間帯が最もおすすめ）／
+    <span style="color:var(--sage);">○ OK</span>（営業中・行ける）／
+    <span style="color:var(--gold);">△ 一応可</span>（営業時間ギリや混雑）／
     <span style="color:var(--muted);">－ 非推奨/閉店</span>
   </div>
 </div>
 
-<h2 class="section-title">⏰ 朝・昼・夜の鉄板セレクション（最初に見て）</h2>
-<p class="section-note">時間帯で迷ったらこの早見表から。各カードのマーカーと連動。</p>
+<h2 class="section-title">朝・昼・夜の鉄板セレクション</h2>
+<p class="section-note">時間帯で迷ったらこの早見表から。各カードのマーカーと連動しています。</p>
 
-<div style="max-width:1200px;margin:10px auto 24px;padding:0 18px;">
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;">
+<div class="quickpick-wrap">
+  <div class="quickpick-grid">
 
-    <div style="background:linear-gradient(135deg,rgba(245,197,24,.12),rgba(245,197,24,.04));border:1px solid rgba(245,197,24,.4);border-radius:12px;padding:14px;">
-      <h3 style="color:#f5c518;font-size:1em;margin-bottom:10px;">🌅 朝食（7:00-10:30）</h3>
-      <ul style="list-style:none;font-size:.88em;line-height:1.9;">
-        <li>🥇 <strong>佳家湯包</strong>（徒歩5分・ホテル至近で湯包朝食）</li>
-        <li>🥈 <strong>大壺春</strong>（6:30開店の生煎で上海モーニング）</li>
-        <li>🥉 <strong>阿娘面馆</strong>（7:00開店・ミシュラン麺）</li>
-        <li>・ <strong>南翔饅頭店</strong>（8:30の豫園本店で行列回避）</li>
-        <li>・ <strong>スタバリザーブ</strong>（朝のカフェタイムに）</li>
+    <div class="quickpick-card morning">
+      <h3>🌅 朝食 — 7:00-10:30</h3>
+      <ul>
+        <li><span class="rank">I</span><strong>佳家湯包</strong>（徒歩5分・湯包朝食）</li>
+        <li><span class="rank">II</span><strong>大壺春</strong>（6:30開店の生煎）</li>
+        <li><span class="rank">III</span><strong>阿娘面馆</strong>（7:00開店・ミシュラン麺）</li>
+        <li><span class="rank">・</span><strong>南翔饅頭店</strong>（8:30で行列回避）</li>
+        <li><span class="rank">・</span><strong>スタバリザーブ</strong>（朝カフェ）</li>
       </ul>
     </div>
 
-    <div style="background:linear-gradient(135deg,rgba(233,69,96,.12),rgba(233,69,96,.04));border:1px solid rgba(233,69,96,.4);border-radius:12px;padding:14px;">
-      <h3 style="color:#e94560;font-size:1em;margin-bottom:10px;">☀️ 昼食（11:30-14:00）</h3>
-      <ul style="list-style:none;font-size:.88em;line-height:1.9;">
-        <li>🥇 <strong>成隆行蟹王府</strong>（ランチは予約取りやすい・高級中華）</li>
-        <li>🥈 <strong>光明邨大酒家</strong>（地元民の昼食スポット）</li>
-        <li>🥉 <strong>富春小籠館</strong>（混ぜ麺＋小籠包で満足ランチ）</li>
-        <li>・ <strong>老吉士酒家</strong>（ランチも美味・予約必須）</li>
-        <li>・ <strong>鼎泰豊</strong>（安定の点心ランチ）</li>
+    <div class="quickpick-card lunch">
+      <h3>☀️ 昼食 — 11:30-14:00</h3>
+      <ul>
+        <li><span class="rank">I</span><strong>成隆行蟹王府</strong>（高級中華ランチ）</li>
+        <li><span class="rank">II</span><strong>光明邨大酒家</strong>（地元民の昼食）</li>
+        <li><span class="rank">III</span><strong>富春小籠館</strong>（混ぜ麺＋小籠包）</li>
+        <li><span class="rank">・</span><strong>老吉士酒家</strong>（予約必須）</li>
+        <li><span class="rank">・</span><strong>鼎泰豊</strong>（安定の点心）</li>
       </ul>
     </div>
 
-    <div style="background:linear-gradient(135deg,rgba(91,181,162,.12),rgba(91,181,162,.04));border:1px solid rgba(91,181,162,.4);border-radius:12px;padding:14px;">
-      <h3 style="color:#5bb5a2;font-size:1em;margin-bottom:10px;">🌙 夕食・夜景（18:00-22:00）</h3>
-      <ul style="list-style:none;font-size:.88em;line-height:1.9;">
-        <li>🥇 <strong>海底捞</strong>（3人で火鍋＆ショーで盛り上がる）</li>
-        <li>🥈 <strong>豊茂烤串</strong>（串焼きで乾杯・モンゴル風BBQ）</li>
-        <li>🥉 <strong>上海タワー 118F</strong>（展望台＋119Fカフェで夜景）</li>
-        <li>・ <strong>左庭右院</strong>（潮汕牛肉火鍋で肉尽くし）</li>
-        <li>・ <strong>豫園ライトアップ</strong>→南翔饅頭店セット</li>
+    <div class="quickpick-card dinner">
+      <h3>🌙 夕食・夜景 — 18:00-22:00</h3>
+      <ul>
+        <li><span class="rank">I</span><strong>海底捞</strong>（火鍋＆ショーで盛り上がる）</li>
+        <li><span class="rank">II</span><strong>豊茂烤串</strong>（串焼き＋乾杯）</li>
+        <li><span class="rank">III</span><strong>上海タワー 118F</strong>（夜景展望）</li>
+        <li><span class="rank">・</span><strong>左庭右院</strong>（潮汕牛肉火鍋）</li>
+        <li><span class="rank">・</span><strong>豫園ライトアップ</strong>→南翔セット</li>
       </ul>
     </div>
 
-    <div style="background:linear-gradient(135deg,rgba(123,140,222,.12),rgba(123,140,222,.04));border:1px solid rgba(123,140,222,.4);border-radius:12px;padding:14px;">
-      <h3 style="color:#7b8cde;font-size:1em;margin-bottom:10px;">🍦 間食・〆・夜カフェ</h3>
-      <ul style="list-style:none;font-size:.88em;line-height:1.9;">
-        <li>🥇 <strong>CHAGEE</strong>（1日1杯ルーティン化推奨）</li>
-        <li>🥈 <strong>BONUS Gelato</strong>（安福路散策の休憩）</li>
-        <li>🥉 <strong>香港糖水</strong>（静安寺観光の〆に豆花）</li>
-        <li>・ <strong>スタバリザーブ</strong>（22時まで長居OK）</li>
+    <div class="quickpick-card snack">
+      <h3>🍦 間食・〆・夜カフェ</h3>
+      <ul>
+        <li><span class="rank">I</span><strong>CHAGEE</strong>（1日1杯ルーティン化）</li>
+        <li><span class="rank">II</span><strong>BONUS Gelato</strong>（安福路散策）</li>
+        <li><span class="rank">III</span><strong>香港糖水</strong>（静安寺観光の〆）</li>
+        <li><span class="rank">・</span><strong>スタバリザーブ</strong>（22時まで）</li>
       </ul>
     </div>
 
   </div>
 
-  <div style="margin-top:14px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px dashed var(--border);border-radius:10px;font-size:.8em;color:var(--muted);line-height:1.6;">
-    <strong style="color:var(--gold);">💡 いつ行ってもOKな店：</strong>
-    CHAGEE（中国茶ミルク）/ スタバリザーブ / CoCo都可 は時間問わず立ち寄れる。<br>
-    <strong style="color:var(--accent);">🚨 時間要注意の店：</strong>
-    阿娘面馆（3部制: 7:00-9:30 / 11:00-13:30 / 17:00-19:30）・佳家湯包（19時閉店）・静安寺（17時閉）・光明邨（14-17時は点心のみ）
+  <div class="quickpick-note">
+    <strong>いつ行ってもOKな店：</strong>
+    CHAGEE / スタバリザーブ / CoCo都可 は時間問わず立ち寄れます。<br>
+    <strong>時間要注意の店：</strong>
+    阿娘面馆（3部制：7:00-9:30 / 11:00-13:30 / 17:00-19:30）・佳家湯包（19時閉店）・静安寺（17時閉）・光明邨（14-17時は点心のみ）
   </div>
 </div>
 
-<h2 class="section-title">🥟 小籠包・生煎の名店</h2>
+<h2 class="section-title">小籠包・生煎の名店</h2>
 <p class="section-note">上海の代名詞。名店ほど並ぶ。朝一・雨の日が狙い目。</p>
 
 <main class="grid">
@@ -251,9 +304,9 @@
         <div class="quote">「旨味たっぷりスープが零れ落ちるほど入り、肉餡は弾力と強いコク。鼎泰豊が女王なら南翔は王様。2F推奨。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/shop/4132455" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=南翔馒头店+豫园" target="_blank" rel="noopener">🗺 地図</a>
-        <a class="btn gold" href="https://www.instagram.com/explore/tags/南翔饅頭店/" target="_blank" rel="noopener">📷 Insta</a>
+        <a class="btn primary" href="https://www.dianping.com/shop/4132455" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E5%8D%97%E7%BF%94%E9%A5%85%E9%A0%AD%E5%BA%97/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=南翔馒头店+豫园" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -294,8 +347,9 @@
         <div class="quote">「全発酵生地は厚くて松ソフト、底はカリッと香ばしい。肉餡は甘辛で旨味凝縮。小楊生煎より好み。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/shop/2934528" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=大壶春+四川中路" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/shop/2934528" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E5%A4%A7%E5%A3%BA%E6%98%A5/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=大壶春+四川中路" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -336,8 +390,9 @@
         <div class="quote">「アメリカのグルメ番組でも絶賛。蟹粉鮮肉湯包が絶品で、鼎泰豊より旨いとの評多数。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/shop/1882622" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=佳家汤包+黄河路" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/shop/1882622" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E4%BD%B3%E5%AE%B6%E6%B9%AF%E5%8C%85/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=佳家汤包+黄河路" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -378,8 +433,9 @@
         <div class="quote">「豚肉の臭みがない小籠包と、焦がしネギ油＋甘め醤油だけのシンプル混ぜ麺が絶品。庶民の味の最高峰。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E5%AF%8C%E6%98%A5%E5%B0%8F%E7%AC%BC%E9%A6%86" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=富春小笼馆" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E5%AF%8C%E6%98%A5%E5%B0%8F%E7%AC%BC%E9%A6%86" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E5%AF%8C%E6%98%A5%E5%B0%8F%E7%B1%A0%E9%A4%A8/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=富春小笼馆" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -424,16 +480,17 @@
         <div class="quote">「品質の安定感は抜群。日本語メニューもあり安心。上海ローカル店が不安な場合の安全牌。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dintaifung.com.cn/" target="_blank" rel="noopener">🌐 公式予約</a>
-        <a class="btn" href="https://www.dianping.com/shop/1934321" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=鼎泰丰+新天地" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dintaifung.com.cn/" target="_blank" rel="noopener">公式予約</a>
+        <a class="btn" href="https://www.dianping.com/shop/1934321" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/dintaifungjp/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=鼎泰丰+新天地" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
 
 </main>
 
-<h2 class="section-title">🦀 上海料理・高級中華</h2>
+<h2 class="section-title">上海料理・高級中華</h2>
 <p class="section-note">シーズン外でも蟹粉（蟹味噌）料理は年中提供。GW期は早め予約を。</p>
 
 <main class="grid">
@@ -477,8 +534,9 @@
         <div class="quote">「濃厚な蟹味噌フカヒレスープ、パラパラ蟹肉入りチャーハン、蟹粉小籠包まで。コース構成が秀逸。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/shop/4152" target="_blank" rel="noopener">📱 大众点评予約</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=成隆行蟹王府+九江路" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/shop/4152" target="_blank" rel="noopener">大众点评予約</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E4%B8%8A%E6%B5%B7%E8%9F%B9/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=成隆行蟹王府+九江路" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -522,9 +580,10 @@
         <div class="quote">「華麗さはないが古い味わいが常連を引きつける。紅焼肉は日本人にぴったりの甘辛。小さな店で予約必須。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.shanghainavi.com/food/465/" target="_blank" rel="noopener">🌐 上海ナビ詳細</a>
-        <a class="btn" href="https://www.dianping.com/shop/4185" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=老吉士酒家+天平路" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.shanghainavi.com/food/465/" target="_blank" rel="noopener">上海ナビ</a>
+        <a class="btn" href="https://www.dianping.com/shop/4185" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E8%80%81%E5%90%89%E5%A3%AB/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=老吉士酒家+天平路" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -565,8 +624,9 @@
         <div class="quote">「淮海中路で最も賑わう行列店。2-3階で伝統的な上海料理をリーズナブルに楽しめる。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/shop/4151" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=光明邨大酒家+淮海中路" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/shop/4151" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E5%85%89%E6%98%8E%E9%82%A8/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=光明邨大酒家+淮海中路" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -610,8 +670,9 @@
         <div class="quote">「濃厚な蟹味噌フカヒレスープが格別。パラパラの蟹肉チャーハン、上海蟹と続くコース構成が感動レベル。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E7%94%AC%E5%BA%9C" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=甬府+南京东路" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E7%94%AC%E5%BA%9C" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E7%94%AC%E5%BA%9C/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=甬府+南京东路" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -652,15 +713,16 @@
         <div class="quote">「お茶を組み込んだ目にも美しい創作中華。プーアル角煮は柔らかく、茶葉香る牛肉炒めが印象的。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E8%8C%B6%E9%A6%99%E5%AE%A4" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=陆家嘴+创作中华" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E8%8C%B6%E9%A6%99%E5%AE%A4" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E4%B8%8A%E6%B5%B7%E5%89%B5%E4%BD%9C%E4%B8%AD%E8%8F%AF/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=陆家嘴+创作中华" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
 
 </main>
 
-<h2 class="section-title">🍜 麺の名店</h2>
+<h2 class="section-title">麺の名店</h2>
 <p class="section-note">上海の麺はあっさり醤油ベース。日本人にもスッと入る。</p>
 
 <main class="grid">
@@ -701,8 +763,9 @@
         <div class="quote">「黄魚麺は魚の生臭さがなく、あっさり醤油スープとツルツル麺が絶品。ミシュラン・ビブグルマン。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/shop/5204" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=阿娘面馆+思南路" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/shop/5204" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E9%98%BF%E5%A8%98%E9%9D%A2/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=阿娘面馆+思南路" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -743,15 +806,16 @@
         <div class="quote">「和風うどんに似た柔らかい細麺。パクチーや八角の香るスープが日本人の口にも合う。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E5%92%8C%E5%BA%9C%E6%8D%9E%E9%9D%A2" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn" href="https://www.hefunoodle.com/" target="_blank" rel="noopener">🌐 公式</a>
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E5%92%8C%E5%BA%9C%E6%8D%9E%E9%9D%A2" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn" href="https://www.hefunoodle.com/" target="_blank" rel="noopener">公式</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E5%92%8C%E5%BA%9C%E6%9D%9E%E9%BA%BA/" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
   </article>
 
 </main>
 
-<h2 class="section-title">🫕 火鍋・串焼</h2>
+<h2 class="section-title">火鍋・串焼</h2>
 <p class="section-note">グループで盛り上がるなら絶対。海底捞はテーマパーク級。</p>
 
 <main class="grid">
@@ -795,9 +859,10 @@
         <div class="quote">「待ち時間にジュース・お菓子・ネイル無料。カンフーヌードルと変面ショーが圧巻。テーマパーク級。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.haidilao.com/" target="_blank" rel="noopener">🌐 公式予約</a>
-        <a class="btn" href="https://www.dianping.com/search/keyword/1/0_%E6%B5%B7%E5%BA%95%E6%8D%9E" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=海底捞+人民广场" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.haidilao.com/" target="_blank" rel="noopener">公式予約</a>
+        <a class="btn" href="https://www.dianping.com/search/keyword/1/0_%E6%B5%B7%E5%BA%95%E6%8D%9E" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E6%B5%B7%E5%BA%95%E6%8D%9E/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=海底捞+人民广场" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -838,8 +903,9 @@
         <div class="quote">「潮汕牛肉火鍋の専門店。冷凍肉不使用、新鮮な牛肉をしゃぶしゃぶで。部位ごとに違う食感が楽しめる。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E5%B7%A6%E5%BA%AD%E5%8F%B3%E9%99%A2" target="_blank" rel="noopener">📱 大众点评予約</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=左庭右院+新世界城" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E5%B7%A6%E5%BA%AD%E5%8F%B3%E9%99%A2" target="_blank" rel="noopener">大众点评予約</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E6%BD%AE%E6%B1%95%E7%89%9B%E8%82%89%E7%81%AB%E9%8D%8B/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=左庭右院+新世界城" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -880,15 +946,16 @@
         <div class="quote">「自動回転串焼き機で羊肉を焼き、スパイスでいただく。待ち時間にアイスや冷えピタ配布でユニーク。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E4%B8%B0%E8%8C%82%E7%83%A4%E4%B8%B2" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=丰茂烤串+第一百货" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E4%B8%B0%E8%8C%82%E7%83%A4%E4%B8%B2" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E4%B8%B0%E8%8C%82%E7%83%A4%E4%B8%B2/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=丰茂烤串+第一百货" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
 
 </main>
 
-<h2 class="section-title">☕ カフェ・スイーツ</h2>
+<h2 class="section-title">カフェ・スイーツ</h2>
 <p class="section-note">映えも実力も。上海は世界最大規模のコーヒー都市。</p>
 
 <main class="grid">
@@ -929,9 +996,10 @@
         <div class="quote">「世界最大級の規模。限定コーヒーと限定タンブラーが目当てで世界中からファンが集まる。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.starbucksreserve.com/en-us/locations/shanghai" target="_blank" rel="noopener">🌐 公式</a>
-        <a class="btn" href="https://www.dianping.com/shop/91655509" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=Starbucks+Reserve+Roastery+Shanghai" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.starbucksreserve.com/en-us/locations/shanghai" target="_blank" rel="noopener">公式</a>
+        <a class="btn" href="https://www.dianping.com/shop/91655509" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/starbucksreserve/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=Starbucks+Reserve+Roastery+Shanghai" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -972,9 +1040,9 @@
         <div class="quote">「ジャスミンとキャラメルピスタチオが絶品。武康大楼観光の合間に最高の休憩スポット。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_BONUS" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn" href="https://www.instagram.com/bonus.gelato/" target="_blank" rel="noopener">📷 Instagram</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=BONUS+gelato+安福路" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_BONUS" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/bonus.gelato/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=BONUS+gelato+安福路" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -1015,8 +1083,9 @@
         <div class="quote">「パイナップルドリアンピザが衝撃の美味しさ。日本では食べられないメニューがネタ的にも面白い。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E8%90%A8%E8%8E%89%E4%BA%9A" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn" href="https://www.saizeriya.com.cn/" target="_blank" rel="noopener">🌐 中国サイゼリヤ公式</a>
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E8%90%A8%E8%8E%89%E4%BA%9A" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn" href="https://www.saizeriya.com.cn/" target="_blank" rel="noopener">中国サイゼリヤ公式</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E3%82%B5%E3%82%A4%E3%82%BC%E3%83%AA%E3%83%A4%E4%B8%AD%E5%9B%BD/" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
   </article>
@@ -1057,15 +1126,16 @@
         <div class="quote">「柔らかな豆花と小豆のハーフ＆ハーフが絶品。優しい甘さで暑い日も冷えた日も美味しい。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E9%A6%99%E6%B8%AF%E7%B3%96%E6%B0%B4" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=香港糖水+静安寺" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_%E9%A6%99%E6%B8%AF%E7%B3%96%E6%B0%B4" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E9%A6%99%E6%B8%AF%E7%B3%96%E6%B0%B4/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=香港糖水+静安寺" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
 
 </main>
 
-<h2 class="section-title">🧋 ドリンク（テイクアウト）</h2>
+<h2 class="section-title">ドリンク（テイクアウト）</h2>
 <p class="section-note">歩きながら片手で。上海のテイクアウト文化を堪能。</p>
 
 <main class="grid">
@@ -1106,8 +1176,9 @@
         <div class="quote">「上品な香りとミルクのまろやかさが絶妙。1日1杯飲みたくなる中国茶ドリンクの革命。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.chagee.com/" target="_blank" rel="noopener">🌐 公式</a>
-        <a class="btn" href="https://www.dianping.com/search/keyword/1/0_%E9%9C%B8%E7%8E%8B%E8%8C%B6%E5%A7%AC" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn primary" href="https://www.chagee.com/" target="_blank" rel="noopener">公式</a>
+        <a class="btn" href="https://www.dianping.com/search/keyword/1/0_%E9%9C%B8%E7%8E%8B%E8%8C%B6%E5%A7%AC" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/chagee.official/" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
   </article>
@@ -1148,14 +1219,15 @@
         <div class="quote">「タピオカ・芋・コーヒーゼリーが入った定番3兄弟が安くて美味い。街歩きのお供に。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_COCO%E9%83%BD%E5%8F%AF" target="_blank" rel="noopener">📱 大众点评</a>
+        <a class="btn primary" href="https://www.dianping.com/search/keyword/1/0_COCO%E9%83%BD%E5%8F%AF" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/coco%E9%83%BD%E5%8F%AF/" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
   </article>
 
 </main>
 
-<h2 class="section-title">🌆 観光スポット（眺望・歴史）</h2>
+<h2 class="section-title">観光スポット（眺望・歴史）</h2>
 <p class="section-note">写真映えする必食ポイント。早朝・夕暮れが狙い目。</p>
 
 <main class="grid">
@@ -1199,9 +1271,10 @@
         <div class="quote">「118階展望台から見下ろす夜景が圧倒的。119階カフェで青島ビール片手に絶景を味わう贅沢。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.klook.com/ja/activity/8287-shanghai-tower-observation-deck-ticket/" target="_blank" rel="noopener">🎫 Klook予約</a>
-        <a class="btn" href="https://www.shanghaitower.com.cn/" target="_blank" rel="noopener">🌐 公式</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=上海中心大厦" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.klook.com/ja/activity/8287-shanghai-tower-observation-deck-ticket/" target="_blank" rel="noopener">Klook予約</a>
+        <a class="btn" href="https://www.shanghaitower.com.cn/" target="_blank" rel="noopener">公式</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E4%B8%8A%E6%B5%B7%E3%82%BF%E3%83%AF%E3%83%BC/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=上海中心大厦" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -1242,8 +1315,9 @@
         <div class="quote">「摩天楼に囲まれた金色の屋根がインパクト大。参拝客と観光客で常に賑わう上海の顔。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/shop/6793" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=静安寺" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/shop/6793" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E9%9D%99%E5%AE%89%E5%AF%BA/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=静安寺" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -1284,8 +1358,9 @@
         <div class="quote">「古い集合住宅を改装したアート街。カフェ・雑貨・アトリエが密集していて歩くだけで楽しい。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/shop/4178" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=田子坊" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/shop/4178" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E7%94%B0%E5%AD%90%E5%9D%8A/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=田子坊" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -1326,8 +1401,9 @@
         <div class="quote">「フランス租界の象徴。プラタナスの並木道と船型ビルの構図が上海っぽくて最高のフォトスポット。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.dianping.com/shop/4214" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=武康大楼" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.dianping.com/shop/4214" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E6%AD%A6%E5%BA%B7%E5%A4%A7%E6%A5%BC/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=武康大楼" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -1368,9 +1444,10 @@
         <div class="quote">「夜のライトアップが圧巻。南翔饅頭店で小籠包、食べ歩き、お土産屋巡りと上海らしさの凝縮エリア。」</div>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://www.yuyuantm.com.cn/" target="_blank" rel="noopener">🌐 公式</a>
-        <a class="btn" href="https://www.dianping.com/shop/4134" target="_blank" rel="noopener">📱 大众点评</a>
-        <a class="btn emerald" href="https://maps.app.goo.gl/?q=豫园" target="_blank" rel="noopener">🗺 地図</a>
+        <a class="btn primary" href="https://www.yuyuantm.com.cn/" target="_blank" rel="noopener">公式</a>
+        <a class="btn" href="https://www.dianping.com/shop/4134" target="_blank" rel="noopener">大众点评</a>
+        <a class="btn insta" href="https://www.instagram.com/explore/tags/%E8%B1%AB%E5%9C%92/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn emerald" href="https://maps.app.goo.gl/?q=豫园" target="_blank" rel="noopener">地図</a>
       </div>
     </div>
   </article>
@@ -1382,10 +1459,14 @@
 </div>
 
 <footer>
-  <p>📱 このページはスマホ最適化されています。フィルターで絞り込み、カード下部のボタンから大众点评/Google Maps/公式サイトへ直接ジャンプできます。</p>
-  <p style="margin-top:8px;">🔴 要予約 / 🟢 予約不要 / 🟣 並び必須（予約不可）</p>
-  <p style="margin-top:8px;color:var(--muted);font-size:.85em;">価格はCNY（1元≈21円換算）/ 所要時間はホテル=JWマリオット上海 Tomorrow Square起点 / レビューは各ブログ・YouTube原文の要約引用です。</p>
-  <p style="margin-top:14px;"><a href="index.html">← 旅行計画トップへ</a></p>
+  <p>スマートフォン最適化。フィルターで絞り込み、各カードから大众点评・Instagram・Google Maps・公式サイトへ直接ジャンプできます。</p>
+  <p style="margin-top:10px;letter-spacing:.04em;">
+    <span style="color:var(--accent);">要予約</span>　／
+    <span style="color:var(--sage);">予約不要</span>　／
+    <span style="color:var(--muted);">並び必須（予約不可）</span>
+  </p>
+  <p style="margin-top:14px;color:var(--muted);font-size:.82em;">価格はCNY（1元 ≒ 21円換算）／ 所要時間はJWマリオット上海 Tomorrow Square 起点／ レビューは各ブログ・YouTube原文の要約引用です。</p>
+  <p style="margin-top:20px;"><a href="index.html">← 旅行計画トップへ</a></p>
 </footer>
 
 <script>
